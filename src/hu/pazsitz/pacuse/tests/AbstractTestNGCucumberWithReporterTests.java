@@ -1,4 +1,4 @@
-package hu.pazsitz.seleniumtestframework.tests;
+package hu.pazsitz.pacuse.tests;
 
 import java.io.BufferedWriter;
 import java.io.File;

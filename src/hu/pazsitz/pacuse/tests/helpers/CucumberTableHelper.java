@@ -1,4 +1,4 @@
-package hu.pazsitz.seleniumtestframework.tests.helpers;
+package hu.pazsitz.pacuse.tests.helpers;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;

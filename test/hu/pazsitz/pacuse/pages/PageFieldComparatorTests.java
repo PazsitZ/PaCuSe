@@ -1,6 +1,6 @@
-package hu.pazsitz.seleniumtestframework.pages;
+package hu.pazsitz.pacuse.pages;
 
-import hu.pazsitz.seleniumtestframework.pages.PageFieldComparator;
+import hu.pazsitz.pacuse.pages.PageFieldComparator;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

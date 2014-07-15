@@ -1,4 +1,4 @@
-package hu.pazsitz.seleniumtestframework.pages;
+package hu.pazsitz.pacuse.pages;
 
 import org.openqa.selenium.WebDriver;
 

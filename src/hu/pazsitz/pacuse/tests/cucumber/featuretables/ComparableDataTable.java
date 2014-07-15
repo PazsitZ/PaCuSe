@@ -1,4 +1,4 @@
-package hu.pazsitz.seleniumtestframework.tests.cucumber.featuretables;
+package hu.pazsitz.pacuse.tests.cucumber.featuretables;
 
 import java.util.ArrayList;
 import java.util.List;

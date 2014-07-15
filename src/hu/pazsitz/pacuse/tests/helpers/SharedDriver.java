@@ -1,4 +1,4 @@
-package hu.pazsitz.seleniumtestframework.tests.helpers;
+package hu.pazsitz.pacuse.tests.helpers;
 
 
 import cucumber.api.Scenario;

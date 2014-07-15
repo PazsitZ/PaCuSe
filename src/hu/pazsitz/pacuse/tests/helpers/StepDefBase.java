@@ -1,6 +1,6 @@
-package hu.pazsitz.seleniumtestframework.tests.helpers;
+package hu.pazsitz.pacuse.tests.helpers;
 
-import hu.pazsitz.seleniumtestframework.pages.AbstractPage;
+import hu.pazsitz.pacuse.pages.AbstractPage;
 
 import org.openqa.selenium.support.PageFactory;
 

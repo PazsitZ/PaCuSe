@@ -1,6 +1,6 @@
-package hu.pazsitz.seleniumtestframework.pageObjects;
+package hu.pazsitz.pacuse.pageObjects;
 
-import hu.pazsitz.seleniumtestframework.pages.GeneralPageImpl;
+import hu.pazsitz.pacuse.pages.GeneralPageImpl;
 
 import org.openqa.selenium.WebDriver;
 
