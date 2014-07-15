@@ -2,8 +2,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>hu.pazsitz.seleniumTestFrameWork</groupId>
-    <artifactId>seleniumTestFrameWork</artifactId>
+    <groupId>hu.pazsitz.pacuse</groupId>
+    <artifactId>pacuse</artifactId>
     <version>0.60</version>
     <packaging>war</packaging>
 
@@ -100,7 +100,7 @@
     </dependencies>
 
     <build>
-        <finalName>seleniumTestFrameWork</finalName>
+        <finalName>PaCuSe</finalName>
         <pluginManagement>
         <plugins>
             <plugin>

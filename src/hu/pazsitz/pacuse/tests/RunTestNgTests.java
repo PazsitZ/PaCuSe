@@ -16,7 +16,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 @Test(groups={"cucumber"})
 @CucumberOptions(
     format = {"pretty", "html:reports/cucumber-html-report", "json:reports/cucumber-report.json"},
-    features="src/main/java/hu/pazsit/seleniumtestframework/tests/cucumber/features",
+    features="src/hu/pazsitz/pacuse/tests/cucumber/features",
     tags = { "@test" } //what tags to include(@)/exclude(@~)
 )
 // Default TestNG Runner, runs all of the features are available

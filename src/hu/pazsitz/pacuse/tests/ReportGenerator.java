@@ -22,7 +22,7 @@ public class ReportGenerator {
         String pluginUrlPath = "";
 
         String buildNumber = "1";
-        String buildProjectName = "seleniumTestFrameWork";
+        String buildProjectName = "PaCuSe FrameWork";
         boolean skippedFails = false;
         boolean undefinedFails = false;
         boolean flashCharts = true;

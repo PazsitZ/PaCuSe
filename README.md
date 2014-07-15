@@ -1,4 +1,4 @@
-cukeseleniumtestfw
+Pazsit Cucumber Selenium test FrameWork
 ==================
 
 ## cucumber - selenium test framework
@@ -12,4 +12,5 @@ There are integrated generation of a pretty report with the following cucumber-j
 
 
 ## Jar package available from:
-http://pazsitz.hu/repo/hu/pazsitz/seleniumTestFrameWork/0.60/seleniumTestFrameWork.jar
+pazsitz.hu/repo/hu/pazsitz/pacuse/0.60/pacuse.0.60.jar
+pazsitz.hu/repo/hu/pazsitz/pacuse/0.60/pacuse.0.60.source.jar
