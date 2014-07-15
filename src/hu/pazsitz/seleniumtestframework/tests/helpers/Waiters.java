@@ -1,4 +1,4 @@
-package hu.pazsit.seleniumtestframework.tests.helpers;
+package hu.pazsitz.seleniumtestframework.tests.helpers;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;

@@ -1,6 +1,6 @@
-package hu.pazsit.seleniumtestframework.pageObjects;
+package hu.pazsitz.seleniumtestframework.pageObjects;
 
-import hu.pazsit.seleniumtestframework.pages.AbstractPage;
+import hu.pazsitz.seleniumtestframework.pages.AbstractPage;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;

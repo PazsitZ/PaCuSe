@@ -1,9 +1,9 @@
-package hu.pazsit.seleniumtestframework.pageObjects;
+package hu.pazsitz.seleniumtestframework.pageObjects;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import hu.pazsit.seleniumtestframework.pages.AbstractWidget;
+import hu.pazsitz.seleniumtestframework.pages.AbstractWidget;
 
 public class AbstractWidgetObject<W extends AbstractWidget> {
     protected WebDriver webDriver;

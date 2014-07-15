@@ -1,6 +1,5 @@
-package hu.pazsit.seleniumtestframework.pages;
+package hu.pazsitz.seleniumtestframework.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -9,7 +8,7 @@ import org.openqa.selenium.WebDriver;
  * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
-public abstract class AbstractPage {
+public abstract class AbstractPage extends PageFieldComparator {
 
     protected WebDriver webDriver;
 
@@ -27,13 +26,6 @@ public abstract class AbstractPage {
         return webDriver.getTitle();
     }
 
-    public String getPageName() {
-        return webDriver.findElement(By.id("pageId")).getAttribute("value").toString();
-    }
-
-    public String getPageId() {
-        return webDriver.findElement(By.tagName("body")).getAttribute("data-pageid");
-    }
-
     abstract public String getUrl();
+    
 }

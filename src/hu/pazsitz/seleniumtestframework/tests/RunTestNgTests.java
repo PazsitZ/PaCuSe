@@ -1,4 +1,4 @@
-package hu.pazsit.seleniumtestframework.tests;
+package hu.pazsitz.seleniumtestframework.tests;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;

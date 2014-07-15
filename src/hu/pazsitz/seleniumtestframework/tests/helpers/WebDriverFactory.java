@@ -1,4 +1,4 @@
-package hu.pazsit.seleniumtestframework.tests.helpers;
+package hu.pazsitz.seleniumtestframework.tests.helpers;
 
 import java.io.File;
 import java.net.MalformedURLException;

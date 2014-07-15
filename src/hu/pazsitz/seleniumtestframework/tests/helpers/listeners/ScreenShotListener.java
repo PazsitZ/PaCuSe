@@ -1,4 +1,4 @@
-package hu.pazsit.seleniumtestframework.tests.helpers.listeners;
+package hu.pazsitz.seleniumtestframework.tests.helpers.listeners;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,7 +10,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
-import hu.pazsit.seleniumtestframework.tests.helpers.StepDefBase;
+import hu.pazsitz.seleniumtestframework.tests.helpers.StepDefBase;
 
 /**
  * ScreenShotListener.java

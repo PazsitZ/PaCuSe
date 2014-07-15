@@ -1,4 +1,4 @@
-package hu.pazsit.seleniumtestframework.pages;
+package hu.pazsitz.seleniumtestframework.pages;
 
 import org.openqa.selenium.WebDriver;
 

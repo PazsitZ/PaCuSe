@@ -1,4 +1,4 @@
-package hu.pazsit.seleniumtestframework.tests;
+package hu.pazsitz.seleniumtestframework.tests;
 
 import java.io.File;
 import java.util.ArrayList;
