@@ -13,4 +13,5 @@ There are integrated generation of a pretty report with the following cucumber-j
 
 ## Jar package available from:
 http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.60/pacuse.0.60.jar
+
 http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.60/pacuse.0.60.source.jar
