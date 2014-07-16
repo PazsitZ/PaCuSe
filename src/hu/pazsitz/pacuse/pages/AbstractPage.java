@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
  * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
-public abstract class AbstractPage extends PageFieldComparator {
+public abstract class AbstractPage {
 
     protected WebDriver webDriver;
 

@@ -1,19 +1,23 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables;
 
+import hu.pazsitz.pacuse.pages.AbstractPage;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 /**
- * ComparableDataTable.java
+ * PopulatorDataTable.java
  *
  * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
-public class ComparableDataTable {
+public class PopulatorDataTable implements IFieldMapperDataTable {
 	private List<Map<String, String>> table = new ArrayList<>();
+	private PageFieldTableMapper mapper = new PageFieldTableMapper(new PopulatorAction());
+	
 
-	public ComparableDataTable(List<Map<String, String>> table) {
+	public PopulatorDataTable(List<Map<String, String>> table) {
 		this.table = table;
 	}
 	
@@ -25,5 +29,9 @@ public class ComparableDataTable {
 		this.table = table;
 	}
 	
-	
+	public ComparedResult populateToPageModel(AbstractPage page) {
+//		mapper.
+		
+		return new ComparedResult(0, null, null, null);
+	}
 }
