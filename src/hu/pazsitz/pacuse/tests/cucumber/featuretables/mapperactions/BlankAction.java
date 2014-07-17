@@ -1,4 +1,4 @@
-package hu.pazsitz.pacuse.tests.cucumber.featuretables;
+package hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions;
 
 import org.openqa.selenium.WebElement;
 
@@ -8,12 +8,14 @@ import org.openqa.selenium.WebElement;
  * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
-public class ComparatorAction implements IMapperAction {
+public class BlankAction implements IMapperAction {
 
+	/**
+	 * Blank Action - no action evaluates, for mapping purpose
+	 */
 	@Override
 	public boolean doAction(WebElement element, String value) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }
