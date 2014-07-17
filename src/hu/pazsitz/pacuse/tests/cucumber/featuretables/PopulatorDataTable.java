@@ -1,6 +1,7 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables;
 
 import hu.pazsitz.pacuse.pages.AbstractPage;
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions.PopulatorAction;
 
 import java.util.List;
 import java.util.Map;
@@ -11,10 +12,10 @@ import java.util.Map;
  * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
-public class PopulatorDataTable extends ActionDataTable implements IFieldMapperDataTable {
+public class PopulatorDataTable extends AbstractDataTable implements IFieldMapperDataTable {
 
 	public PopulatorDataTable(List<Map<String, String>> table) {
-		super(new PageFieldTableMapper(new PopulatorAction()));
+		super(new PopulatorAction());
 		this.table = table;
 	}
 	
