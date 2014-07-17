@@ -1,7 +1,7 @@
 package hu.pazsitz.pacuse.pages;
 
-import hu.pazsitz.pacuse.tests.cucumber.featuretables.ComparatorAction;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.PageFieldTableMapper;
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions.ComparatorAction;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
