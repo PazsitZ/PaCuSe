@@ -5,6 +5,12 @@ import org.openqa.selenium.support.PageFactory;
 
 import hu.pazsitz.pacuse.pages.AbstractWidget;
 
+/**
+ * AbstractWidgetObject.java
+ *
+ * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
+ * @copyright Copyright (c) 2014, Zoltan Pazsit
+ */
 public class AbstractWidgetObject<W extends AbstractWidget> {
     protected WebDriver webDriver;
     protected W widget;
