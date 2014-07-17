@@ -87,7 +87,7 @@ public class SharedDriver extends EventFiringWebDriver {
     }
 
     public byte[] makeScreenshot(String name) {
-        final String SCREENSHOT_FOLDER = "build/cucumber-html-report/images/";
+        final String SCREENSHOT_FOLDER = "reports/cucumber-html-report/images/";
         final String SCREENSHOT_FORMAT = "png";
         byte[] screenshot = new byte[0];
 
