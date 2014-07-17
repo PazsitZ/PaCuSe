@@ -1,4 +1,4 @@
-Pazsit Cucumber Selenium test FrameWork
+Pazsit Cucumber Selenium Test FrameWork
 ==================
 
 ## cucumber - selenium test framework
@@ -8,10 +8,18 @@ The given repo with some Helper classes and abstract implementations provides an
 The framework use selenium. 
 Both java or the cucumber feature tests are runned by TestNG
 
-There are integrated generation of a pretty report with the following cucumber-jvm reporter (https://github.com/masterthought/jenkins-cucumber-jvm-reports-plugin-java)
+There is an integrated report-generator with the following cucumber-jvm reporter (https://github.com/masterthought/jenkins-cucumber-jvm-reports-plugin-java)
 
+
+# Some Features:
+	- Easy usage of the Page Model - PageObject pattern
+	- Ongoing support and initial implementation of nested widgets in the Page Model
+	- Waiter Helper class with a collection of waiter implementations
+	- Cucumber-Selenium table mapping with built in validation and population based on annotations
+	- built in report generator
+	
 
 ## Jar package available from:
-http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.60/pacuse.0.60.jar
+http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.65/pacuse.0.65.jar
 
-http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.60/pacuse.0.60.source.jar
+http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.65/pacuse.0.65.source.jar
