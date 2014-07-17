@@ -19,11 +19,7 @@ public class CucumberTableHelper {
      * @return WebElement
      */
     public static WebElement checkboxTicker(WebElement element, String value) {
-        final String TICK_YES = "yes";
-        final String TICK_TRUE = "true";
-
-        value = value.trim().toLowerCase();
-        boolean boolValue = value.equals(TICK_TRUE) || value.equals(TICK_YES);
+        boolean boolValue = getCheckboxBoolValue(value);
 
         if (!element.isSelected() && boolValue) {
             element.click();
@@ -33,6 +29,15 @@ public class CucumberTableHelper {
 
         return element;
     }
+
+    public static boolean getCheckboxBoolValue(String value) {
+		final String TICK_YES = "yes";
+        final String TICK_TRUE = "true";
+
+        value = value.trim().toLowerCase();
+        boolean boolValue = value.equals(TICK_TRUE) || value.equals(TICK_YES);
+		return boolValue;
+	}
 
     /**
      * fills the element only on non-null value
