@@ -40,6 +40,11 @@ public abstract class AbstractDataTable implements IFieldMapperDataTable {
 		this.table = table;
 	}
 	
+	/**
+	 * finds the corresponding fields and invokes the given action on it
+	 * @param page
+	 * @return
+	 */
 	protected ComparedResult doActionToPageModel(AbstractPage page) {
 		List<String> success = new ArrayList<>();
 		List<String> failed = new ArrayList<>();

@@ -30,6 +30,11 @@ public class CucumberTableHelper {
         return element;
     }
 
+    /**
+     * Converts "yes" and "true" strings (from gherkin table) to boolean
+     * @param value
+     * @return boolean
+     */
     public static boolean getCheckboxBoolValue(String value) {
 		final String TICK_YES = "yes";
         final String TICK_TRUE = "true";
@@ -56,6 +61,12 @@ public class CucumberTableHelper {
         return element;
     }
 
+    /**
+     * 
+     * @param element
+     * @param value
+     * @return WebElement
+     */
     public static WebElement selectByIndex(WebElement element, int value) {
         Select selector = new Select(element);
         selector.selectByIndex(value);

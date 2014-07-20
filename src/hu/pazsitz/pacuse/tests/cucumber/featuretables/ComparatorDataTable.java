@@ -19,6 +19,11 @@ public class ComparatorDataTable extends AbstractDataTable implements IFieldMapp
 		this.table = table;
 	}
 	
+	/**
+	 * Compare fields to table values
+	 * @param page
+	 * @return ComparedResult
+	 */
 	public ComparedResult compareToPageModel(AbstractPage page) {
 		return doActionToPageModel(page);
 	}

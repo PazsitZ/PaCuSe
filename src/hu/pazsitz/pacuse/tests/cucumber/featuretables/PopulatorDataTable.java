@@ -19,6 +19,11 @@ public class PopulatorDataTable extends AbstractDataTable implements IFieldMappe
 		this.table = table;
 	}
 	
+	/**
+	 * Populate fields to table values
+	 * @param page
+	 * @return ComparedResult
+	 */
 	public ComparedResult populateToPageModel(AbstractPage page) {
 		return doActionToPageModel(page);
 	}
