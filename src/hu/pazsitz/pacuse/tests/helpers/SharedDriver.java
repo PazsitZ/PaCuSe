@@ -56,7 +56,7 @@ public class SharedDriver extends EventFiringWebDriver {
 
     @Override
     public void close() {
-        if (Thread.currentThread() != CLOSE_THREAD) {
+        if (REAL_DRIVER.getWindowHandles().size() == 1 && Thread.currentThread() != CLOSE_THREAD) {
             throw new UnsupportedOperationException("You shouldn't close this WebDriver. It's shared and will close when the JVM exits.");
         }
         if (REAL_DRIVER != null) {
