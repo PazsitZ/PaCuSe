@@ -2,6 +2,7 @@ package hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions;
 
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions.delegates.populator.PopulatorActionDelegator;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -19,7 +20,7 @@ public class PopulatorAction implements IMapperAction {
 		
 		try {
 			return delegator.populate(element, value);
-		} catch (NullPointerException e) {
+		} catch (NullPointerException | NoSuchElementException e) {
 			return false;
 		}
 	}

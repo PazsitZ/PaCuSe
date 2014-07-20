@@ -34,6 +34,8 @@ public class CucumberTableHelper {
 		final String TICK_YES = "yes";
         final String TICK_TRUE = "true";
 
+        if (value == null) return false;
+        
         value = value.trim().toLowerCase();
         boolean boolValue = value.equals(TICK_TRUE) || value.equals(TICK_YES);
 		return boolValue;
