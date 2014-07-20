@@ -26,7 +26,7 @@ public class ComparatorActionDelegator implements IActionDelegator {
 				case "checkbox" :
 					return element.isSelected() == CucumberTableHelper.getCheckboxBoolValue(value);
 				default:
-					return element.getText().equals(value) || element.getText().trim().equals(value.trim());
+					return element.getAttribute("value").equals(value) || element.getAttribute("value").trim().equals(value.trim());
 			}
 		} else {
 			return element.getText().equals(value) || element.getText().trim().equals(value.trim());
