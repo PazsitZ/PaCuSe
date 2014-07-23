@@ -19,7 +19,7 @@ import cucumber.runtime.Runtime;
 
 public class AbstractTestNGCucumberWithReporterTests extends AbstractTestNGCucumberTests {
     private static TestNGCucumberRunner runner;
-    private String filePath = "seleniumTest/com/expedia/www/checkout/ui/tests/cucumber/stepdefs/";
+    private String filePath = "tests/cucumber/stepdefs/";
     
     @Override
     @Test(groups = "cucumber", description = "Runs Cucumber Features")
