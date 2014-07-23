@@ -19,7 +19,7 @@ import cucumber.runtime.Runtime;
 
 public class AbstractTestNGCucumberWithReporterTests extends AbstractTestNGCucumberTests {
     private static TestNGCucumberRunner runner;
-    private String filePath = "tests/cucumber/stepdefs/";
+    private static String filePath = "tests/cucumber/stepdefs/";
     
     @Override
     @Test(groups = "cucumber", description = "Runs Cucumber Features")
@@ -38,7 +38,7 @@ public class AbstractTestNGCucumberWithReporterTests extends AbstractTestNGCucum
     }
     
     public void setFilePath(String filePath) {
-    	this.filePath = filePath;
+    	AbstractTestNGCucumberWithReporterTests.filePath = filePath;
     }
     
     public void afterReporting(Scenario scenario) {

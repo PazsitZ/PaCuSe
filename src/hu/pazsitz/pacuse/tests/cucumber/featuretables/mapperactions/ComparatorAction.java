@@ -1,5 +1,6 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions;
 
+
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions.delegates.comparator.ComparatorActionDelegator;
 
 import org.openqa.selenium.WebElement;
@@ -15,8 +16,9 @@ public class ComparatorAction implements IMapperAction {
 	
 	@Override
 	public boolean doAction(WebElement element, String value) {
-		System.out.println("[DEBUG - ComparatorAction]  element.text: " + element.getText() + " value: " + value);
 		try {
+			System.out.println("[DEBUG - ComparatorAction]  element.text: " + element.getText() + " value: " + value);
+			
 			return delegator.populate(element, value);			
 		} catch (NullPointerException e) {
 			return false;

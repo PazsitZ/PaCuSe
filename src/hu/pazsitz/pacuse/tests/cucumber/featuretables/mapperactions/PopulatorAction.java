@@ -16,9 +16,9 @@ public class PopulatorAction implements IMapperAction {
 	
 	@Override
 	public boolean doAction(WebElement element, String value) {
-		System.out.println("[DEBUG - PopulatorAction]  element.text: " + element.getText() + " value: " + value);
-		
 		try {
+			System.out.println("[DEBUG - PopulatorAction]  element.text: " + element.getText() + "(" +element.getAttribute("name") + ") value: " + value);
+			
 			return delegator.populate(element, value);
 		} catch (NullPointerException | NoSuchElementException e) {
 			return false;
