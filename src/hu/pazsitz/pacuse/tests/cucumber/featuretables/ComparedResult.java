@@ -34,7 +34,7 @@ public class ComparedResult {
 	 * @return boolean
 	 */
 	public boolean success() {
-		return fieldNonDeterined.size() == 0;
+		return fieldFailed.size() == 0;
 	}
 	
 	/**
