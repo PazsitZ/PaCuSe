@@ -16,7 +16,7 @@ public class ComparatorDataTable extends AbstractDataTable implements IFieldMapp
 	
 	public ComparatorDataTable(List<Map<String, String>> table) {
 		super(new ComparatorAction());
-		this.table = table;
+		setTable(table);
 	}
 	
 	/**

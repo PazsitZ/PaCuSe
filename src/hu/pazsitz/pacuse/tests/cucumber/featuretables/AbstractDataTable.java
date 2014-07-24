@@ -14,10 +14,10 @@ import java.util.Map;
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
 public abstract class AbstractDataTable implements IFieldMapperDataTable {
-	protected List<String> fieldNonDetermined = new ArrayList<>();
-	protected int fieldNumber = 0;
-	protected final PageFieldTableMapper mapper;
-	protected List<Map<String, String>> table = new ArrayList<>();
+	private List<String> fieldNonDetermined = new ArrayList<>();
+	private int fieldNumber = 0;
+	private final PageFieldTableMapper mapper;
+	private List<Map<String, String>> table = new ArrayList<>();
 	
 	public AbstractDataTable(IMapperAction action) {
 		this.mapper = new PageFieldTableMapper(action);
@@ -38,6 +38,7 @@ public abstract class AbstractDataTable implements IFieldMapperDataTable {
 
 	public void setTable(List<Map<String, String>> table) {
 		this.table = table;
+		fillNonDetermined();
 	}
 	
 	/**
@@ -51,12 +52,15 @@ public abstract class AbstractDataTable implements IFieldMapperDataTable {
 		for (Map<String, String> row : table) {
 			for (Map.Entry<String, String> entry : row.entrySet()) {
 				String fieldName = entry.getKey();
-				if (mapper.mapFields(page, fieldName, entry.getValue())) {
+				Boolean mappedField = mapper.mapFields(page, fieldName, entry.getValue());
+				if (mappedField != null && mappedField) {
 					success.add(fieldName);
-				} else {
+					fieldNonDetermined.remove(fieldName);
+				} else if (mappedField != null) {
 					failed.add(fieldName);
+					fieldNonDetermined.remove(fieldName);
 				}
-				fieldNonDetermined.remove(fieldName);
+				
 			}
 		}
 		

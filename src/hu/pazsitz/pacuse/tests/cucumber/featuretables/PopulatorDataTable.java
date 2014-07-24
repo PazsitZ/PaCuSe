@@ -16,7 +16,7 @@ public class PopulatorDataTable extends AbstractDataTable implements IFieldMappe
 
 	public PopulatorDataTable(List<Map<String, String>> table) {
 		super(new PopulatorAction());
-		this.table = table;
+		setTable(table);
 	}
 	
 	/**

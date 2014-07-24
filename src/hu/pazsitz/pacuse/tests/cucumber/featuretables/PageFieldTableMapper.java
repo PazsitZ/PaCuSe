@@ -39,15 +39,17 @@ public class PageFieldTableMapper {
 	 * @param value
 	 * @return boolean
 	 */
-	public boolean mapFields(AbstractPage page, String fieldName, String value) {
-		boolean result = false;
+	public Boolean mapFields(AbstractPage page, String fieldName, String value) {
+		boolean result = true;
 		
 		WebElement element = lookUpForField(page, fieldName);
+		if (element == null) return null;	// non determined field
+		
 		result = action.doAction(element, value);
 		
     	return result;
     }
-
+	
 	/**
 	 * Usually use with BlankAction, for just simple element mapping to field names
 	 * @param page
@@ -61,7 +63,7 @@ public class PageFieldTableMapper {
 			WebElement element = lookUpForField(page, field);
 			action.doAction(element, field);
 		}
-//		
+		
     	return result;
     }
 	
