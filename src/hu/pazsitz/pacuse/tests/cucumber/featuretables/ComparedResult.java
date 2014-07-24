@@ -22,11 +22,11 @@ public class ComparedResult {
 	}
 	
 	/**
-	 * The last procedure was successful and all the table field was evaluated already
+	 * The last procedure was successful and all the table fields have been evaluated already
 	 * @return boolean
 	 */
 	public boolean fullSuccess() {
-		return fieldNonDeterined.size() == 0 && fieldFailed.size() == 0;
+		return success() && fieldNonDeterined.size() == 0;
 	}
 	
 	/**
