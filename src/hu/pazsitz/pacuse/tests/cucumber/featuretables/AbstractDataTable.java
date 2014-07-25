@@ -6,6 +6,9 @@ import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.IFieldAction;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+
+import org.openqa.selenium.WebElement;
 
 /**
  * AbstractDataTable.java
@@ -14,18 +17,22 @@ import java.util.Map;
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
 public abstract class AbstractDataTable implements IFieldMapperDataTable {
+	private IFieldAction action;
+	private List<String> success = new ArrayList<>();
+	private List<String> failed = new ArrayList<>();
 	private List<String> fieldNonDetermined = new ArrayList<>();
 	private int fieldNumber = 0;
 	private final PageFieldTableMapper mapper;
 	private List<Map<String, String>> table = new ArrayList<>();
 	
 	public AbstractDataTable(IFieldAction action) {
-		this.mapper = new PageFieldTableMapper(action);
+		this.action = action;
+		this.mapper = new PageFieldTableMapper();
 	}
 	
 	protected void fillNonDetermined() {
 		for (Map<String, String> row : table) {
-			for (Map.Entry<String, String> entry : row.entrySet()) {
+			for (Entry<String, String> entry : row.entrySet()) {
 				fieldNonDetermined.add(entry.getKey());
 				fieldNumber++;
 			}
@@ -47,25 +54,31 @@ public abstract class AbstractDataTable implements IFieldMapperDataTable {
 	 * @return
 	 */
 	protected FieldActionResult doActionToPageModel(AbstractPage page) {
-		List<String> success = new ArrayList<>();
-		List<String> failed = new ArrayList<>();
+		success = new ArrayList<>();
+		failed = new ArrayList<>();
 		for (Map<String, String> row : table) {
-			for (Map.Entry<String, String> entry : row.entrySet()) {
-				String fieldName = entry.getKey();
-				Boolean mappedField = mapper.mapFields(page, fieldName, entry.getValue());
-				if (mappedField != null && mappedField) {
-					success.add(fieldName);
-					fieldNonDetermined.remove(fieldName);
-				} else if (mappedField != null) {
-					failed.add(fieldName);
-					fieldNonDetermined.remove(fieldName);
+			for (Entry<String, String> entry : row.entrySet()) {
+				WebElement mappedField = mapper.mapField(page, entry.getKey());
+				if (mappedField != null) {
+					evaluateAction(entry, mappedField);
 				}
-				
 			}
 		}
 		
 		return new FieldActionResult(fieldNumber, success, fieldNonDetermined, failed);
 	}
 
+	private void evaluateAction(Entry<String, String> entry, WebElement mappedField) {
+		String fieldName = entry.getKey();
+		Boolean result = action.doAction(mappedField, entry.getValue());
+		
+		if (result != null && result) {
+			success.add(fieldName);
+			fieldNonDetermined.remove(fieldName);
+		} else if (result != null) {
+			failed.add(fieldName);
+			fieldNonDetermined.remove(fieldName);
+		}
+	}
 	
 }

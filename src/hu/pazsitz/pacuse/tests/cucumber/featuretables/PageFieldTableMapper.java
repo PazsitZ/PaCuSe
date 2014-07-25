@@ -1,5 +1,8 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables;
 
+import hu.pazsitz.pacuse.pages.AbstractPage;
+import hu.pazsitz.pacuse.tests.annotations.TableName;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -9,11 +12,6 @@ import java.util.Map;
 
 import org.openqa.selenium.WebElement;
 
-import hu.pazsitz.pacuse.pages.AbstractPage;
-import hu.pazsitz.pacuse.tests.annotations.TableName;
-import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.BlankAction;
-import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.IFieldAction;
-
 /**
  * PageFieldTableMapper.java
  *
@@ -21,37 +19,22 @@ import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.IFieldAction;
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
 public class PageFieldTableMapper {
-	private final IFieldAction action;
-	
-	public PageFieldTableMapper() {
-		this.action = new BlankAction();
-	}
 			
-	
-	public PageFieldTableMapper(IFieldAction action) {
-		this.action = action;
-	}
-	
 	/**
-	 * Evaluates the given Action on the mapped field
+	 * Gets the mapped field if exists
 	 * @param page
 	 * @param fieldName
 	 * @param value
 	 * @return boolean
 	 */
-	public Boolean mapFields(AbstractPage page, String fieldName, String value) {
-		boolean result = true;
-		
+	public WebElement mapField(AbstractPage page, String fieldName) {
 		WebElement element = lookUpForField(page, fieldName);
-		if (element == null) return null;	// non determined field
-		
-		result = action.doAction(element, value);
-		
-    	return result;
+
+		return element;
     }
 	
 	/**
-	 * Usually use with BlankAction, for just simple element mapping to field names
+	 * Simple element mapping to field names
 	 * @param page
 	 * @param fields
 	 * @return Map<String, WebElement>
@@ -61,7 +44,7 @@ public class PageFieldTableMapper {
 		
 		for (String field : fields) {
 			WebElement element = lookUpForField(page, field);
-			action.doAction(element, field);
+			result.put(field, element);
 		}
 		
     	return result;
