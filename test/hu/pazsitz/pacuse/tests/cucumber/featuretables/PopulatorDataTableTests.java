@@ -16,9 +16,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Test(groups = "unit")
-public class ComparatorDataTableTests {
+public class PopulatorDataTableTests {
 
-	private ComparatorDataTable table;
+	private PopulatorDataTable table;
 	private TestPage page;
 	private TestPage2 page2;
 	
@@ -30,7 +30,7 @@ public class ComparatorDataTableTests {
 		map.put("non existent field", "asdasd");
 		List<Map<String, String>> dataTable = new ArrayList<>();
 		dataTable.add(map);
-		table = new ComparatorDataTable(dataTable);
+		table = new PopulatorDataTable(dataTable);
 		
 		buildPageObject();
 	}
@@ -39,37 +39,41 @@ public class ComparatorDataTableTests {
 		page = new TestPage(null);
 		WebElement element = Mockito.mock(WebElement.class, Mockito.RETURNS_MOCKS);
 		Mockito.when(element.getTagName()).thenReturn("input");
-		Mockito.when(element.getAttribute("value")).thenReturn("testName");
 		page.name = element;
 		
 		WebElement element2 = Mockito.mock(WebElement.class, Mockito.RETURNS_MOCKS);
 		Mockito.when(element2.getTagName()).thenReturn("input");
-		Mockito.when(element2.getAttribute("value")).thenReturn("email@email.com");
 		page.email = element2;
 		
 		WebElement element3 = Mockito.mock(WebElement.class, Mockito.RETURNS_MOCKS);
 		Mockito.when(element3.getTagName()).thenReturn("input");
-		Mockito.when(element3.getAttribute("value")).thenReturn("addressValue 123");
 		page.address = element3;
 		
 		page2 = new TestPage2(null);
 		WebElement element4 = Mockito.mock(WebElement.class, Mockito.RETURNS_MOCKS);
 		Mockito.when(element4.getTagName()).thenReturn("input");
-		Mockito.when(element4.getAttribute("value")).thenReturn("asdasd");
 		page2.field = element4;
 	}
 	
 	@Test
-	public void testCompareToPageModel() {
-		FieldActionResult result = table.compareToPageModel(page);
+	public void testPopulateToPageModel() {
+		FieldActionResult result = table.populateToPageModel(page);
 		Assert.assertFalse(result.hasFailed(), result.getFailedFields().toString());
 		Assert.assertFalse(result.fullSuccess(), result.getFailedFields().toString());
 		Assert.assertTrue(result.success(), result.getFailedFields().toString());
 		Assert.assertTrue(result.hasNonDeterined(), result.getNonDeterminedFields().toString());
+		Mockito.verify(page.name, Mockito.times(1)).clear();
+		Mockito.verify(page.name, Mockito.times(1)).sendKeys("testName");
+		Mockito.verify(page.email, Mockito.times(1)).clear();
+		Mockito.verify(page.email, Mockito.times(1)).sendKeys("email@email.com");
+		Mockito.verify(page.address, Mockito.times(0)).clear();
+		Mockito.verify(page.address, Mockito.times(0)).sendKeys("addressValue 123");
 		
-		FieldActionResult result2 = table.compareToPageModel(page2);
+		FieldActionResult result2 = table.populateToPageModel(page2);
 		Assert.assertTrue(result2.fullSuccess(),result2.getFailedFields().toString());
 		Assert.assertTrue(result2.success(), result2.getFailedFields().toString());
+		Mockito.verify(page2.field, Mockito.times(1)).clear();
+		Mockito.verify(page2.field, Mockito.times(1)).sendKeys("asdasd");
 	}
 	
 	private class TestPage extends AbstractPage {
