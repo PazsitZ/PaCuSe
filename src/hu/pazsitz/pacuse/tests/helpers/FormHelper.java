@@ -11,6 +11,22 @@ import org.openqa.selenium.support.ui.Select;
  */
 public class FormHelper {
 
+	/**
+	 * Handles checkbox setting
+	 * @param element
+	 * @param boolValue
+	 * @return WebElement
+	 */
+	 public static WebElement checkboxTicker(WebElement element, boolean boolValue) {
+		 if (!element.isSelected() && boolValue) {
+	            element.click();
+	        } else if (element.isSelected() && !boolValue) {
+	            element.click();
+	        }
+
+	        return element;
+	 }
+	 
     /**
      * Handles "yes" and "true" String values as checked
      *
@@ -21,13 +37,7 @@ public class FormHelper {
     public static WebElement checkboxTicker(WebElement element, String value) {
         boolean boolValue = getCheckboxBoolValue(value);
 
-        if (!element.isSelected() && boolValue) {
-            element.click();
-        } else if (element.isSelected() && !boolValue) {
-            element.click();
-        }
-
-        return element;
+        return checkboxTicker(element, boolValue);
     }
 
     /**
@@ -47,8 +57,7 @@ public class FormHelper {
 	}
 
     /**
-     * fills the element only on non-null value
-     *
+     * Fills the element only on non-null value
      * @param element
      * @param value
      * @return WebElement
@@ -62,7 +71,7 @@ public class FormHelper {
     }
 
     /**
-     * 
+     * Selects option by numerical index
      * @param element
      * @param value
      * @return WebElement
@@ -75,8 +84,7 @@ public class FormHelper {
     }
 
     /**
-     * fills the element only on non-null value
-     *
+     * Fills the element only on non-null value
      * @param element
      * @param value
      * @return WebElement
