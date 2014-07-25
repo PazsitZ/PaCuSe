@@ -63,7 +63,12 @@ public class AbstractTestNGCucumberWithReporterTests extends AbstractTestNGCucum
 	private void generateMissingSteps(String className, List<String> snippets) {
 		final String br = System.getProperty("line.separator");
 		String fileStringStart = "package " + this.getClass().getPackage().getName() + ".cucumber.stepdefs;" + br + br
-			+ "import cucumber.api.PendingException;" + br + "import cucumber.api.java.en.Then;" + br + br
+			+ "import cucumber.api.DataTable;" + br 
+			+ "import cucumber.api.PendingException;" + br 
+			+ "import cucumber.api.java.en.Then;" + br 
+			+ "import cucumber.api.java.en.Given;" + br 
+			+ "import cucumber.api.java.en.Then;" + br 
+			+ br + br
 			+ "public class " + className + " { " + br;
 		final String fileStringEnd = "} ";
 		 
