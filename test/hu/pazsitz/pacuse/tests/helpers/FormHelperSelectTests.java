@@ -18,6 +18,12 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+/**
+ * FormHelperSelectTests.java
+ *
+ * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
+ * @copyright Copyright (c) 2014, Zoltan Pazsit
+ */
 @Test(groups = "unit")
 public class FormHelperSelectTests {
 	@Mock(answer=Answers.RETURNS_DEFAULTS)

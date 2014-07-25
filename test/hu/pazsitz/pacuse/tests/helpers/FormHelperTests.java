@@ -13,6 +13,12 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+/**
+ * FormHelperTests.java
+ *
+ * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
+ * @copyright Copyright (c) 2014, Zoltan Pazsit
+ */
 @Test(groups = "unit")
 public class FormHelperTests {
 	@Mock(answer=Answers.RETURNS_DEFAULTS)

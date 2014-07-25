@@ -14,6 +14,12 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+/**
+ * AbstractPageObjectTests.java
+ *
+ * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
+ * @copyright Copyright (c) 2014, Zoltan Pazsit
+ */
 @Test(groups = "unit")
 public class AbstractPageObjectTests {
 	@Mock(answer=Answers.RETURNS_DEFAULTS)

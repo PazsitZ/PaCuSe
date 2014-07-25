@@ -13,6 +13,12 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 
+/**
+ * NameCardPageObject.java
+ *
+ * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
+ * @copyright Copyright (c) 2014, Zoltan Pazsit
+ */
 public class NameCardPageObject extends AbstractPageObject<NameCardPage> {
 
 	public NameCardPageObject(WebDriver webDriver) {
