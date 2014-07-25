@@ -19,7 +19,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Test(groups = "unit")
-public class CucumberTableHelperSelectTests {
+public class FormHelperSelectTests {
 	@Mock(answer=Answers.RETURNS_DEFAULTS)
 	private WebElement element;
 	@Mock(answer=Answers.RETURNS_DEFAULTS)
@@ -43,7 +43,7 @@ public class CucumberTableHelperSelectTests {
 	 */
 	@Test
 	public void testSelectByValueDummyTest() {
-		CucumberTableHelper.selectByValue(element, "asd");
+		FormHelper.selectByValue(element, "asd");
 		verify(option, atLeast(1)).isSelected();
 		verify(option, times(1)).click();
 		
@@ -51,7 +51,7 @@ public class CucumberTableHelperSelectTests {
 	
 	@Test
 	public void testSelectByValueWithNull() {
-		CucumberTableHelper.selectByValue(element, null);
+		FormHelper.selectByValue(element, null);
 		verify(option, times(0)).isSelected();
 		verify(option, times(0)).click();
 		
@@ -61,7 +61,7 @@ public class CucumberTableHelperSelectTests {
 	public void testSelectByIndex() {
 		when(option.getAttribute("index")).thenReturn("19");
 		
-		CucumberTableHelper.selectByIndex(element, 19);
+		FormHelper.selectByIndex(element, 19);
 		verify(option, atLeast(1)).isSelected();
 		verify(option, times(1)).click();
 	}
@@ -70,7 +70,7 @@ public class CucumberTableHelperSelectTests {
 	public void testSelectByIndexWithException() {
 		when(option.getAttribute("index")).thenReturn("19");
 		
-		CucumberTableHelper.selectByIndex(element, 1);
+		FormHelper.selectByIndex(element, 1);
 	}
 	
 	/**
@@ -79,14 +79,14 @@ public class CucumberTableHelperSelectTests {
 	 */
 	@Test
 	public void testSelectByTextDummyTest() {
-		CucumberTableHelper.selectByText(element, "selectable element");
+		FormHelper.selectByText(element, "selectable element");
 		verify(option, atLeast(1)).isSelected();
 		verify(option, times(1)).click();
 	}
 	
 	@Test
 	public void testSelectByTextWithNull() {
-		CucumberTableHelper.selectByText(element, null);
+		FormHelper.selectByText(element, null);
 		verify(option, times(0)).isSelected();
 		verify(option, times(0)).click();
 	}

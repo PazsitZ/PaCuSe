@@ -1,7 +1,7 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables;
 
 import hu.pazsitz.pacuse.pages.AbstractPage;
-import hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions.PopulatorAction;
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.PopulatorAction;
 
 import java.util.List;
 import java.util.Map;
@@ -22,9 +22,9 @@ public class PopulatorDataTable extends AbstractDataTable implements IFieldMappe
 	/**
 	 * Populate fields to table values
 	 * @param page
-	 * @return ComparedResult
+	 * @return FieldActionResult
 	 */
-	public ComparedResult populateToPageModel(AbstractPage page) {
+	public FieldActionResult populateToPageModel(AbstractPage page) {
 		return doActionToPageModel(page);
 	}
 }

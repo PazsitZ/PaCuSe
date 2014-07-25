@@ -14,7 +14,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Test(groups = "unit")
-public class CucumberTableHelperTests {
+public class FormHelperTests {
 	@Mock(answer=Answers.RETURNS_DEFAULTS)
 	private WebElement element;
 	
@@ -27,35 +27,35 @@ public class CucumberTableHelperTests {
 	@Test
 	public void testCheckboxTickerNotSelectedElementWithYes() {
 		when(element.isSelected()).thenReturn(false);
-		CucumberTableHelper.checkboxTicker(element, "yes");
+		FormHelper.checkboxTicker(element, "yes");
 		verify(element, atLeast(1)).isSelected();
 		verify(element, times(1)).click();
 	}
 	@Test
 	public void testCheckboxTickerNotSelectedElementWithTrue() {	
 		when(element.isSelected()).thenReturn(false);
-		CucumberTableHelper.checkboxTicker(element, "true");
+		FormHelper.checkboxTicker(element, "true");
 		verify(element, atLeast(1)).isSelected();
 		verify(element, times(1)).click();
 	}
 	@Test
 	public void testCheckboxTickerNotSelectedElementWithNo() {		
 		when(element.isSelected()).thenReturn(false);
-		CucumberTableHelper.checkboxTicker(element, "no");
+		FormHelper.checkboxTicker(element, "no");
 		verify(element, atLeast(1)).isSelected();
 		verify(element, times(0)).click();
 	}
 	@Test
 	public void testCheckboxTickerNotSelectedElementWithDummy() {
 		when(element.isSelected()).thenReturn(false);
-		CucumberTableHelper.checkboxTicker(element, "-");
+		FormHelper.checkboxTicker(element, "-");
 		verify(element, atLeast(1)).isSelected();
 		verify(element, times(0)).click();
 	}
 	@Test
 	public void testCheckboxTickerNotSelectedElementWithNull() {
 		when(element.isSelected()).thenReturn(false);
-		CucumberTableHelper.checkboxTicker(element, null);
+		FormHelper.checkboxTicker(element, null);
 		verify(element, atLeast(1)).isSelected();
 		verify(element, times(0)).click();
 	}
@@ -63,35 +63,35 @@ public class CucumberTableHelperTests {
 	@Test
 	public void testCheckboxTickerSelectedElementWith() {
 		when(element.isSelected()).thenReturn(true);
-		CucumberTableHelper.checkboxTicker(element, "yes");
+		FormHelper.checkboxTicker(element, "yes");
 		verify(element, atLeast(1)).isSelected();
 		verify(element, times(0)).click();
 	}
 	@Test
 	public void testCheckboxTickerSelectedElementWithTrue() {
 		when(element.isSelected()).thenReturn(true);
-		CucumberTableHelper.checkboxTicker(element, "true");
+		FormHelper.checkboxTicker(element, "true");
 		verify(element, atLeast(1)).isSelected();
 		verify(element, times(0)).click();
 	}
 	@Test
 	public void testCheckboxTickerSelectedElementWithFalse() {
 		when(element.isSelected()).thenReturn(true);
-		CucumberTableHelper.checkboxTicker(element, "false");
+		FormHelper.checkboxTicker(element, "false");
 		verify(element, atLeast(1)).isSelected();
 		verify(element, times(1)).click();
 	}
 	@Test
 	public void testCheckboxTickerSelectedElementWithDummy() {
 		when(element.isSelected()).thenReturn(true);
-		CucumberTableHelper.checkboxTicker(element, "asd");
+		FormHelper.checkboxTicker(element, "asd");
 		verify(element, atLeast(1)).isSelected();
 		verify(element, times(1)).click();
 	}
 	@Test
 	public void testCheckboxTickerSelectedElementWithNull() {
 		when(element.isSelected()).thenReturn(true);
-		CucumberTableHelper.checkboxTicker(element, null);
+		FormHelper.checkboxTicker(element, null);
 		verify(element, atLeast(1)).isSelected();
 		verify(element, times(1)).click();
 	}
@@ -100,7 +100,7 @@ public class CucumberTableHelperTests {
 	public void testInputFillOverWrite() {
 		String assertValue = "input String";
 		
-		CucumberTableHelper.inputFillOverWrite(element, assertValue);
+		FormHelper.inputFillOverWrite(element, assertValue);
 		verify(element, times(1)).clear();
 		verify(element, times(1)).sendKeys(assertValue);
 	}
@@ -109,19 +109,19 @@ public class CucumberTableHelperTests {
 	public void testInputFillOverWriteWithNull() {
 		String assertValue = null;
 		
-		CucumberTableHelper.inputFillOverWrite(element, assertValue);
+		FormHelper.inputFillOverWrite(element, assertValue);
 		verify(element, times(0)).clear();
 		verify(element, times(0)).sendKeys(assertValue);
 	}
 	
 	@Test
 	public void testGetCheckboxBoolValue() {
-		Assert.assertTrue(CucumberTableHelper.getCheckboxBoolValue("yes"));
-		Assert.assertTrue(CucumberTableHelper.getCheckboxBoolValue("true"));
-		Assert.assertFalse(CucumberTableHelper.getCheckboxBoolValue("no"));
-		Assert.assertFalse(CucumberTableHelper.getCheckboxBoolValue("false"));
-		Assert.assertFalse(CucumberTableHelper.getCheckboxBoolValue(""));
-		Assert.assertFalse(CucumberTableHelper.getCheckboxBoolValue(null));
+		Assert.assertTrue(FormHelper.getCheckboxBoolValue("yes"));
+		Assert.assertTrue(FormHelper.getCheckboxBoolValue("true"));
+		Assert.assertFalse(FormHelper.getCheckboxBoolValue("no"));
+		Assert.assertFalse(FormHelper.getCheckboxBoolValue("false"));
+		Assert.assertFalse(FormHelper.getCheckboxBoolValue(""));
+		Assert.assertFalse(FormHelper.getCheckboxBoolValue(null));
 	}
 	
 	

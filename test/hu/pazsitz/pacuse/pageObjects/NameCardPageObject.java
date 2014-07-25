@@ -5,7 +5,7 @@ import static org.testng.Assert.assertTrue;
 import hu.pazsitz.pacuse.pageObjects.AbstractPageObject;
 import hu.pazsitz.pacuse.pages.NameCardPage;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.ComparatorDataTable;
-import hu.pazsitz.pacuse.tests.cucumber.featuretables.ComparedResult;
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.FieldActionResult;
 
 import java.util.List;
 import java.util.Map;
@@ -34,7 +34,7 @@ public class NameCardPageObject extends AbstractPageObject<NameCardPage> {
 		assertEquals(page.getProfession().getText(), table.get(0).get("profession"));
 		
 		ComparatorDataTable comparatorTable = new ComparatorDataTable(table);
-		ComparedResult result = comparatorTable.compareToPageModel(page);
+		FieldActionResult result = comparatorTable.compareToPageModel(page);
 		assertTrue(result.fullSuccess(), result.getFailedFields().toString());
 	}
 

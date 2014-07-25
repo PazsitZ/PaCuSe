@@ -66,13 +66,13 @@ public class ComparatorDataTableTests {
 	
 	@Test
 	public void testCompareToPageModel() {
-		ComparedResult result = table.compareToPageModel(page);
+		FieldActionResult result = table.compareToPageModel(page);
 		Assert.assertFalse(result.hasFailed(), result.getFailedFields().toString());
 		Assert.assertFalse(result.fullSuccess(), result.getFailedFields().toString());
 		Assert.assertTrue(result.success(), result.getFailedFields().toString());
 		Assert.assertTrue(result.hasNonDeterined(), result.getNonDeterminedFields().toString());
 		
-		ComparedResult result2 = table.compareToPageModel(page2);
+		FieldActionResult result2 = table.compareToPageModel(page2);
 		Assert.assertTrue(result2.fullSuccess(),result2.getFailedFields().toString());
 		Assert.assertTrue(result2.success(), result2.getFailedFields().toString());
 	}

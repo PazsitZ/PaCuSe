@@ -11,8 +11,8 @@ import org.openqa.selenium.WebElement;
 
 import hu.pazsitz.pacuse.pages.AbstractPage;
 import hu.pazsitz.pacuse.tests.annotations.TableName;
-import hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions.BlankAction;
-import hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions.IMapperAction;
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.BlankAction;
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.IFieldAction;
 
 /**
  * PageFieldTableMapper.java
@@ -21,14 +21,14 @@ import hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions.IMapperActio
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
 public class PageFieldTableMapper {
-	private final IMapperAction action;
+	private final IFieldAction action;
 	
 	public PageFieldTableMapper() {
 		this.action = new BlankAction();
 	}
 			
 	
-	public PageFieldTableMapper(IMapperAction action) {
+	public PageFieldTableMapper(IFieldAction action) {
 		this.action = action;
 	}
 	

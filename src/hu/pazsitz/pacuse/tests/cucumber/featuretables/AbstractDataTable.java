@@ -1,7 +1,7 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables;
 
 import hu.pazsitz.pacuse.pages.AbstractPage;
-import hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions.IMapperAction;
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.IFieldAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public abstract class AbstractDataTable implements IFieldMapperDataTable {
 	private final PageFieldTableMapper mapper;
 	private List<Map<String, String>> table = new ArrayList<>();
 	
-	public AbstractDataTable(IMapperAction action) {
+	public AbstractDataTable(IFieldAction action) {
 		this.mapper = new PageFieldTableMapper(action);
 	}
 	
@@ -46,7 +46,7 @@ public abstract class AbstractDataTable implements IFieldMapperDataTable {
 	 * @param page
 	 * @return
 	 */
-	protected ComparedResult doActionToPageModel(AbstractPage page) {
+	protected FieldActionResult doActionToPageModel(AbstractPage page) {
 		List<String> success = new ArrayList<>();
 		List<String> failed = new ArrayList<>();
 		for (Map<String, String> row : table) {
@@ -64,7 +64,7 @@ public abstract class AbstractDataTable implements IFieldMapperDataTable {
 			}
 		}
 		
-		return new ComparedResult(fieldNumber, success, fieldNonDetermined, failed);
+		return new FieldActionResult(fieldNumber, success, fieldNonDetermined, failed);
 	}
 
 	

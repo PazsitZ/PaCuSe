@@ -1,7 +1,7 @@
-package hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions;
+package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions;
 
 
-import hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions.delegates.comparator.ComparatorActionDelegator;
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.comparator.ComparatorActionDelegator;
 
 import org.openqa.selenium.WebElement;
 
@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
  * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
-public class ComparatorAction implements IMapperAction {
+public class ComparatorAction implements IFieldAction {
 	private ComparatorActionDelegator delegator = new ComparatorActionDelegator();
 	
 	@Override

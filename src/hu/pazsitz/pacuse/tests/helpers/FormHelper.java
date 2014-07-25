@@ -4,12 +4,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 /**
- * CucumberTableHelper.java
+ * FormHelper.java
  *
  * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
-public class CucumberTableHelper {
+public class FormHelper {
 
     /**
      * Handles "yes" and "true" String values as checked

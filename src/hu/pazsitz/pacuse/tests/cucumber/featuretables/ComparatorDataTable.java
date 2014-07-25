@@ -1,7 +1,7 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables;
 
 import hu.pazsitz.pacuse.pages.AbstractPage;
-import hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions.ComparatorAction;
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.ComparatorAction;
 
 import java.util.List;
 import java.util.Map;
@@ -22,9 +22,9 @@ public class ComparatorDataTable extends AbstractDataTable implements IFieldMapp
 	/**
 	 * Compare fields to table values
 	 * @param page
-	 * @return ComparedResult
+	 * @return FieldActionResult
 	 */
-	public ComparedResult compareToPageModel(AbstractPage page) {
+	public FieldActionResult compareToPageModel(AbstractPage page) {
 		return doActionToPageModel(page);
 	}
 }

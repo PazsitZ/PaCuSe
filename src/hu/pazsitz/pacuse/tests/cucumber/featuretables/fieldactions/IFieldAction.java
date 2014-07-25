@@ -1,14 +1,14 @@
-package hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions;
+package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions;
 
 import org.openqa.selenium.WebElement;
 
 /**
- * IMapperAction.java
+ * IFieldAction.java
  *
  * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
-public interface IMapperAction {
+public interface IFieldAction {
 
 	public boolean doAction(WebElement element, String value);
 }

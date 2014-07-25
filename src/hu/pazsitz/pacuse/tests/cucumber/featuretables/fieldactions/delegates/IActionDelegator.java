@@ -1,4 +1,4 @@
-package hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions.delegates;
+package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates;
 
 import org.openqa.selenium.WebElement;
 

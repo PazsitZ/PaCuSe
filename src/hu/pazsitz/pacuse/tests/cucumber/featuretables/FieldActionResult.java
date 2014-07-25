@@ -3,18 +3,18 @@ package hu.pazsitz.pacuse.tests.cucumber.featuretables;
 import java.util.List;
 
 /**
- * ComparedResult.java
+ * FieldActionResult.java
  *
  * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
-public class ComparedResult {
+public class FieldActionResult {
 	private final int tableFieldNumber;
 	private final List<String> fieldSuccess;
 	private final List<String> fieldNonDeterined;
 	private final List<String> fieldFailed;
 	
-	public ComparedResult(int tableFieldNumber, List<String> fieldSuccess, List<String> fieldNonDeterined, List<String> fieldFailed) {
+	public FieldActionResult(int tableFieldNumber, List<String> fieldSuccess, List<String> fieldNonDeterined, List<String> fieldFailed) {
 		this.tableFieldNumber = tableFieldNumber;
 		this.fieldSuccess = fieldSuccess;
 		this.fieldNonDeterined = fieldNonDeterined;

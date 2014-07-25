@@ -1,10 +1,10 @@
-package hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions.delegates.comparator;
+package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.comparator;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions.delegates.IActionDelegator;
-import hu.pazsitz.pacuse.tests.helpers.CucumberTableHelper;
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IActionDelegator;
+import hu.pazsitz.pacuse.tests.helpers.FormHelper;
 
 /**
  * ComparatorActionDelegator.java
@@ -24,7 +24,7 @@ public class ComparatorActionDelegator implements IActionDelegator {
 			switch (element.getAttribute("type")) {
 				case "radio" :
 				case "checkbox" :
-					return element.isSelected() == CucumberTableHelper.getCheckboxBoolValue(value);
+					return element.isSelected() == FormHelper.getCheckboxBoolValue(value);
 				default:
 					return element.getAttribute("value").equals(value) || element.getAttribute("value").trim().equals(value.trim());
 			}

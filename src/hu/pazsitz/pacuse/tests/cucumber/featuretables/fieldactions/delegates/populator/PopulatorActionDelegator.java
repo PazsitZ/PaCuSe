@@ -1,7 +1,7 @@
-package hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions.delegates.populator;
+package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.populator;
 
-import hu.pazsitz.pacuse.tests.cucumber.featuretables.mapperactions.delegates.IActionDelegator;
-import hu.pazsitz.pacuse.tests.helpers.CucumberTableHelper;
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IActionDelegator;
+import hu.pazsitz.pacuse.tests.helpers.FormHelper;
 
 import org.openqa.selenium.WebElement;
 
@@ -17,18 +17,18 @@ public class PopulatorActionDelegator implements IActionDelegator {
 	public boolean populate(WebElement element, String value) {
 		try {
 		if ("select".equals(element.getTagName())) {
-			CucumberTableHelper.selectByValue(element, value);
+			FormHelper.selectByValue(element, value);
 		} else {
 			switch (element.getAttribute("type")) {
 				case "radio" :
 				case "checkbox" :
-					CucumberTableHelper.checkboxTicker(element, value);
+					FormHelper.checkboxTicker(element, value);
 				break;
 				case "button" :
 					element.click();
 				break;
 				default:
-					CucumberTableHelper.inputFillOverWrite(element, value);
+					FormHelper.inputFillOverWrite(element, value);
 				break;
 			}
 			
