@@ -1,10 +1,12 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.comparator;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IActionDelegator;
-import hu.pazsitz.pacuse.tests.helpers.FormHelper;
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IDelegatedAction;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
 
 /**
  * ComparatorActionDelegator.java
@@ -14,23 +16,47 @@ import hu.pazsitz.pacuse.tests.helpers.FormHelper;
  */
 public class ComparatorActionDelegator implements IActionDelegator {
 
+	/**
+	 * 
+	 */
 	@Override
-	public boolean populate(WebElement element, String value) {
-		if ("select".equals(element.getTagName())) {
-			Select selector = new Select(element);
-			return selector.getFirstSelectedOption().getText().equals(value) 
-				|| selector.getFirstSelectedOption().getAttribute("value").equals(value);
-		} else if ("input".equals(element.getTagName())) {
-			switch (element.getAttribute("type")) {
-				case "radio" :
-				case "checkbox" :
-					return element.isSelected() == FormHelper.getCheckboxBoolValue(value);
-				default:
-					return element.getAttribute("value").equals(value) || element.getAttribute("value").trim().equals(value.trim());
-			}
-		} else {
-			return element.getText().equals(value) || element.getText().trim().equals(value.trim());
+	public boolean doDelegate(WebElement element, String value) throws Exception {
+		boolean result = false;
+		Exception ex = null;
+		List<IDelegatedAction> actions = new ArrayList<>();
+		
+		switch (element.getTagName()) {
+			case "select":
+				actions.add(new SelectByTextComparatorAction());
+				actions.add(new SelectByValueComparatorAction());
+			break;
+			case "input":
+				if (element.getAttribute("type").equals("radio") || element.getAttribute("type").equals("checkbox")) {
+				actions.add(new InputCheckboxComparatorAction());
+				} else {
+					actions.add(new InputCommonComparatorAction());
+				}
+			break;
+			case "a":
+				actions.add(new LinkSrcComparatorAction());
+				actions.add(new LinkTextComparatorAction());
+			break;
+			default:
+				actions.add(new CommonElementComparatorAction());
 		}
+		
+		for (IDelegatedAction action : actions) {
+			try {
+				result = action.doAction(element, value);
+			} catch (Exception e) {
+				ex = e;
+			}
+			if (result) break;
+		}
+		
+		if (!result && ex != null) throw ex;
+		
+		return result;
 	}
 
 }
