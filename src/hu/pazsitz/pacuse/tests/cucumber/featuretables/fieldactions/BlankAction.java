@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
  *
  * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
  * @copyright Copyright (c) 2014, Zoltan Pazsit
+ * 
+ * @deprecated since the mapping has no action it's useless
  */
 public class BlankAction implements IFieldAction {
 

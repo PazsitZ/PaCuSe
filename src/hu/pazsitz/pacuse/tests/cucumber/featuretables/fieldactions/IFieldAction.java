@@ -10,5 +10,5 @@ import org.openqa.selenium.WebElement;
  */
 public interface IFieldAction {
 
-	public boolean doAction(WebElement element, String value);
+	public boolean doAction(WebElement element, String value) throws Exception;
 }

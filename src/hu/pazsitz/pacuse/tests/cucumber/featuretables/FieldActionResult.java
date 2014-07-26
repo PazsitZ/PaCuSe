@@ -1,6 +1,7 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * FieldActionResult.java
@@ -12,9 +13,9 @@ public class FieldActionResult {
 	private final int tableFieldNumber;
 	private final List<String> fieldSuccess;
 	private final List<String> fieldNonDeterined;
-	private final List<String> fieldFailed;
+	private final Map<String, String> fieldFailed;
 	
-	public FieldActionResult(int tableFieldNumber, List<String> fieldSuccess, List<String> fieldNonDeterined, List<String> fieldFailed) {
+	public FieldActionResult(int tableFieldNumber, List<String> fieldSuccess, List<String> fieldNonDeterined, Map<String, String> fieldFailed) {
 		this.tableFieldNumber = tableFieldNumber;
 		this.fieldSuccess = fieldSuccess;
 		this.fieldNonDeterined = fieldNonDeterined;
@@ -53,7 +54,7 @@ public class FieldActionResult {
 		return fieldNonDeterined.size() > 0;
 	}
 	
-	public List<String> getFailedFields() {
+	public Map<String, String> getFailedFields() {
 		return fieldFailed;
 	}
 	

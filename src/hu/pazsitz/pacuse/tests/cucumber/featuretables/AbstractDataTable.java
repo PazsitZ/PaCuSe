@@ -4,6 +4,7 @@ import hu.pazsitz.pacuse.pages.AbstractPage;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.IFieldAction;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -19,7 +20,7 @@ import org.openqa.selenium.WebElement;
 public abstract class AbstractDataTable implements IFieldMapperDataTable {
 	private IFieldAction action;
 	private List<String> success = new ArrayList<>();
-	private List<String> failed = new ArrayList<>();
+	private Map<String, String> failed = new HashMap<>();
 	private List<String> fieldNonDetermined = new ArrayList<>();
 	private int fieldNumber = 0;
 	private final PageFieldTableMapper mapper;
@@ -55,7 +56,7 @@ public abstract class AbstractDataTable implements IFieldMapperDataTable {
 	 */
 	protected FieldActionResult doActionToPageModel(AbstractPage page) {
 		success = new ArrayList<>();
-		failed = new ArrayList<>();
+		failed = new HashMap<>();
 		for (Map<String, String> row : table) {
 			for (Entry<String, String> entry : row.entrySet()) {
 				WebElement mappedField = mapper.mapField(page, entry.getKey());
@@ -69,14 +70,21 @@ public abstract class AbstractDataTable implements IFieldMapperDataTable {
 	}
 
 	private void evaluateAction(Entry<String, String> entry, WebElement mappedField) {
+		Exception ex = null;
+		Boolean result = null;
 		String fieldName = entry.getKey();
-		Boolean result = action.doAction(mappedField, entry.getValue());
+		try {
+			result = action.doAction(mappedField, entry.getValue());
+		} catch (Exception e) {
+			result = false;
+			ex = e;
+		}
 		
 		if (result != null && result) {
 			success.add(fieldName);
 			fieldNonDetermined.remove(fieldName);
 		} else if (result != null) {
-			failed.add(fieldName);
+			failed.put(fieldName, ex.getMessage());
 			fieldNonDetermined.remove(fieldName);
 		}
 	}

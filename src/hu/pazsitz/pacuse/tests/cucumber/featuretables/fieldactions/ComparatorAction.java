@@ -15,14 +15,11 @@ public class ComparatorAction implements IFieldAction {
 	private ComparatorActionDelegator delegator = new ComparatorActionDelegator();
 	
 	@Override
-	public boolean doAction(WebElement element, String value) {
-		try {
-			System.out.println("[DEBUG - ComparatorAction]  element.text: " + element.getText() + " value: " + value);
-			
-			return delegator.populate(element, value);			
-		} catch (NullPointerException e) {
-			return false;
-		}
+	public boolean doAction(WebElement element, String value) throws Exception {
+		// TODO Log4j
+		System.out.println("[DEBUG - ComparatorAction]  element.text: " + element.getText() + " value: " + value);
+		
+		return delegator.doDelegate(element, value);			
 	}
 
 }

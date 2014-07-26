@@ -2,7 +2,6 @@ package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions;
 
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.populator.PopulatorActionDelegator;
 
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -15,14 +14,11 @@ public class PopulatorAction implements IFieldAction {
 	private PopulatorActionDelegator delegator = new PopulatorActionDelegator();
 	
 	@Override
-	public boolean doAction(WebElement element, String value) {
-		try {
-			System.out.println("[DEBUG - PopulatorAction]  element.text: " + element.getText() + "(" +element.getAttribute("name") + ") value: " + value);
+	public boolean doAction(WebElement element, String value) throws Exception {
+		// TODO Log4j
+		System.out.println("[DEBUG - PopulatorAction]  element.text: " + element.getText() + "(" +element.getAttribute("name") + ") value: " + value);
 			
-			return delegator.populate(element, value);
-		} catch (NullPointerException | NoSuchElementException e) {
-			return false;
-		}
+		return delegator.doDelegate(element, value);
 	}
 
 }
