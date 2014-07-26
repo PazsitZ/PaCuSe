@@ -1,7 +1,10 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.populator;
 
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IActionDelegator;
-import hu.pazsitz.pacuse.tests.helpers.FormHelper;
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IDelegatedAction;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.WebElement;
 
@@ -14,29 +17,42 @@ import org.openqa.selenium.WebElement;
 public class PopulatorActionDelegator implements IActionDelegator {
 
 	@Override
-	public boolean populate(WebElement element, String value) {
-		try {
+	public boolean doDelegate(WebElement element, String value) throws Exception {
+		boolean result = false;
+		Exception ex = null;
+		List<IDelegatedAction> actions = new ArrayList<>();
+		
 		if ("select".equals(element.getTagName())) {
-			FormHelper.selectByValue(element, value);
+			actions.add(new SelectByValuePopulatorAction());
+			actions.add(new SelectByTextPopulatorAction());
 		} else {
 			switch (element.getAttribute("type")) {
 				case "radio" :
 				case "checkbox" :
-					FormHelper.checkboxTicker(element, value);
+					actions.add(new CheckBoxtickerPopulatorAction());
 				break;
 				case "button" :
-					element.click();
+					actions.add(new ButtonPopulatorAction());
 				break;
 				default:
-					FormHelper.inputFillOverWrite(element, value);
+					actions.add(new InputPopulatorAction());
 				break;
 			}
 			
 		}
-		} catch (Exception e){
-			return false;
+		
+		for (IDelegatedAction action : actions) {
+			try {
+				result = action.doAction(element, value);
+			} catch (Exception e) {
+				ex = e;
+			}
+			if (result) break;
 		}
-		return true;
+		
+		if (!result && ex != null) throw ex;
+		
+		return result;
 	}
 	
 
