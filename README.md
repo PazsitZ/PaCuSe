@@ -21,6 +21,6 @@ There is an integrated report-generator with the following cucumber-jvm reporter
 	
 
 ## Jar package available from:
-http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.70/pacuse.0.70.jar
+http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.75/pacuse.0.75.jar
 
-http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.70/pacuse.0.70.source.jar
+http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.75/pacuse.0.75.source.jar
