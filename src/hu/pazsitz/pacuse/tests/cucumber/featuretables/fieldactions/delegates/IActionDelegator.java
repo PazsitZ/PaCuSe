@@ -9,5 +9,5 @@ import org.openqa.selenium.WebElement;
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
 public interface IActionDelegator {
-	public boolean populate(WebElement element, String value);
+	public boolean doDelegate(WebElement element, String value) throws Exception;
 }
