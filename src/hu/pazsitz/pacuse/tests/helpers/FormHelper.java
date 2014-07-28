@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.Select;
  */
 public class FormHelper {
 
+	private static final String MULTISELECT_VALUE_SPLIT_CHAR = ",";
+
 	/**
 	 * Handles checkbox setting
 	 * @param element
@@ -57,15 +59,32 @@ public class FormHelper {
 	}
 
     /**
-     * Fills the element only on non-null value
+     * Fills the element only on non-null value (multiple select handles "," as separator chars)
      * @param element
      * @param value
      * @return WebElement
      */
     public static WebElement selectByValue(WebElement element, String value) {
-        if (value == null) return element;
-        Select selector = new Select(element);
-        selector.selectByValue(value);
+    	return selectByValue(element, value, true);
+    }
+    
+    /**
+     * 
+     * @param element
+     * @param value
+     * @param allowHandleMultiple if multiple select allowed it considers "," as separator chars
+     * @return
+     */
+	public static WebElement selectByValue(WebElement element, String value, boolean allowHandleMultiple) {
+		if (value == null) return element;
+		
+		Select selector = new Select(element);
+		if (!selector.isMultiple()) allowHandleMultiple = false;
+		String[] values = splitMultipleSelectValue(value, allowHandleMultiple);
+        
+        for (String singleValue : values) {
+	        selector.selectByValue(singleValue);
+        }
 
         return element;
     }
@@ -76,26 +95,65 @@ public class FormHelper {
      * @param value
      * @return WebElement
      */
-    public static WebElement selectByIndex(WebElement element, int value) {
-        Select selector = new Select(element);
-        selector.selectByIndex(value);
+	public static WebElement selectByIndex(WebElement element, int value) {
+		return selectByIndex(element, new int[]{value});
+	}
+	
+	/**
+	 * Selects option by numerical index
+	 * @param element
+	 * @param value
+	 * @return WebElement
+	 */
+    public static WebElement selectByIndex(WebElement element, int[] values) {
+    	for (int singleValue : values) {
+	        Select selector = new Select(element);
+	        selector.selectByIndex(singleValue);
+    	}
 
         return element;
     }
 
     /**
-     * Fills the element only on non-null value
+     * Fills the element only on non-null value (multiple select handles "," as separator chars)
      * @param element
      * @param value
      * @return WebElement
      */
     public static WebElement selectByText(WebElement element, String value) {
-        if (value == null) return element;
-        Select selector = new Select(element);
-        selector.selectByVisibleText(value);
-
+    	return selectByText(element, value, true);
+    }
+    
+    /**
+     * Fills the element only on non-null value
+     * @param element
+     * @param value
+     * @param allowHandleMultiple if multiple select allowed it considers "," as separator chars
+     * @return WebElement
+     */
+    public static WebElement selectByText(WebElement element, String value, boolean allowHandleMultiple) {
+		if (value == null) return element;
+		
+		Select selector = new Select(element);
+		if (!selector.isMultiple()) allowHandleMultiple = false;
+		String[] values = splitMultipleSelectValue(value, allowHandleMultiple);
+        
+        for (String singleValue : values) {
+	        selector.selectByVisibleText(singleValue);
+        }
+        
         return element;
     }
+
+	private static String[] splitMultipleSelectValue(String value, boolean allowHandleMultiple) {
+		String[] values;
+		if (allowHandleMultiple) {
+        	values = value.split(MULTISELECT_VALUE_SPLIT_CHAR);
+        } else {
+        	values = new String[]{value};
+        }
+		return values;
+	}
 
     /**
      * fills the element only on non-null value
