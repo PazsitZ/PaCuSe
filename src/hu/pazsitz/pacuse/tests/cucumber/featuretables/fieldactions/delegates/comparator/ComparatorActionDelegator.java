@@ -1,12 +1,11 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.comparator;
 
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IActionDelegator;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IDelegatedAction;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.openqa.selenium.WebElement;
 
 /**
  * ComparatorActionDelegator.java
@@ -20,7 +19,7 @@ public class ComparatorActionDelegator implements IActionDelegator {
 	 * 
 	 */
 	@Override
-	public boolean doDelegate(WebElement element, String value) throws Exception {
+	public boolean doDelegate(AnnotatedWebElement element, String value) throws Exception {
 		boolean result = false;
 		Exception ex = null;
 		List<IDelegatedAction> actions = new ArrayList<>();

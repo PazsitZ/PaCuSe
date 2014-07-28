@@ -1,7 +1,6 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.populator;
 
-import org.openqa.selenium.WebElement;
-
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IDelegatedAction;
 
 /**
@@ -13,7 +12,10 @@ import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IDe
 public class ButtonPopulatorAction implements IDelegatedAction {
 
 	@Override
-	public boolean doAction(WebElement element, String value) throws Exception {
+	public boolean doAction(AnnotatedWebElement element, String value) throws Exception {
+		// TODO Log4j
+		System.out.println("[DEBUG - " + this.getClass().getSimpleName() + "] tag: " + element.getTagName() + " value: " + value);
+
 		element.click();
 		return true;
 	}

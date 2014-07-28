@@ -1,6 +1,7 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.comparator;
 
-import org.openqa.selenium.WebElement;
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
+
 import org.openqa.selenium.support.ui.Select;
 
 /**
@@ -12,10 +13,10 @@ import org.openqa.selenium.support.ui.Select;
 public class SelectByValueComparatorAction extends AbstractDelegatedComparatorAction<String, String> {
 
 	@Override
-	public boolean doAction(WebElement element, String value) throws Exception {
+	public boolean doAction(AnnotatedWebElement element, String value) throws Exception {
 		Select selector = new Select(element);
 		
-		return compareAction(selector.getFirstSelectedOption().getAttribute("value"), value);
+		return compareAction(value, selector.getFirstSelectedOption().getAttribute("value"));
 	}
 
 }

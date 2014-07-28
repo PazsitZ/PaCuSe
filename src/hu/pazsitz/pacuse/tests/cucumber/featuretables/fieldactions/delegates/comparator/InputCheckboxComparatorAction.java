@@ -1,8 +1,7 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.comparator;
 
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
 import hu.pazsitz.pacuse.tests.helpers.FormHelper;
-
-import org.openqa.selenium.WebElement;
 
 /**
  * InputCheckboxComparatorAction.java
@@ -13,8 +12,8 @@ import org.openqa.selenium.WebElement;
 public class InputCheckboxComparatorAction extends AbstractDelegatedComparatorAction<Boolean, Boolean> {
 
 	@Override
-	public boolean doAction(WebElement element, String value) throws Exception {
-		return compareAction((Boolean) element.isSelected(), (Boolean) FormHelper.getCheckboxBoolValue(value));
+	public boolean doAction(AnnotatedWebElement element, String value) throws Exception {
+		return compareAction((Boolean) FormHelper.getCheckboxBoolValue(value), (Boolean) element.isSelected());
 	}
 
 }

@@ -1,12 +1,11 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.populator;
 
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IActionDelegator;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IDelegatedAction;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.openqa.selenium.WebElement;
 
 /**
  * PopulatorActionDelegator.java
@@ -17,7 +16,7 @@ import org.openqa.selenium.WebElement;
 public class PopulatorActionDelegator implements IActionDelegator {
 
 	@Override
-	public boolean doDelegate(WebElement element, String value) throws Exception {
+	public boolean doDelegate(AnnotatedWebElement element, String value) throws Exception {
 		boolean result = false;
 		Exception ex = null;
 		List<IDelegatedAction> actions = new ArrayList<>();

@@ -1,6 +1,6 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates;
 
-import org.openqa.selenium.WebElement;
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
 
 /**
  * IActionDelegator.java
@@ -9,5 +9,5 @@ import org.openqa.selenium.WebElement;
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
 public interface IActionDelegator {
-	public boolean doDelegate(WebElement element, String value) throws Exception;
+	public boolean doDelegate(AnnotatedWebElement element, String value) throws Exception;
 }

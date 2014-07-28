@@ -1,6 +1,6 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.comparator;
 
-import org.openqa.selenium.WebElement;
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
 
 /**
  * LinkSrcComparatorAction.java
@@ -11,8 +11,8 @@ import org.openqa.selenium.WebElement;
 public class LinkSrcComparatorAction extends AbstractDelegatedComparatorAction<String, String> {
 
 	@Override
-	public boolean doAction(WebElement element, String value) throws Exception {
-		return compareAction(element.getAttribute("src").trim(), value.trim());
+	public boolean doAction(AnnotatedWebElement element, String value) throws Exception {
+		return compareAction(value.trim(), element.getAttribute("src").trim());
 	}
 
 }

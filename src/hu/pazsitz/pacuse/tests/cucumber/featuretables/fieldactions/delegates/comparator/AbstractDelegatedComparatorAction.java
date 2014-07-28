@@ -1,9 +1,8 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.comparator;
 
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.DelegatedActionException;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IDelegatedAction;
-
-import org.openqa.selenium.WebElement;
 
 /**
  * AbstractDelegatedComparatorAction.java
@@ -17,10 +16,12 @@ abstract public class AbstractDelegatedComparatorAction<E, V> implements IDelega
 	 * Handles the common part of the ComparatorActions
 	 */
 	@Override
-	abstract public boolean doAction(WebElement element, String value) throws Exception;
+	abstract public boolean doAction(AnnotatedWebElement element, String value) throws Exception;
 	
 	protected boolean compareAction(E expected, V actual) throws DelegatedActionException {
 		boolean result = expected.equals(actual);
+		// TODO Log4j
+		System.out.println("[DEBUG - " + this.getClass().getSimpleName() + "] expected: " + expected + " value: " + actual);
 
 		if (!result) {
 			throw new DelegatedActionException(expected.toString(), actual.toString());
