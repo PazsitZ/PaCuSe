@@ -56,6 +56,18 @@ public class FieldActionResult {
 		return fieldNonDeterined.size() > 0;
 	}
 	
+	/**
+	 * Gets the number of the field from the provided table
+	 * @return int
+	 */
+	public int getFieldNumber() {
+		return tableFieldNumber;
+	}
+	
+	public List<String> getSuccessFields() {
+		return fieldSuccess;
+	}
+	
 	public Map<String, String> getFailedFields() {
 		return fieldFailed;
 	}
