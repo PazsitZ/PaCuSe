@@ -55,4 +55,9 @@ public class NameCardStepDef {
 	    	nameCard.validateContactCard();
 	    }
 	}
+	
+	@Then("^validate the contact page content from table:$")
+	public void validate_the_contact_page_contentWithTable(List<Map<String, String>> table) throws Throwable {
+    	nameCard.validateContactCard(table);
+	}
 }

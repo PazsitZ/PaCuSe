@@ -35,19 +35,24 @@ public class NameCardPageObject extends AbstractPageObject<NameCardPage> {
         webDriver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 	}
 
+	public void validateAboutCard() {
+		String name = "Zoltán Pázsit";
+		String profession = "Software Enginer - Web Developer";
+		assertEquals(page.getName().getText(), name);
+		assertEquals(page.getProfession().getText(), profession);
+	}
+	
 	public void validateAboutCard(List<Map<String, String>> table) {
-		assertEquals(page.getName().getText(), table.get(0).get("name"));
-		assertEquals(page.getProfession().getText(), table.get(0).get("profession"));
-		
 		ComparatorDataTable comparatorTable = new ComparatorDataTable(table);
 		FieldActionResult result = comparatorTable.compareToPageModel(page);
-		assertTrue(result.fullSuccess(), result.getFailedFields().toString());
+		assertTrue(result.fullSuccess(), result.getNonSucceedFields().toString());
+		assertEquals(result.getNonDeterminedFields().size(), 0);
 	}
 
 	public void validateContactCard() {
 		final String mail1 = "contact@pazsitz.hu";
 		final String mail2 = "pazsitz@gmail.com";
-		final String webPageUrl = "http://pazsitz.hu/";
+		final String webPageUrl = "http://pazsitz.hu";
 		final String FBUrl = "http://facebook.com/pazsitz";
 		final String LIUrl = "http://hu.linkedin.com/in/PazsitZ";
 
@@ -58,5 +63,12 @@ public class NameCardPageObject extends AbstractPageObject<NameCardPage> {
 		assertEquals(page.getWebPageUrlLink().getAttribute("href"), webPageUrl);
 		assertEquals(page.getFBUrlLink().getAttribute("href"), FBUrl);
 		assertEquals(page.getLinkedInUrlLink().getAttribute("href"), LIUrl);
+	}
+
+	public void validateContactCard(List<Map<String, String>> table) {
+		ComparatorDataTable comparatorTable = new ComparatorDataTable(table);
+		FieldActionResult result = comparatorTable.compareToPageModel(page);
+		assertTrue(result.fullSuccess(), result.getNonSucceedFields().toString());
+		assertEquals(result.getNonDeterminedFields().size(), 0);
 	}
 }
