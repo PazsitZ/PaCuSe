@@ -1,7 +1,7 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables;
 
 import hu.pazsitz.pacuse.pages.AbstractPage;
-import hu.pazsitz.pacuse.tests.annotations.TableName;
+import hu.pazsitz.pacuse.tests.annotations.DataTableAttributes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,15 +83,15 @@ public class PopulatorDataTableTests {
 	}
 	
 	private class TestPage extends AbstractPage {
-		@TableName(name="name") public WebElement name;
-		@TableName(name="email") public WebElement email;
-		@TableName(name="address") public WebElement address;
+		@DataTableAttributes(name="name") public WebElement name;
+		@DataTableAttributes(name="email") public WebElement email;
+		@DataTableAttributes(name="address") public WebElement address;
 		public TestPage(WebDriver webDriver) { super(webDriver); }
 		@Override public String getUrl() { return pageUrl; }
 	}
 	
 	private class TestPage2 extends AbstractPage {
-		@TableName(name="non existent field") public WebElement field;
+		@DataTableAttributes(name="non existent field") public WebElement field;
 		public TestPage2(WebDriver webDriver) { super(webDriver); }
 		@Override public String getUrl() { return pageUrl; }
 	}
