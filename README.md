@@ -16,11 +16,11 @@ There is an integrated report-generator with the following cucumber-jvm reporter
 	- Ongoing support and initial implementation of nested widgets in the Page Model
 	- Waiter Helper class with a collection of waiter implementations
 	- Form Elements Handling Helper class
-	- Cucumber-Selenium table mapping with built in validation and population based on annotations
+	- Dynamic Cucumber-Selenium table mapping with configurable built in validation and population based on annotations
 	- built in report generator
 	
 
 ## Jar package available from:
-http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.75/pacuse.0.75.jar
+http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.78/pacuse.0.78.jar
 
-http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.75/pacuse.0.75.source.jar
+http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.78/pacuse.0.78.source.jar
