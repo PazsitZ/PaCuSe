@@ -1,6 +1,6 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions;
 
-import org.openqa.selenium.WebElement;
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
 
 /**
  * ComparatorAction.java
@@ -16,7 +16,7 @@ public class BlankAction implements IFieldAction {
 	 * Blank Action - no action evaluates, for mapping purpose
 	 */
 	@Override
-	public boolean doAction(WebElement element, String value) {
+	public boolean doAction(AnnotatedWebElement element, String value) {
 		return true;
 	}
 

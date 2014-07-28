@@ -1,9 +1,8 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions;
 
 
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.comparator.ComparatorActionDelegator;
-
-import org.openqa.selenium.WebElement;
 
 /**
  * ComparatorAction.java
@@ -15,10 +14,7 @@ public class ComparatorAction implements IFieldAction {
 	private ComparatorActionDelegator delegator = new ComparatorActionDelegator();
 	
 	@Override
-	public boolean doAction(WebElement element, String value) throws Exception {
-		// TODO Log4j
-		System.out.println("[DEBUG - ComparatorAction]  element.text: " + element.getText() + " value: " + value);
-		
+	public boolean doAction(AnnotatedWebElement element, String value) throws Exception {
 		return delegator.doDelegate(element, value);			
 	}
 

@@ -1,6 +1,6 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions;
 
-import org.openqa.selenium.WebElement;
+import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
 
 /**
  * IFieldAction.java
@@ -10,5 +10,5 @@ import org.openqa.selenium.WebElement;
  */
 public interface IFieldAction {
 
-	public boolean doAction(WebElement element, String value) throws Exception;
+	public boolean doAction(AnnotatedWebElement element, String value) throws Exception;
 }
