@@ -2,6 +2,12 @@ package hu.pazsitz.pacuse.tests.cucumber.featuretables;
 
 import java.util.Comparator;
 
+/**
+ * PriorityAnnotationComparator.java
+ *
+ * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
+ * @copyright Copyright (c) 2014, Zoltan Pazsit
+ */
 public class PriorityAnnotationComparator implements Comparator<AnnotatedWebElement> {
 
 	/**

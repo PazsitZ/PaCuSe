@@ -3,7 +3,7 @@ package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
 
 /**
- * ComparatorAction.java
+ * BlankAction.java
  *
  * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
  * @copyright Copyright (c) 2014, Zoltan Pazsit
