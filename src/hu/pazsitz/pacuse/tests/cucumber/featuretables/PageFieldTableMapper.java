@@ -1,7 +1,7 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables;
 
 import hu.pazsitz.pacuse.pages.AbstractPage;
-import hu.pazsitz.pacuse.tests.annotations.TableName;
+import hu.pazsitz.pacuse.tests.annotations.DataTableAttributes;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -27,8 +27,8 @@ public class PageFieldTableMapper {
 	 * @param value
 	 * @return boolean
 	 */
-	public WebElement mapField(AbstractPage page, String fieldName) {
-		WebElement element = lookUpForField(page, fieldName);
+	public AnnotatedWebElement mapField(AbstractPage page, String fieldName) {
+		AnnotatedWebElement element = lookUpForField(page, fieldName);
 
 		return element;
     }
@@ -50,7 +50,7 @@ public class PageFieldTableMapper {
     	return result;
     }
 	
-	private WebElement lookUpForField(AbstractPage page, String fieldName) {
+	private AnnotatedWebElement lookUpForField(AbstractPage page, String fieldName) {
 		for (Field field : page.getClass().getDeclaredFields()) {
 			if (!isFieldAnnotationMatches(fieldName, field)) {
 				continue;
@@ -63,7 +63,8 @@ public class PageFieldTableMapper {
 		        if (field.getType().getSimpleName().equals("WebElement")) {
 		        	field.setAccessible(true);
 		        	try {
-		        		return (WebElement)field.get(page);
+		        		WebElement element = (WebElement)field.get(page);
+		        		return new AnnotatedWebElement(element, field.getAnnotation(DataTableAttributes.class));
 					} catch (IllegalArgumentException
 							| IllegalAccessException e) {
 						e.printStackTrace();
@@ -76,13 +77,17 @@ public class PageFieldTableMapper {
 
 
 	private boolean isFieldAnnotationMatches(String fieldName, Field field) {
-		if (!field.isAnnotationPresent(TableName.class)) return false;
+		if (!field.isAnnotationPresent(DataTableAttributes.class)) return false;
 			
 		fieldName = fieldName.trim();
 		String fieldNameVariant = fieldName.toLowerCase().replaceAll("[_ ]", "");
-		String anotationFieldName = field.getAnnotation(TableName.class).name();
-		return anotationFieldName.equals(fieldName)
-			|| anotationFieldName.toLowerCase().equals(fieldName.toLowerCase())
-			|| anotationFieldName.toLowerCase().equals(fieldNameVariant);
+		for (String anotationFieldName : field.getAnnotation(DataTableAttributes.class).name()) {
+			if ( anotationFieldName.equals(fieldName)
+				|| anotationFieldName.toLowerCase().equals(fieldName.toLowerCase())
+				|| anotationFieldName.toLowerCase().equals(fieldNameVariant)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

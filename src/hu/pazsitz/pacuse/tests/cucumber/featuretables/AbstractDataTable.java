@@ -8,8 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import org.openqa.selenium.WebElement;
+import java.util.TreeMap;
 
 /**
  * AbstractDataTable.java
@@ -50,32 +49,41 @@ public abstract class AbstractDataTable implements IFieldMapperDataTable {
 	}
 	
 	/**
-	 * finds the corresponding fields and invokes the given action on it
+	 * Finds the corresponding fields and invokes the given action on it
 	 * @param page
 	 * @return
 	 */
 	protected FieldActionResult doActionToPageModel(AbstractPage page) {
 		success = new ArrayList<>();
 		failed = new HashMap<>();
+		Map<AnnotatedWebElement, Entry<String, String>> fields = new TreeMap<>(new PriorityAnnotationComparator());
+		
 		for (Map<String, String> row : table) {
 			for (Entry<String, String> entry : row.entrySet()) {
-				WebElement mappedField = mapper.mapField(page, entry.getKey());
+				AnnotatedWebElement mappedField = mapper.mapField(page, entry.getKey());
 				if (mappedField != null) {
-					evaluateAction(entry, mappedField);
+					fields.put(mappedField, entry);
 				}
 			}
+		}
+		
+		/** Sorted Map by priority anotation value */
+		for (AnnotatedWebElement element : fields.keySet()) {
+			evaluateAction(fields.get(element), element);
 		}
 		
 		return new FieldActionResult(fieldNumber, success, fieldNonDetermined, failed);
 	}
 
-	private void evaluateAction(Entry<String, String> entry, WebElement mappedField) {
+	private void evaluateAction(Entry<String, String> entry, AnnotatedWebElement mappedField) {
 		Exception ex = null;
 		Boolean result = null;
 		String fieldName = entry.getKey();
 		try {
 			result = action.doAction(mappedField, entry.getValue());
 		} catch (Exception e) {
+			// TODO Log4j
+			System.out.println("[DEBUG - " + this.getClass().getSimpleName() + "] exception: " + e.getMessage());
 			result = false;
 			ex = e;
 		}
@@ -88,5 +96,4 @@ public abstract class AbstractDataTable implements IFieldMapperDataTable {
 			fieldNonDetermined.remove(fieldName);
 		}
 	}
-	
 }

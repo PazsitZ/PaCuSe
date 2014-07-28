@@ -1,7 +1,7 @@
 package hu.pazsitz.pacuse.pages;
 
 import hu.pazsitz.pacuse.pages.AbstractPage;
-import hu.pazsitz.pacuse.tests.annotations.TableName;
+import hu.pazsitz.pacuse.tests.annotations.DataTableAttributes;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,30 +29,34 @@ public class NameCardPage extends AbstractPage {
     @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' about ')]")
     private WebElement aboutCardPanel;
 
-    @TableName(name="name")
+    @DataTableAttributes(name="name")
     @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' about ')]/div/span/h2")
     private WebElement name;
 
-    @TableName(name="profession")
+    @DataTableAttributes(name="profession")
     @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' about ')]//span[@class='profession']")
     private WebElement profession;
-
 
     @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' contact ')]")
     private WebElement contactCardPanel;
 
+    @DataTableAttributes(name="email1", priority = 1)
     @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' contact ')]//span[@class='email'][1]/a")
     private WebElement contactEmail1;
 
+    @DataTableAttributes(name="email2", priority = 1)
     @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' contact ')]//span[@class='email'][2]/a")
     private WebElement contactEmail2;
 
+    @DataTableAttributes(name={"webPage", "web Page Url"}, priority = 2)
     @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' contact ')]//span[@class='list']/span[1]/a")
     private WebElement webPageUrlLink;
 
+    @DataTableAttributes(name="Facebook", priority = 2)
     @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' contact ')]//span[@class='list']/span[2]/a")
     private WebElement FBUrlLink;
 
+    @DataTableAttributes(name="LinkedIn", priority = 2)
     @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' contact ')]//span[@class='list']/span[3]/a")
     private WebElement LinkedInUrlLink;
 
