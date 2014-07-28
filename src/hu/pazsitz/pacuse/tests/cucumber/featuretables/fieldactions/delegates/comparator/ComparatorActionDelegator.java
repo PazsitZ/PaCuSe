@@ -1,5 +1,6 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.comparator;
 
+import hu.pazsitz.pacuse.tests.annotations.DTAInputHandling;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IActionDelegator;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IDelegatedAction;
@@ -24,10 +25,14 @@ public class ComparatorActionDelegator implements IActionDelegator {
 		Exception ex = null;
 		List<IDelegatedAction> actions = new ArrayList<>();
 		
+		DTAInputHandling inputHandling = element.getFieldAnnotation().inputHandling();
 		switch (element.getTagName()) {
 			case "select":
-				actions.add(new SelectByTextComparatorAction());
-				actions.add(new SelectByValueComparatorAction());
+				if (inputHandling == DTAInputHandling.AUTO || inputHandling == DTAInputHandling.SELECT_BY_TEXT)
+					actions.add(new SelectByTextComparatorAction());
+				if (inputHandling == DTAInputHandling.AUTO || inputHandling == DTAInputHandling.SELECT_BY_VALUE)
+					actions.add(new SelectByValueComparatorAction());
+				// TODO SelectByIndexComparatorAction
 			break;
 			case "input":
 				if (element.getAttribute("type").equals("radio") || element.getAttribute("type").equals("checkbox")) {
@@ -37,8 +42,10 @@ public class ComparatorActionDelegator implements IActionDelegator {
 				}
 			break;
 			case "a":
-				actions.add(new LinkSrcComparatorAction());
-				actions.add(new LinkTextComparatorAction());
+				if (inputHandling == DTAInputHandling.AUTO || inputHandling == DTAInputHandling.LINK_BY_SRC)
+					actions.add(new LinkSrcComparatorAction());
+				if (inputHandling == DTAInputHandling.AUTO || inputHandling == DTAInputHandling.LINK_BY_TEXT)
+					actions.add(new LinkTextComparatorAction());
 			break;
 			default:
 				actions.add(new CommonElementComparatorAction());

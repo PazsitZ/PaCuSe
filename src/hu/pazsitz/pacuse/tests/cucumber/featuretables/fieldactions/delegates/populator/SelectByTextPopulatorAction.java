@@ -15,8 +15,7 @@ public class SelectByTextPopulatorAction implements IDelegatedAction {
 	public boolean doAction(AnnotatedWebElement element, String value) throws Exception {
 		// TODO Log4j
 		System.out.println("[DEBUG - " + this.getClass().getSimpleName() + "] tag: " + element.getTagName() + " value: " + value);
-	
-		FormHelper.selectByValue(element, value);
+		FormHelper.selectByText(element, value, element.getFieldAnnotation().allowMultiSelect());
 		return true;
 	}
 

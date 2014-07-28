@@ -1,5 +1,6 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.populator;
 
+import hu.pazsitz.pacuse.tests.annotations.DTAInputHandling;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IActionDelegator;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IDelegatedAction;
@@ -21,9 +22,14 @@ public class PopulatorActionDelegator implements IActionDelegator {
 		Exception ex = null;
 		List<IDelegatedAction> actions = new ArrayList<>();
 		
+		DTAInputHandling inputHandling = element.getFieldAnnotation().inputHandling();
 		if ("select".equals(element.getTagName())) {
-			actions.add(new SelectByValuePopulatorAction());
-			actions.add(new SelectByTextPopulatorAction());
+			if (inputHandling == DTAInputHandling.AUTO || inputHandling == DTAInputHandling.SELECT_BY_VALUE)
+				actions.add(new SelectByValuePopulatorAction());
+			if (inputHandling == DTAInputHandling.AUTO || inputHandling == DTAInputHandling.SELECT_BY_TEXT)
+				actions.add(new SelectByTextPopulatorAction());
+			if (inputHandling == DTAInputHandling.AUTO || inputHandling == DTAInputHandling.SELECT_BY_INDEX)
+				actions.add(new SelectByIndexPopulatorAction());
 		} else {
 			switch (element.getAttribute("type")) {
 				case "radio" :

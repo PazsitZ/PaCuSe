@@ -16,7 +16,7 @@ public class SelectByValuePopulatorAction implements IDelegatedAction {
 		// TODO Log4j
 		System.out.println("[DEBUG - " + this.getClass().getSimpleName() + "] tag: " + element.getTagName() + " value: " + value);
 	
-		FormHelper.selectByValue(element, value);
+		FormHelper.selectByValue(element, value, element.getFieldAnnotation().allowMultiSelect());
 		return true;
 	}
 
