@@ -15,5 +15,19 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface DataTableAttributes {
 	String[] name();
-	int priority() default 0; 
+	
+	int priority() default 0;
+	
+	/**
+	 * if multiple select allowed it considers "," as separator chars in value string
+	 * @return
+	 */
+	boolean allowMultiSelect() default true;
+	
+	/**
+	 * If you want to specify the Input Attribute handling
+	 * @return
+	 */
+	DTAInputHandling inputHandling() default DTAInputHandling.AUTO;
+	
 }
