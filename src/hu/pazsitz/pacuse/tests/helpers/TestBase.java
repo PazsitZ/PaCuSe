@@ -30,7 +30,7 @@ public class TestBase {
     @BeforeClass
     public void init() {
         server = "";
-        webDriver = WebDriverFactory.getInstance(WebDriverFactory.BrowserName.FIREFOX);
+        webDriver = WebDriverFactory.getInstance(WebDriverFactory.BrowserName.CHROME);
         Waiters.setWebDriver(webDriver);
     }
 
