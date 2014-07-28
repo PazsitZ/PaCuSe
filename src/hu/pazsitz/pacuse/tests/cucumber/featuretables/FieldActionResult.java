@@ -1,5 +1,6 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ public class FieldActionResult {
 	
 	/**
 	 * The last procedure was successful and all the table fields have been evaluated already
+	 * use FieldActionResult.getNonSucceedFields() for assertion message
 	 * @return boolean
 	 */
 	public boolean fullSuccess() {
@@ -56,6 +58,19 @@ public class FieldActionResult {
 	
 	public Map<String, String> getFailedFields() {
 		return fieldFailed;
+	}
+	
+	/**
+	 * Gets the sum of failed and nonDetermined fields
+	 * For assertion debug message
+	 * @return Map<String, String>
+	 */
+	public Map<String, String> getNonSucceedFields() {
+		Map<String, String> map = new HashMap<String, String>();
+		map.putAll(fieldFailed);
+		for (String item : fieldNonDeterined) { map.put(item, "Non Determined"); }
+		
+		return map;
 	}
 	
 	public List<String> getNonDeterminedFields() {
