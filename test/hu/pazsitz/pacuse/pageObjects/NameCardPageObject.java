@@ -45,6 +45,8 @@ public class NameCardPageObject extends AbstractPageObject<NameCardPage> {
 	public void validateAboutCard(List<Map<String, String>> table) {
 		ComparatorDataTable comparatorTable = new ComparatorDataTable(table);
 		FieldActionResult result = comparatorTable.compareToPageModel(page);
+		assertTrue(result.success(2), result.getNonSucceedFields().toString());
+		assertTrue(result.success("name", "profession"), result.getNonSucceedFields().toString());
 		assertTrue(result.fullSuccess(), result.getNonSucceedFields().toString());
 		assertEquals(result.getNonDeterminedFields().size(), 0);
 	}
