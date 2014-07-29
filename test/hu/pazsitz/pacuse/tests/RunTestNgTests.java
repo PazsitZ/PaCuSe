@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import cucumber.api.CucumberOptions;
+import cucumber.api.SnippetType;
 
 /**
  * RunTestNgTests.java
@@ -19,7 +20,8 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(
     format = {"pretty", "html:reports/cucumber-html-report", "json:reports/cucumber-report.json"},
     features="test/hu/pazsitz/pacuse/tests/cucumber/features",
-    tags = { "@test" } //what tags to include(@)/exclude(@~)
+    tags = { "@test" }, //what tags to include(@)/exclude(@~)
+    snippets = SnippetType.CAMELCASE
 )
 // Default TestNG Runner, runs all of the features are available
 public class RunTestNgTests extends AbstractTestNGCucumberWithReporterTests {
