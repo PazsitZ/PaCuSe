@@ -83,7 +83,7 @@ public abstract class AbstractDataTable implements IFieldMapperDataTable {
 			result = action.doAction(mappedField, entry.getValue());
 		} catch (Exception e) {
 			// TODO Log4j
-			System.out.println("[DEBUG - " + this.getClass().getSimpleName() + "] exception: " + e.getMessage());
+			System.out.println("[DEBUG - " + this.getClass().getSimpleName() + "] (field: [" + fieldName + "]) exception: " + e.getMessage());
 			result = false;
 			ex = e;
 		}
