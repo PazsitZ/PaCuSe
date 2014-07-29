@@ -1,11 +1,13 @@
 package hu.pazsitz.pacuse.tests;
 
+import hu.pazsitz.pacuse.tests.helpers.StepDefBase;
+import hu.pazsitz.pacuse.tests.helpers.WebDriverFactory;
+
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import cucumber.api.CucumberOptions;
-import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 /**
  * RunTestNgTests.java
@@ -20,21 +22,22 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
     tags = { "@test" } //what tags to include(@)/exclude(@~)
 )
 // Default TestNG Runner, runs all of the features are available
-public class RunTestNgTests extends AbstractTestNGCucumberTests {
+public class RunTestNgTests extends AbstractTestNGCucumberWithReporterTests {
     /**
      * Right now the Cucumber ReportGenerator doesn't support embed image only the HtmlReportGenerator
      */
-    private final boolean DO_EMBED_SCREENSHOT = false;
 
     @BeforeClass
     public void init() {
-        System.setProperty("cucumber.report.embed_scrennshot", Boolean.toString(DO_EMBED_SCREENSHOT));
+    	setFilePathOfStepDefinitions("test/main/java/hu/pazsitz/pacuse/tests/cucumber/stepdefs/");
+        System.setProperty("cucumber.report.embed_screenshot", Boolean.toString(true));
+        System.setProperty("PaCuSe.browser", WebDriverFactory.BrowserName.FIREFOX.name());
+        System.setProperty("PaCuSe.WebDriver.screenshot.path", "reports/");
     }
 
     @AfterClass
     public void TestSuiteTearDown() {
-        if (DO_EMBED_SCREENSHOT == false) {
-            ReportGenerator.main(null);
-        }
+    	StepDefBase.getInstance().tearDown();
+        ReportGenerator.main(null);
     }
 }

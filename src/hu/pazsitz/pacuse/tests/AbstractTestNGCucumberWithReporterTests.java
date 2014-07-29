@@ -19,7 +19,7 @@ import cucumber.runtime.Runtime;
 
 public class AbstractTestNGCucumberWithReporterTests extends AbstractTestNGCucumberTests {
     private static TestNGCucumberRunner runner;
-    private static String filePath = "tests/cucumber/stepdefs/";
+    private static String filePathOfStepDefinitions = "tests/cucumber/stepdefs/";
     
     @Override
     @Test(groups = "cucumber", description = "Runs Cucumber Features")
@@ -37,8 +37,8 @@ public class AbstractTestNGCucumberWithReporterTests extends AbstractTestNGCucum
         return runner;
     }
     
-    public void setFilePath(String filePath) {
-    	AbstractTestNGCucumberWithReporterTests.filePath = filePath;
+    public void setFilePathOfStepDefinitions(String filePath) {
+    	AbstractTestNGCucumberWithReporterTests.filePathOfStepDefinitions = filePath;
     }
     
     public void afterReporting(Scenario scenario) {
@@ -73,7 +73,7 @@ public class AbstractTestNGCucumberWithReporterTests extends AbstractTestNGCucum
 		final String fileStringEnd = "} ";
 		 
 		try {
-			File file = new File(filePath + className + ".java");
+			File file = new File(filePathOfStepDefinitions + className + ".java");
 	        BufferedWriter bufferWritter = new BufferedWriter(new FileWriter(file));
 	        bufferWritter.write(fileStringStart);
 	        for (String snippet : snippets) {

@@ -48,7 +48,7 @@ public class StepDefBase {
 
     public void tearDown() {
         if (webDriver != null) {
-            webDriver.close();
+            webDriver.quit();
         }
     }
 

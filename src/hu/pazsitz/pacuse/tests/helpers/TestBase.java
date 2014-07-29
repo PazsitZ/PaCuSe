@@ -4,8 +4,6 @@ import hu.pazsitz.pacuse.pages.AbstractPage;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -30,7 +28,11 @@ public class TestBase {
     @BeforeClass
     public void init() {
         server = "";
-        webDriver = WebDriverFactory.getInstance(WebDriverFactory.BrowserName.CHROME);
+        webDriver = WebDriverFactory.getInstance(
+    		WebDriverFactory.BrowserName.getBrowser(
+    			System.getProperty("PaCuSe.browser")
+    		)
+		);
         Waiters.setWebDriver(webDriver);
     }
 
@@ -45,28 +47,6 @@ public class TestBase {
             webDriver.quit();
         }
     }
-
-    @AfterMethod
-    public void setScreenshot(ITestResult result) {
-//        if (!result.isSuccess()) {
-//            ATUReports.add("Test Failed", LogAs.FAILED, null);
-
-//            try {
-//                WebDriver returned = new Augmenter().augment(webDriver);
-//                if (returned != null) {
-//                    File f = ((TakesScreenshot) returned).getScreenshotAs(OutputType.FILE);
-//                    try {
-//                        FileUtils.copyFile(f, new File(SCREENSHOT_FOLDER + result.getName() + SCREENSHOT_FORMAT));
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            } catch (ScreenshotException se) {
-//                se.printStackTrace();
-//            }
-//        }
-    }
-
 
     protected void loadPage(AbstractPage pageImpl) {
         String pageUrl = server + pageImpl.getUrl();
