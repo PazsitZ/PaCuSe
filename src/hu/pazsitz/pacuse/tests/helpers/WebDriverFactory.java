@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -20,17 +21,25 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class WebDriverFactory {
 
     /* Browsers constants */
-    enum BrowserName {
+    public enum BrowserName {
         CHROME("chrome"),
         FIREFOX("firefox"),
         INTERNET_EXPLORER("ie"),
-        SAFARI("safari"),
         HTML_UNIT("htmlunit");
 
         private final String name;
 
         BrowserName(String name) {
             this.name = name;
+        }
+        
+        public static BrowserName getBrowser(String name) {
+        	for (BrowserName browserName : BrowserName.values()){
+        		if (browserName.name().equals(name))
+        			return browserName;
+        	}
+        	
+        	return BrowserName.CHROME;
         }
 
     }
@@ -61,7 +70,7 @@ public class WebDriverFactory {
 
         // In case there is no Hub
         if (gridHubUrl == null || gridHubUrl.length() == 0) {
-            return getInstance(browserName, username, password);
+            return getInstance(browserName);
         }
 
         if (BrowserName.CHROME.equals(browserName)) {
@@ -79,11 +88,9 @@ public class WebDriverFactory {
             }
 
             capability.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
-//        } else if (BrowserName.INTERNET_EXPLORER.equals(browserName)) {
-//            capability = DesiredCapabilities.internetExplorer();
-//            capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-//        } else if (BrowserName.SAFARI.equals(browserName)) {
-//            capability = DesiredCapabilities.safari();
+        } else if (BrowserName.INTERNET_EXPLORER.equals(browserName)) {
+            capability = DesiredCapabilities.internetExplorer();
+            capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
         } else {
             capability = DesiredCapabilities.htmlUnit();
             // HTMLunit Check
@@ -104,54 +111,41 @@ public class WebDriverFactory {
         return webDriver;
     }
 
-    public static WebDriver getInstance(BrowserName browser) {
-        return getInstance(browser, null, null);
-    }
-
     /*
      * Factory method to return a WebDriver instance given the browser to hit
      *
      * @param browser : String representing the local browser to hit
      *
-     * @param username : username for BASIC authentication on the page to test
-     *
-     * @param password : password for BASIC authentication on the page to test
-     *
      * @return WebDriver instance
      */
-    public static WebDriver getInstance(BrowserName browser, String username, String password) {
+    public static WebDriver getInstance(BrowserName browser) {
 
         WebDriver webDriver;
 
+        DesiredCapabilities capabilities;
+        
         if (BrowserName.CHROME.equals(browser)) {
             setChromeDriver();
-
-            webDriver = new ChromeDriver();
-        }
-        else if (BrowserName.FIREFOX.equals(browser)) {
-
+            capabilities = DesiredCapabilities.chrome();
+            capabilities.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
+            capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+            webDriver = new ChromeDriver(capabilities);
+        } else if (BrowserName.FIREFOX.equals(browser)) {
             FirefoxProfile ffProfile = new FirefoxProfile();
-
-            // Authenication Hack for Firefox
-            if (username != null && password != null) {
-                ffProfile.setPreference("network.http.phishy-userpass-length", 255);
-            }
-
+            ffProfile.setAcceptUntrustedCertificates(true);
             webDriver = new FirefoxDriver(ffProfile);
-
-//        } else if (BrowserName.INTERNET_EXPLORER.equals(browser)) {
-//            isSupportedPlatform(browser);
-//            setIEDriver();
-//            webDriver = new InternetExplorerDriver();
-//
-//        } else if (BrowserName.SAFARI.equals(browser)) {
-//            isSupportedPlatform(browser);
-//            webDriver = new SafariDriver();
-
+        } else if (BrowserName.INTERNET_EXPLORER.equals(browser)) {
+            isSupportedPlatform(browser);
+            setIEDriver();
+            capabilities = DesiredCapabilities.internetExplorer();
+            capabilities.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
+            capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+            capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+            webDriver = new InternetExplorerDriver(capabilities);
         } else {
-
+        	capabilities = DesiredCapabilities.htmlUnitWithJs();
             // HTMLunit Check
-            webDriver = new HtmlUnitDriver(true);
+            webDriver = new HtmlUnitDriver(capabilities);
         }
 
         return webDriver;
@@ -175,8 +169,6 @@ public class WebDriverFactory {
         Platform current = Platform.getCurrent();
         if (BrowserName.INTERNET_EXPLORER.equals(browser)) {
             is_supported = Platform.WINDOWS.is(current);
-        } else if (BrowserName.SAFARI.equals(browser)) {
-            is_supported = Platform.MAC.is(current) || Platform.WINDOWS.is(current);
         }
         assert is_supported : "Platform is not supported by " + browser.name + " browser";
     }

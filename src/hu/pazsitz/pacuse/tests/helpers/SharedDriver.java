@@ -1,19 +1,21 @@
 package hu.pazsitz.pacuse.tests.helpers;
 
 
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
-import org.apache.commons.io.FileUtils;
+
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+
+import cucumber.api.Scenario;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 
 /**
 * <p>
@@ -36,29 +38,20 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 * </p>
 */
 public class SharedDriver extends EventFiringWebDriver {
-    private boolean doEmbedScreenshot = false;
-    private static final WebDriver REAL_DRIVER = WebDriverFactory.getInstance(WebDriverFactory.BrowserName.CHROME);
-    private static final Thread CLOSE_THREAD = new Thread() {
-        @Override
-        public void run() {
-            REAL_DRIVER.close();
-        }
-    };
-
-    static {
-        Runtime.getRuntime().addShutdownHook(CLOSE_THREAD);
-    }
+    private static boolean doEmbedScreenshot = false;
+    private static final WebDriver REAL_DRIVER = WebDriverFactory.getInstance(
+		WebDriverFactory.BrowserName.getBrowser(
+			System.getProperty("PaCuSe.browser")
+		)
+	);
 
     public SharedDriver() {
         super(REAL_DRIVER);
-        doEmbedScreenshot = Boolean.parseBoolean(System.getProperty("cucumber.report.embed_scrennshot", "false"));
+        doEmbedScreenshot = Boolean.parseBoolean(System.getProperty("cucumber.report.embed_screenshot", "false"));
     }
 
     @Override
     public void close() {
-        if (REAL_DRIVER.getWindowHandles().size() == 1 && Thread.currentThread() != CLOSE_THREAD) {
-            throw new UnsupportedOperationException("You shouldn't close this WebDriver. It's shared and will close when the JVM exits.");
-        }
         if (REAL_DRIVER != null) {
             super.close();
         }
@@ -86,8 +79,8 @@ public class SharedDriver extends EventFiringWebDriver {
         return makeScreenshot(name).length > 0;
     }
 
-    public byte[] makeScreenshot(String name) {
-        final String SCREENSHOT_FOLDER = "reports/cucumber-html-report/images/";
+    protected byte[] makeScreenshot(String name) {
+        final String SCREENSHOT_FOLDER = System.getProperty("PaCuSe.WebDriver.screenshot.path", "reports/cucumber-html-report/images/");
         final String SCREENSHOT_FORMAT = "png";
         byte[] screenshot = new byte[0];
 
@@ -95,12 +88,12 @@ public class SharedDriver extends EventFiringWebDriver {
             screenshot = getScreenshotAs(OutputType.BYTES);
             ByteArrayInputStream bais = new ByteArrayInputStream(screenshot);
             BufferedImage image = ImageIO.read(bais);
-            File outputfile = new File("temp");
-            ImageIO.write(image, SCREENSHOT_FORMAT, outputfile);
-            FileUtils.copyFile(outputfile, new File(SCREENSHOT_FOLDER + name + "." + SCREENSHOT_FORMAT));
+            ImageIO.write(image, SCREENSHOT_FORMAT, new File(SCREENSHOT_FOLDER + name + "." + SCREENSHOT_FORMAT));
         } catch (WebDriverException e) {
+        	// TODO log4j
             System.err.println(e.getMessage());
         } catch (IOException e) {
+        	// TODO log4j
             System.err.println(e.getMessage());
         }
 
