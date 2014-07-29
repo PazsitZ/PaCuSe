@@ -41,6 +41,32 @@ public class FieldActionResult {
 	}
 	
 	/**
+	 * The last procedure was successful
+	 * asserts
+	 * @return boolean
+	 */
+	public boolean success(int succededFieldNumber) {
+		return fieldFailed.size() == 0 && fieldSuccess.size() == succededFieldNumber;
+	}
+	
+	/**
+	 * The last procedure was successful
+	 * @return boolean
+	 */
+	public boolean success(String... fields) {
+		if (fieldFailed.size() != 0) {
+			return false;
+		}
+		
+		for (String field : fields) {
+			if (!fieldSuccess.contains(field)) 
+				return false;
+		}
+		
+		return true;
+	}
+	
+	/**
 	 * Has the last procedure contained failures
 	 * @return
 	 */
