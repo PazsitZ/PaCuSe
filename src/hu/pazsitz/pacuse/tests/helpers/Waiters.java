@@ -3,6 +3,7 @@ package hu.pazsitz.pacuse.tests.helpers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -73,6 +74,16 @@ public class Waiters {
         });
     }
 
+    public static void waitForDisplayed(WebElement webElement, int seconds) {
+    	final WebElement element = webElement;
+    	new WebDriverWait(webDriver, seconds).until(new ExpectedCondition<Boolean>() {
+    		@Override
+    		public Boolean apply(WebDriver d) {
+    			return element.isDisplayed();
+    		}
+    	});
+    }
+    
     public static void waitForIdDisplayed(String idName, int seconds) {
         final String name = idName;
         new WebDriverWait(webDriver, seconds).until(new ExpectedCondition<Boolean>() {
@@ -88,7 +99,7 @@ public class Waiters {
         new WebDriverWait(webDriver, seconds).until(new ExpectedCondition<Boolean>() {
             @Override
             public Boolean apply(WebDriver d) {
-                return d.findElement(By.id(name)).isDisplayed();
+                return d.findElement(By.className(name)).isDisplayed();
             }
         });
     }
