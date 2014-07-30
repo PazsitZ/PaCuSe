@@ -1,11 +1,16 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables;
 
 import hu.pazsitz.pacuse.pages.AbstractPage;
+import hu.pazsitz.pacuse.pages.AbstractWidget;
+import hu.pazsitz.pacuse.pages.IWidgetPage;
+import hu.pazsitz.pacuse.pages.widgets.AboutWidget;
 import hu.pazsitz.pacuse.tests.annotations.DataTableAttributes;
+import hu.pazsitz.pacuse.tests.annotations.Widget;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,8 +56,12 @@ public class PageFieldTableMapper {
     }
 	
 	private AnnotatedWebElement lookUpForField(AbstractPage page, String fieldName) {
+		List<Field> widgets = new ArrayList<>();
 		for (Field field : page.getClass().getDeclaredFields()) {
 			if (!isFieldAnnotationMatches(fieldName, field)) {
+				if (field.isAnnotationPresent(Widget.class)) {
+					widgets.add(field);
+				}
 				continue;
 			}
 			
@@ -65,13 +74,24 @@ public class PageFieldTableMapper {
 		        	try {
 		        		WebElement element = (WebElement)field.get(page);
 		        		return new AnnotatedWebElement(element, field.getAnnotation(DataTableAttributes.class));
-					} catch (IllegalArgumentException
-							| IllegalAccessException e) {
+					} catch (IllegalArgumentException | IllegalAccessException e) {
+						// TODO log4j
 						e.printStackTrace();
 					}
 		        }
 		    }
 		}
+		
+		for (Field field : widgets) {
+			field.setAccessible(true);
+			try {
+				return lookUpForField((AbstractWidget)field.get(page), fieldName);
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				// TODO log4j
+				e.printStackTrace();
+			}
+		}
+		
 		return null;
 	}
 
