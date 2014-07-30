@@ -2,8 +2,6 @@ package hu.pazsitz.pacuse.tests.cucumber.featuretables;
 
 import hu.pazsitz.pacuse.pages.AbstractPage;
 import hu.pazsitz.pacuse.pages.AbstractWidget;
-import hu.pazsitz.pacuse.pages.IWidgetPage;
-import hu.pazsitz.pacuse.pages.widgets.AboutWidget;
 import hu.pazsitz.pacuse.tests.annotations.DataTableAttributes;
 import hu.pazsitz.pacuse.tests.annotations.Widget;
 
