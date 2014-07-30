@@ -1,6 +1,7 @@
 package hu.pazsitz.pacuse.pageObjects;
 
 import hu.pazsitz.pacuse.pages.AbstractPage;
+import hu.pazsitz.pacuse.pages.AbstractWidget;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -30,6 +31,27 @@ public abstract class AbstractPageObject<P extends AbstractPage> {
         }
         PageFactory.initElements(webDriver, this.page);
     }
+    
+    /**
+     * Creates the widgetObject
+     * @param clazz
+     * @param widget ideally comes from the Page Model object page.getXYWidget()
+     * @return ? extends {@link AbstractWidgetObject}
+     */
+	protected <W> W registerWidgetObject(Class<W> clazz, AbstractWidget widget) {
+		W widgetObject = null;
+		
+		try {
+			widgetObject = clazz.getDeclaredConstructor(
+					widget.getClass(), WebDriver.class).newInstance(
+						widget, webDriver);
+		} catch (Exception e) {
+			// TODO log4j
+			e.printStackTrace();
+		}
+
+		return widgetObject; 
+	}
 
     protected void loadPage() {
         String pageUrl = page.getUrl();

@@ -1,6 +1,7 @@
 package hu.pazsitz.pacuse.pages;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
 /**
  * AbstractPage.java
@@ -28,4 +29,22 @@ public abstract class AbstractPage {
 
     abstract public String getUrl();
     
+    /**
+     * Creates the Widget Model
+     * @param clazz
+     * @return ? extends {@link AbstractWidget}
+     */
+    protected <W> W registerWidget(Class<W> clazz) {
+    	W widget = null;
+		try {
+			widget = clazz.getDeclaredConstructor(WebDriver.class).newInstance(webDriver);
+		} catch (Exception e) {
+			// TODO log4j
+			e.printStackTrace();
+		}
+		
+    	PageFactory.initElements(webDriver, widget);
+    	
+    	return widget;
+	}
 }
