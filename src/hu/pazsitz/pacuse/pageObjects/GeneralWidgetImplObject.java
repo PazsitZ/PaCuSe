@@ -1,8 +1,8 @@
 package hu.pazsitz.pacuse.pageObjects;
 
-import org.openqa.selenium.WebDriver;
-
 import hu.pazsitz.pacuse.pages.GeneralWidgetImpl;
+
+import org.openqa.selenium.WebDriver;
 
 /**
  * GeneralWidgetImplObject.java
@@ -12,8 +12,8 @@ import hu.pazsitz.pacuse.pages.GeneralWidgetImpl;
  */
 public class GeneralWidgetImplObject extends AbstractWidgetObject<GeneralWidgetImpl>{
 
-	public GeneralWidgetImplObject(WebDriver webDriver) {
-		super(GeneralWidgetImpl.class, webDriver);
+	public GeneralWidgetImplObject(GeneralWidgetImpl widget, WebDriver webDriver) {
+		super(widget, webDriver);
 	}
-
+	
 }
