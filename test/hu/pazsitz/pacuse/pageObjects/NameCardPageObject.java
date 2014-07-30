@@ -2,7 +2,7 @@ package hu.pazsitz.pacuse.pageObjects;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-import hu.pazsitz.pacuse.pageObjects.AbstractPageObject;
+import hu.pazsitz.pacuse.pageObjects.widgets.AboutWidgetObject;
 import hu.pazsitz.pacuse.pages.NameCardPage;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.ComparatorDataTable;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.FieldActionResult;
@@ -20,9 +20,15 @@ import org.openqa.selenium.WebDriver;
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
 public class NameCardPageObject extends AbstractPageObject<NameCardPage> {
-
+	private AboutWidgetObject aboutWidgetObject;
+	
 	public NameCardPageObject(WebDriver webDriver) {
 		super(NameCardPage.class, webDriver);
+		aboutWidgetObject = registerWidgetObject(AboutWidgetObject.class, page.getAboutWidget());
+	}
+	
+	public AboutWidgetObject getAboutWidgetObject() {
+		return aboutWidgetObject;
 	}
 
 	public void showAboutCard() {
@@ -38,8 +44,8 @@ public class NameCardPageObject extends AbstractPageObject<NameCardPage> {
 	public void validateAboutCard() {
 		String name = "Zoltán Pázsit";
 		String profession = "Software Enginer - Web Developer";
-		assertEquals(page.getName().getText(), name);
-		assertEquals(page.getProfession().getText(), profession);
+		assertEquals(page.getAboutWidget().getName().getText(), name);
+		assertEquals(page.getAboutWidget().getProfession().getText(), profession);
 	}
 	
 	public void validateAboutCard(List<Map<String, String>> table) {

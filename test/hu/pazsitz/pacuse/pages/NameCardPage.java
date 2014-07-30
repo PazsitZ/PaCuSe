@@ -1,7 +1,9 @@
 package hu.pazsitz.pacuse.pages;
 
 import hu.pazsitz.pacuse.pages.AbstractPage;
+import hu.pazsitz.pacuse.pages.widgets.AboutWidget;
 import hu.pazsitz.pacuse.tests.annotations.DataTableAttributes;
+import hu.pazsitz.pacuse.tests.annotations.Widget;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,26 +18,21 @@ import org.openqa.selenium.support.How;
  */
 public class NameCardPage extends AbstractPage {
     private final String pageUrl = "http://pazsitz.hu";
+    @Widget
+    protected AboutWidget aboutWidget;
 
     public NameCardPage(WebDriver webDriver) {
         super(webDriver);
+        aboutWidget = registerWidget(AboutWidget.class);
     }
 
-    @Override
+	@Override
     public String getUrl() {
         return pageUrl;
     }
 
     @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' about ')]")
     private WebElement aboutCardPanel;
-
-    @DataTableAttributes(name="name")
-    @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' about ')]/div/span/h2")
-    private WebElement name;
-
-    @DataTableAttributes(name="profession")
-    @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' about ')]//span[@class='profession']")
-    private WebElement profession;
 
     @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' contact ')]")
     private WebElement contactCardPanel;
@@ -64,14 +61,6 @@ public class NameCardPage extends AbstractPage {
 		return aboutCardPanel;
 	}
 
-	public WebElement getName() {
-		return name;
-	}
-
-	public WebElement getProfession() {
-		return profession;
-	}
-
 	public WebElement getContactCardPanel() {
 		return contactCardPanel;
 	}
@@ -94,6 +83,10 @@ public class NameCardPage extends AbstractPage {
 
 	public WebElement getLinkedInUrlLink() {
 		return LinkedInUrlLink;
+	}
+	
+	public AboutWidget getAboutWidget() {
+		return aboutWidget;
 	}
 
 
