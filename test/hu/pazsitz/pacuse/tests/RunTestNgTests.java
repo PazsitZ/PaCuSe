@@ -33,8 +33,10 @@ public class RunTestNgTests extends AbstractTestNGCucumberWithReporterTests {
     public void init() {
     	setFilePathOfStepDefinitions("test/main/java/hu/pazsitz/pacuse/tests/cucumber/stepdefs/");
         System.setProperty("cucumber.report.embed_screenshot", Boolean.toString(true));
-        System.setProperty("PaCuSe.browser", WebDriverFactory.BrowserName.FIREFOX.name());
+        System.setProperty("PaCuSe.browser", WebDriverFactory.BrowserName.CHROME.name());
         System.setProperty("PaCuSe.WebDriver.screenshot.path", "reports/");
+        System.setProperty("PaCuSe.ReportGenerator.outputReport.path", "reports/");
+        System.setProperty("PaCuSe.ReportGenerator.jsonReport.path", "reports/");
     }
 
     @AfterClass

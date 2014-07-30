@@ -13,12 +13,15 @@ import net.masterthought.cucumber.ReportBuilder;
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
 public class ReportGenerator {
+	private static String outputReportPath = System.getProperty("PaCuSe.ReportGenerator.outputReport.path", "./reports/");
+	private static String jsonReportPath = System.getProperty("PaCuSe.ReportGenerator.jsonReport.path", outputReportPath);
 
     public static void main(String[] args) {
-        File reportOutputDirectory = new File("./reports/cucumber-pretty-html-report");
+    	
+        File reportOutputDirectory = new File(outputReportPath + "/cucumber-pretty-html-report");
         System.out.println(reportOutputDirectory.getAbsolutePath());
         List<String> jsonReportFiles = new ArrayList<String>();
-        jsonReportFiles.add("./reports/cucumber-report.json");
+        jsonReportFiles.add(jsonReportPath + "/cucumber-report.json");
         String pluginUrlPath = "";
 
         String buildNumber = "1";
