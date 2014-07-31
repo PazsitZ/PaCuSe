@@ -1,5 +1,7 @@
 package hu.pazsitz.pacuse.tests.helpers;
 
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
@@ -168,5 +170,13 @@ public class FormHelper {
         element.sendKeys(value);
 
         return element;
+    }
+    
+    public static WebElement setElementAttribute(WebElement element, String attribute, String value) {
+    	WebDriver driver = StepDefBase.getInstance().getWebDriver();
+    	JavascriptExecutor js = (JavascriptExecutor) driver;
+    	js.executeScript("arguments[0].setAttribute('" + attribute + "', '" + value + "')", element);
+    	
+    	return element;
     }
 }
