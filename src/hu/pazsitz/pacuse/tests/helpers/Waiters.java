@@ -1,5 +1,7 @@
 package hu.pazsitz.pacuse.tests.helpers;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -64,16 +66,6 @@ public class Waiters {
         });
     }
 
-    public static void waitForTagNameDisplayed(String inputTag, int seconds) {
-        final String tag = inputTag;
-        new WebDriverWait(webDriver, seconds).until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver d) {
-                return d.findElement(By.tagName(tag)).isDisplayed();
-            }
-        });
-    }
-
     public static void waitForDisplayed(WebElement webElement, int seconds) {
     	final WebElement element = webElement;
     	new WebDriverWait(webDriver, seconds).until(new ExpectedCondition<Boolean>() {
@@ -84,24 +76,41 @@ public class Waiters {
     	});
     }
     
+    public static void waitForElementDisappears(By by, int seconds) {
+    	waitForElementDisappears(by, seconds, 0);
+    }
+    
+    public static void waitForElementDisappears(By by, int seconds, int startDelay) {
+    	webDriver.manage().timeouts().implicitlyWait(startDelay, TimeUnit.SECONDS);
+    	final By byStatement = by;
+    	new WebDriverWait(webDriver, seconds).until(new ExpectedCondition<Boolean>() {
+    		@Override
+    		public Boolean apply(WebDriver d) {
+    			return d.findElements(byStatement).isEmpty();
+    		}
+    	});
+    }
+    
+    public static void waitForElementDisplayed(By by, int seconds) {
+    	final By byStatement = by;
+    	new WebDriverWait(webDriver, seconds).until(new ExpectedCondition<Boolean>() {
+    		@Override
+    		public Boolean apply(WebDriver d) {
+    			return d.findElement(byStatement).isDisplayed();
+    		}
+    	});
+    }
+    
+    public static void waitForTagNameDisplayed(String inputTag, int seconds) {
+    	waitForElementDisplayed(By.tagName(inputTag), seconds);
+    }
+    
     public static void waitForIdDisplayed(String idName, int seconds) {
-        final String name = idName;
-        new WebDriverWait(webDriver, seconds).until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver d) {
-                return d.findElement(By.id(name)).isDisplayed();
-            }
-        });
+    	waitForElementDisplayed(By.id(idName), seconds);
     }
 
     public static void waitForClassDisplayed(String className, int seconds) {
-        final String name = className;
-        new WebDriverWait(webDriver, seconds).until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver d) {
-                return d.findElement(By.className(name)).isDisplayed();
-            }
-        });
+    	waitForElementDisplayed(By.className(className), seconds);
     }
 
     public static void waitForDocumentReady(int seconds) {
