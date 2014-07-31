@@ -34,11 +34,11 @@ public abstract class AbstractPageObject<P extends AbstractPage> {
     
     /**
      * Creates the widgetObject
-     * @param clazz
+     * @param clazz Class< ? extends {@link AbstractWidgetObject<?>} >
      * @param widget ideally comes from the Page Model object page.getXYWidget()
-     * @return ? extends {@link AbstractWidgetObject}
+     * @return < ? extends {@link AbstractWidgetObject} >
      */
-	protected <W> W registerWidgetObject(Class<W> clazz, AbstractWidget widget) {
+	protected <W extends AbstractWidgetObject<? extends AbstractWidget>> W registerWidgetObject(Class<W> clazz, AbstractWidget widget) {
 		W widgetObject = null;
 		
 		try {

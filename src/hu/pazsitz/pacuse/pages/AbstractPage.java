@@ -31,10 +31,10 @@ public abstract class AbstractPage {
     
     /**
      * Creates the Widget Model
-     * @param clazz
-     * @return ? extends {@link AbstractWidget}
+     * @param clazz Class< ? extends {@link AbstractWidget} >
+     * @return < ? extends {@link AbstractWidget} >
      */
-    protected <W> W registerWidget(Class<W> clazz) {
+    protected <W extends AbstractWidget> W registerWidget(Class<W> clazz) {
     	W widget = null;
 		try {
 			widget = clazz.getDeclaredConstructor(WebDriver.class).newInstance(webDriver);
