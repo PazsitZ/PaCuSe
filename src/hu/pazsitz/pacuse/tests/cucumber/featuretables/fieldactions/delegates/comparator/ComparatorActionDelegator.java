@@ -42,8 +42,8 @@ public class ComparatorActionDelegator implements IActionDelegator {
 				}
 			break;
 			case "a":
-				if (inputHandling == DTAInputHandling.AUTO || inputHandling == DTAInputHandling.LINK_BY_SRC)
-					actions.add(new LinkSrcComparatorAction());
+				if (inputHandling == DTAInputHandling.AUTO || inputHandling == DTAInputHandling.LINK_BY_HREF)
+					actions.add(new LinkHrefComparatorAction());
 				if (inputHandling == DTAInputHandling.AUTO || inputHandling == DTAInputHandling.LINK_BY_TEXT)
 					actions.add(new LinkTextComparatorAction());
 			break;

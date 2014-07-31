@@ -3,16 +3,16 @@ package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.co
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
 
 /**
- * LinkSrcComparatorAction.java
+ * LinkHrefComparatorAction.java
  *
  * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
-public class LinkSrcComparatorAction extends AbstractDelegatedComparatorAction<String, String> {
+public class LinkHrefComparatorAction extends AbstractDelegatedComparatorAction<String, String> {
 
 	@Override
 	public boolean doAction(AnnotatedWebElement element, String value) throws Exception {
-		return compareAction(value.trim(), element.getAttribute("src").trim());
+		return compareAction(value.trim(), element.getAttribute("href").trim());
 	}
 
 }
