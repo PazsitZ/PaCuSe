@@ -21,8 +21,14 @@ public class PopulatorActionDelegator implements IActionDelegator {
 		boolean result = false;
 		Exception ex = null;
 		List<IDelegatedAction> actions = new ArrayList<>();
-		
 		DTAInputHandling inputHandling = element.getFieldAnnotation().inputHandling();
+		
+		// TODO refactor
+		if ((inputHandling == DTAInputHandling.AUTO || inputHandling == DTAInputHandling.CUSTOM_ATTRIBUTE) 
+				&& !element.getFieldAnnotation().attribute().isEmpty()) {
+			actions.add(new CustomAttributePopulatorAction());
+		}
+		
 		if ("select".equals(element.getTagName())) {
 			if (inputHandling == DTAInputHandling.AUTO || inputHandling == DTAInputHandling.SELECT_BY_VALUE)
 				actions.add(new SelectByValuePopulatorAction());
@@ -31,17 +37,19 @@ public class PopulatorActionDelegator implements IActionDelegator {
 			if (inputHandling == DTAInputHandling.AUTO || inputHandling == DTAInputHandling.SELECT_BY_INDEX)
 				actions.add(new SelectByIndexPopulatorAction());
 		} else {
-			switch (element.getAttribute("type")) {
-				case "radio" :
-				case "checkbox" :
-					actions.add(new CheckBoxtickerPopulatorAction());
-				break;
-				case "button" :
-					actions.add(new ButtonPopulatorAction());
-				break;
-				default:
-					actions.add(new InputPopulatorAction());
-				break;
+			if (inputHandling == DTAInputHandling.AUTO){
+				switch (element.getAttribute("type")) {
+					case "radio" :
+					case "checkbox" :
+						actions.add(new CheckBoxtickerPopulatorAction());
+					break;
+					case "button" :
+						actions.add(new ButtonPopulatorAction());
+					break;
+					default:
+						actions.add(new InputPopulatorAction());
+					break;
+				}
 			}
 			
 		}

@@ -26,6 +26,12 @@ public class ComparatorActionDelegator implements IActionDelegator {
 		List<IDelegatedAction> actions = new ArrayList<>();
 		
 		DTAInputHandling inputHandling = element.getFieldAnnotation().inputHandling();
+		if ((inputHandling == DTAInputHandling.AUTO || inputHandling == DTAInputHandling.CUSTOM_ATTRIBUTE) 
+				&& !element.getFieldAnnotation().attribute().isEmpty()) {
+			actions.add(new CustomAttributeComparatorAction());
+		}
+		
+		// TODO refactor
 		switch (element.getTagName()) {
 			case "select":
 				if (inputHandling == DTAInputHandling.AUTO || inputHandling == DTAInputHandling.SELECT_BY_TEXT)
@@ -35,10 +41,12 @@ public class ComparatorActionDelegator implements IActionDelegator {
 				// TODO SelectByIndexComparatorAction
 			break;
 			case "input":
-				if (element.getAttribute("type").equals("radio") || element.getAttribute("type").equals("checkbox")) {
-				actions.add(new InputCheckboxComparatorAction());
-				} else {
-					actions.add(new InputCommonComparatorAction());
+				if (inputHandling == DTAInputHandling.AUTO) {
+					if (element.getAttribute("type").equals("radio") || element.getAttribute("type").equals("checkbox")) {
+						actions.add(new InputCheckboxComparatorAction());
+					} else {
+						actions.add(new InputCommonComparatorAction());
+					}
 				}
 			break;
 			case "a":
