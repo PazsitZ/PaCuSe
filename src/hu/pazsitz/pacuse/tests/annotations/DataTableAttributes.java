@@ -30,4 +30,6 @@ public @interface DataTableAttributes {
 	 */
 	DTAInputHandling inputHandling() default DTAInputHandling.AUTO;
 	
+	String attribute() default "";
+	
 }

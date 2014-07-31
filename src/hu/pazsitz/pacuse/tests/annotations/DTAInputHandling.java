@@ -15,6 +15,8 @@ public enum DTAInputHandling {
 	SELECT_BY_INDEX,
 	
 	LINK_BY_TEXT,
-	LINK_BY_HREF
+	LINK_BY_HREF,
+	
+	CUSTOM_ATTRIBUTE
 	;
 }
