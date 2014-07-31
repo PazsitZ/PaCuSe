@@ -2,6 +2,7 @@ package hu.pazsitz.pacuse.pages;
 
 import hu.pazsitz.pacuse.pages.AbstractPage;
 import hu.pazsitz.pacuse.pages.widgets.AboutWidget;
+import hu.pazsitz.pacuse.tests.annotations.DTAInputHandling;
 import hu.pazsitz.pacuse.tests.annotations.DataTableAttributes;
 import hu.pazsitz.pacuse.tests.annotations.Widget;
 
@@ -45,7 +46,8 @@ public class NameCardPage extends AbstractPage {
     @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' contact ')]//span[@class='email'][2]/a")
     private WebElement contactEmail2;
 
-    @DataTableAttributes(name={"webPage", "web Page Url"}, priority = 2)
+    @DataTableAttributes(name={"webPage", "web Page Url"}, priority = 2, 
+		inputHandling = DTAInputHandling.CUSTOM_ATTRIBUTE, attribute = "href")
     @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' contact ')]//span[@class='list']/span[1]/a")
     private WebElement webPageUrlLink;
 

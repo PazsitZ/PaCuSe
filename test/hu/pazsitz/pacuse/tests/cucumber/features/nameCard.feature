@@ -10,6 +10,6 @@ Feature: Sample
 		When select the contact card
 		Then validate the contact page content from table:
 		| email1             | email2            | webPage            | Facebook                    | LinkedIn                          |
-		| contact@pazsitz.hu | pazsitz@gmail.com | http://pazsitz.hu  | http://facebook.com/pazsitz | http://hu.linkedin.com/in/PazsitZ |
+		| contact@pazsitz.hu | pazsitz@gmail.com | http://pazsitz.hu/  | http://facebook.com/pazsitz | http://hu.linkedin.com/in/PazsitZ |
 		And no matching feature
 
