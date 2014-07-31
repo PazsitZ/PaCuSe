@@ -6,6 +6,12 @@ import hu.pazsitz.pacuse.pages.AbstractWidget;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+/**
+ * AbstractPageObject.java
+ *
+ * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
+ * @copyright Copyright (c) 2014, Zoltan Pazsit
+ */
 public abstract class AbstractPageObject<P extends AbstractPage> {
     protected WebDriver webDriver;
     protected P page;
