@@ -16,6 +16,7 @@ public class ButtonPopulatorAction implements IDelegatedAction {
 		// TODO Log4j
 		System.out.println("[DEBUG - " + this.getClass().getSimpleName() + "] tag: " + element.getTagName() + " value: " + value);
 
+		// TODO determine value, convert to boolean and check state of the element
 		element.click();
 		return true;
 	}
