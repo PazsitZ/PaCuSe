@@ -65,7 +65,7 @@ public class SharedDriver extends EventFiringWebDriver {
     @After
     public void embedScreenshot(Scenario scenario) {
         if (scenario.isFailed()) {
-            String scenarioName = scenario.getName().replace(" ", "_");
+            String scenarioName = scenario.getName().replace(" ", "_").replaceAll("[^\\w_]", "");
             byte[] screenshot = makeScreenshot(scenarioName);
 
             if (doEmbedScreenshot && screenshot.length > 0) {
