@@ -2,6 +2,7 @@ package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.po
 
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IDelegatedAction;
+import hu.pazsitz.pacuse.tests.helpers.FormHelper;
 
 /**
  * ButtonPopulatorAction.java
@@ -16,8 +17,8 @@ public class ButtonPopulatorAction implements IDelegatedAction {
 		// TODO Log4j
 		System.out.println("[DEBUG - " + this.getClass().getSimpleName() + "] tag: " + element.getTagName() + " value: " + value);
 
-		// TODO determine value, convert to boolean and check state of the element
-		element.click();
+		FormHelper.checkboxTicker(element, value);
+		
 		return true;
 	}
 
