@@ -2,7 +2,6 @@ package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.po
 
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IDelegatedAction;
-import hu.pazsitz.pacuse.tests.helpers.FormHelper;
 
 /**
  * ButtonPopulatorAction.java
