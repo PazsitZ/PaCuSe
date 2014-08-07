@@ -17,7 +17,7 @@ public class ButtonPopulatorAction implements IDelegatedAction {
 		// TODO Log4j
 		System.out.println("[DEBUG - " + this.getClass().getSimpleName() + "] tag: " + element.getTagName() + " value: " + value);
 
-		FormHelper.checkboxTicker(element, value);
+		element.click();
 		
 		return true;
 	}
