@@ -41,7 +41,7 @@ public class PopulatorActionDelegator implements IActionDelegator {
 				switch (element.getAttribute("type")) {
 					case "radio" :
 					case "checkbox" :
-						actions.add(new CheckBoxTtickerPopulatorAction());
+						actions.add(new CheckBoxTickerPopulatorAction());
 					break;
 					case "button" :
 						actions.add(new ButtonPopulatorAction());

@@ -5,12 +5,12 @@ import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IDe
 import hu.pazsitz.pacuse.tests.helpers.FormHelper;
 
 /**
- * CheckBoxTtickerPopulatorAction.java
+ * CheckBoxTickerPopulatorAction.java
  *
  * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
-public class CheckBoxTtickerPopulatorAction implements IDelegatedAction {
+public class CheckBoxTickerPopulatorAction implements IDelegatedAction {
 
 	@Override
 	public boolean doAction(AnnotatedWebElement element, String value) throws Exception {
