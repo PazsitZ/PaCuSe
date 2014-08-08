@@ -3,8 +3,11 @@ package hu.pazsitz.pacuse.pageObjects;
 import hu.pazsitz.pacuse.pages.AbstractPage;
 import hu.pazsitz.pacuse.pages.AbstractWidget;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+
+import com.google.common.collect.Iterables;
 
 /**
  * AbstractPageObject.java
@@ -15,6 +18,7 @@ import org.openqa.selenium.support.PageFactory;
 public abstract class AbstractPageObject<P extends AbstractPage> {
     protected WebDriver webDriver;
     protected P page;
+    private String prevPageHandle;
 
     public AbstractPageObject(Class<P> pageClass, WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -59,9 +63,69 @@ public abstract class AbstractPageObject<P extends AbstractPage> {
 		return widgetObject; 
 	}
 
+	/**
+	 * Loads the actual page by the defined page url
+	 */
     protected void loadPage() {
         String pageUrl = page.getUrl();
         page.getWebDriver().get(pageUrl);
+    }
+    
+    /**
+     * Loads the actual page by the defined page url
+     * and appends the given parameters
+     * @param additionalParams
+     */
+    protected void loadPage(String additionalParams) {
+    	String pageUrl = page.getUrl() + additionalParams;
+    	page.getWebDriver().get(pageUrl);
+    }
+    
+    /**
+     * Loads the actual page by the given page url
+     * and appends the given parameters if any given
+     * @param additionalParams
+     */
+    protected void loadPage(String url, String additionalParams) {
+    	if (additionalParams == null) additionalParams = "";
+    	
+    	String pageUrl = url + additionalParams;
+    	page.getWebDriver().get(pageUrl);
+    }
+    
+    /**
+     * Opens and loads the given content in a new window
+     * to navigate back use the this.goToPreviousPage()
+     * @param url
+     * @return newly opened page handle Identifier String
+     */
+    public String loadPageInNewWindow(String url) {
+        prevPageHandle = webDriver.getWindowHandle();
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) webDriver;
+        jsExecutor.executeScript("window.open(\"" + url + "\")");
+        String connectorPageHandle = Iterables.getLast(webDriver.getWindowHandles());
+       
+        webDriver.switchTo().window(connectorPageHandle);
+       
+        return connectorPageHandle;
+    }
+    
+    /**
+     * Navigate back after page a page is loaded into new window
+     * optionally closes the actual window
+     * @param closeActual
+     * @return boolean
+     */
+    public boolean goToPreviousPage(boolean closeActual) {
+    	if (!prevPageHandle.isEmpty() && webDriver.getWindowHandles().contains(prevPageHandle)) {
+    		if (closeActual && !webDriver.getWindowHandle().equals(prevPageHandle)) {
+    			webDriver.close();
+    		}
+    		webDriver.switchTo().window(prevPageHandle);
+    		return true;
+    	}
+    	
+    	return false;
     }
 
     public P getPage() {
