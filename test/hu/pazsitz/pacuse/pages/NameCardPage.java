@@ -39,25 +39,29 @@ public class NameCardPage extends AbstractPage {
     private WebElement contactCardPanel;
 
     @DataTableAttributes(name="email1", priority = 1)
-    @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' contact ')]//span[@class='email'][1]/a")
+    @FindBy(how=How.XPATH, using="//span[contains(concat(' ',@class,' '), ' email-contact ')]/a")
     private WebElement contactEmail1;
 
     @DataTableAttributes(name="email2", priority = 1)
-    @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' contact ')]//span[@class='email'][2]/a")
+    @FindBy(how=How.XPATH, using="//span[contains(concat(' ',@class,' '), ' email-pazsitz ')]/a")
     private WebElement contactEmail2;
 
     @DataTableAttributes(name={"webPage", "web Page Url"}, priority = 2, 
 		inputHandling = DTAInputHandling.CUSTOM_ATTRIBUTE, attribute = "href")
-    @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' contact ')]//span[@class='list']/span[1]/a")
+    @FindBy(how=How.XPATH, using="//a[contains(concat(' ',@class,' '), ' link-pazsitz ')]")
     private WebElement webPageUrlLink;
 
     @DataTableAttributes(name="Facebook", priority = 2)
-    @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' contact ')]//span[@class='list']/span[2]/a")
-    private WebElement FBUrlLink;
+    @FindBy(how=How.XPATH, using="//a[contains(concat(' ',@class,' '), ' link-facebook ')]")
+    private WebElement fBUrlLink;
 
     @DataTableAttributes(name="LinkedIn", priority = 2)
-    @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' contact ')]//span[@class='list']/span[3]/a")
-    private WebElement LinkedInUrlLink;
+    @FindBy(how=How.XPATH, using="//a[contains(concat(' ',@class,' '), ' link-linkedin ')]")
+    private WebElement linkedInUrlLink;
+    
+    @DataTableAttributes(name="Github", priority = 2)
+    @FindBy(how=How.XPATH, using="//a[contains(concat(' ',@class,' '), ' link-github-pazsitz ')]")
+    private WebElement githubUrlLink;
 
 	public WebElement getAboutCardPanel() {
 		return aboutCardPanel;
@@ -80,11 +84,15 @@ public class NameCardPage extends AbstractPage {
 	}
 
 	public WebElement getFBUrlLink() {
-		return FBUrlLink;
+		return fBUrlLink;
 	}
 
 	public WebElement getLinkedInUrlLink() {
-		return LinkedInUrlLink;
+		return linkedInUrlLink;
+	}
+	
+	public WebElement getGithubUrlLink() {
+		return githubUrlLink;
 	}
 	
 	public AboutWidget getAboutWidget() {
