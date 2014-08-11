@@ -97,7 +97,7 @@ public abstract class AbstractPageObject<P extends AbstractPage> {
      * Opens and loads the given content in a new window
      * to navigate back use the this.goToPreviousPage()
      * @param url
-     * @return newly opened page handle Identifier String
+     * @return newly opened page Identifier String
      */
     public String loadPageInNewWindow(String url) {
         prevPageHandle = webDriver.getWindowHandle();
@@ -114,13 +114,16 @@ public abstract class AbstractPageObject<P extends AbstractPage> {
      * Navigate back after page a page is loaded into new window
      * optionally closes the actual window
      * @param closeActual
-     * @return boolean
+     * @return the switch was successful
      */
     public boolean goToPreviousPage(boolean closeActual) {
     	if (!prevPageHandle.isEmpty() && webDriver.getWindowHandles().contains(prevPageHandle)) {
     		if (closeActual && !webDriver.getWindowHandle().equals(prevPageHandle)) {
     			webDriver.close();
+    		} else {
+    			prevPageHandle = webDriver.getWindowHandle();
     		}
+    		
     		webDriver.switchTo().window(prevPageHandle);
     		return true;
     	}
