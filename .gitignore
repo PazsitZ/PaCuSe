@@ -2,6 +2,7 @@ target/
 test-output/
 reports/
 lib/
+log4j/
 .classpath
 .project
 .settings/
