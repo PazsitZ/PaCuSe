@@ -37,6 +37,7 @@ public class RunTestNgTests extends AbstractTestNGCucumberWithReporterTests {
         System.setProperty("PaCuSe.WebDriver.screenshot.path", "reports/");
         System.setProperty("PaCuSe.ReportGenerator.outputReport.path", "reports/");
         System.setProperty("PaCuSe.ReportGenerator.jsonReport.path", "reports/");
+        System.setProperty("PaCuSe.log4j.config", "");
     }
 
     @AfterClass
