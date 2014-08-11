@@ -6,10 +6,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.PropertyConfigurator;
 import org.testng.IHookCallBack;
 import org.testng.ITestResult;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import cucumber.api.Scenario;
@@ -20,6 +23,33 @@ import cucumber.runtime.Runtime;
 public class AbstractTestNGCucumberWithReporterTests extends AbstractTestNGCucumberTests {
     private static TestNGCucumberRunner runner;
     private static String filePathOfStepDefinitions = "tests/cucumber/stepdefs/";
+    
+    @BeforeClass
+    public void initLogging() {
+    	String configPath = System.getProperty("PaCuSe.log4j.config", "");
+        if (configPath.isEmpty()) {
+        	PropertyConfigurator.configure(getLog4jProperties());
+        } else {
+        	PropertyConfigurator.configure(configPath);
+        }
+    }
+
+	private Properties getLog4jProperties() {
+		Properties prop = new Properties();
+		//    	# Define the root logger with appender file
+    	prop.setProperty("log", "./log4j");
+    	prop.setProperty("log4j.rootLogger", "DEBUG, FILE");
+    	//    	# Define the file appender
+    	prop.setProperty("log4j.appender.FILE", "org.apache.log4j.FileAppender");
+		prop.setProperty("log4j.appender.FILE.File", "${log}/log.out");
+		//    	# Define the layout for file appender
+    	prop.setProperty("log4j.appender.FILE.layout", "org.apache.log4j.PatternLayout");
+		prop.setProperty("log4j.appender.FILE.layout.conversionPattern", "[%-5p] %d{yyyy MMM dd HH:mm:ss} %c{1} - %m%n");
+		//    	#log4j.appender.FILE.layout.conversionPattern=%C{1}.%M %m %n
+		prop.setProperty("log4j.logger.org.apache.http", "ERROR");
+		prop.setProperty("log4j.logger.hu.pazsitz", "DEBUG");
+		return prop;
+	}
     
     @Override
     @Test(groups = "cucumber", description = "Runs Cucumber Features")
