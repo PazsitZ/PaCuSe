@@ -32,7 +32,7 @@ public class SelectByIndexPopulatorAction implements IDelegatedAction {
 		int i = 0;
 		int[] values = new int[stringValues.length];
 		for (String numericalValue : stringValues) { 
-			values[i++] = Integer.parseInt(numericalValue); 
+			values[i++] = Integer.parseInt(numericalValue.trim()); 
 		}
 		return values;
 	}
