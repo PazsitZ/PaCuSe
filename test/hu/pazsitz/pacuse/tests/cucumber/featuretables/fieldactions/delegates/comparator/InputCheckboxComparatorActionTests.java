@@ -1,6 +1,5 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.comparator;
 
-import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.DelegatedActionException;

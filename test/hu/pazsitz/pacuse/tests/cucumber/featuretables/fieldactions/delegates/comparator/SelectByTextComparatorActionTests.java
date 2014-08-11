@@ -1,12 +1,11 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.comparator;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 import hu.pazsitz.pacuse.tests.annotations.DataTableAttributes;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.DelegatedActionException;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import org.mockito.Mockito;
 import org.openqa.selenium.By;
