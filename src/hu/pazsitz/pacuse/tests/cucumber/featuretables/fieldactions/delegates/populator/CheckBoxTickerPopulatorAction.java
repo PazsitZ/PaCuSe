@@ -1,5 +1,7 @@
 package hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.populator;
 
+import org.apache.log4j.Logger;
+
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.AnnotatedWebElement;
 import hu.pazsitz.pacuse.tests.cucumber.featuretables.fieldactions.delegates.IDelegatedAction;
 import hu.pazsitz.pacuse.tests.helpers.FormHelper;
@@ -14,8 +16,7 @@ public class CheckBoxTickerPopulatorAction implements IDelegatedAction {
 
 	@Override
 	public boolean doAction(AnnotatedWebElement element, String value) throws Exception {
-		// TODO Log4j
-		System.out.println("[DEBUG - " + this.getClass().getSimpleName() + "] tag: " + element.getTagName() + " value: " + value);
+		Logger.getLogger(this.getClass()).info(" tag: " + element.getTagName() + " value: " + value);
 	
 		FormHelper.checkboxTicker(element, value);
 		return true;

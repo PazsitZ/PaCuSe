@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -73,8 +74,7 @@ public class PageFieldTableMapper {
 		        		WebElement element = (WebElement)field.get(page);
 		        		return new AnnotatedWebElement(element, field.getAnnotation(DataTableAttributes.class));
 					} catch (IllegalArgumentException | IllegalAccessException e) {
-						// TODO log4j
-						e.printStackTrace();
+						Logger.getLogger(this.getClass()).error(e.getMessage());
 					}
 		        }
 		    }
@@ -85,8 +85,7 @@ public class PageFieldTableMapper {
 			try {
 				return lookUpForField((AbstractWidget)field.get(page), fieldName);
 			} catch (IllegalArgumentException | IllegalAccessException e) {
-				// TODO log4j
-				e.printStackTrace();
+				Logger.getLogger(this.getClass()).error(e.getMessage());
 			}
 		}
 		

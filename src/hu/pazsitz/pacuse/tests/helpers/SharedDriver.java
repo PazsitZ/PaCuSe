@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -90,11 +91,9 @@ public class SharedDriver extends EventFiringWebDriver {
             BufferedImage image = ImageIO.read(bais);
             ImageIO.write(image, SCREENSHOT_FORMAT, new File(SCREENSHOT_FOLDER + name + "." + SCREENSHOT_FORMAT));
         } catch (WebDriverException e) {
-        	// TODO log4j
-            System.err.println(e.getMessage());
+        	Logger.getLogger(this.getClass()).error(e.getMessage());
         } catch (IOException e) {
-        	// TODO log4j
-            System.err.println(e.getMessage());
+        	Logger.getLogger(this.getClass()).error(e.getMessage());
         }
 
         return screenshot;

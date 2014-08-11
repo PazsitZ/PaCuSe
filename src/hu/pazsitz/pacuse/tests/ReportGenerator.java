@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import net.masterthought.cucumber.ReportBuilder;
 
 /**
@@ -20,6 +22,7 @@ public class ReportGenerator {
     	
         File reportOutputDirectory = new File(outputReportPath + "/cucumber-pretty-html-report");
         System.out.println(reportOutputDirectory.getAbsolutePath());
+        Logger.getLogger(ReportGenerator.class).info("fancy report path:" + reportOutputDirectory.getAbsolutePath());
         List<String> jsonReportFiles = new ArrayList<String>();
         jsonReportFiles.add(jsonReportPath + "/cucumber-report.json");
         String pluginUrlPath = "";
@@ -55,7 +58,7 @@ public class ReportGenerator {
 
             System.out.println("Fancy report generated successful");
         } catch (Exception e) {
-            e.printStackTrace();
+        	Logger.getLogger(ReportGenerator.class).error(e.getMessage());
         }
 
     }

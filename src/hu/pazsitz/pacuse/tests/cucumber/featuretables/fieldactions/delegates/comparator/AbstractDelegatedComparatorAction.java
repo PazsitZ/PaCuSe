@@ -37,9 +37,7 @@ abstract public class AbstractDelegatedComparatorAction<E, V> implements IDelega
 	 */
 	protected boolean compareAction(E expected, V actual) throws DelegatedActionException {
 		boolean result = expected.equals(actual);
-		// TODO Log4j
-		Logger.getLogger(this.getClass()).error("expected: " + expected + " value: " + actual);
-//		System.out.println("[DEBUG - " + this.getClass().getSimpleName() + "] expected: " + expected + " value: " + actual);
+		Logger.getLogger(this.getClass()).info("expected: " + expected + " value: " + actual);
 
 		if (!result) {
 			throw new DelegatedActionException(expected.toString(), actual.toString());

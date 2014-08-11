@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
+import org.apache.log4j.Logger;
+
 /**
  * AbstractDataTable.java
  *
@@ -82,8 +84,7 @@ public abstract class AbstractDataTable implements IFieldMapperDataTable {
 		try {
 			result = action.doAction(mappedField, entry.getValue());
 		} catch (Exception e) {
-			// TODO Log4j
-			System.out.println("[DEBUG - " + this.getClass().getSimpleName() + "] (field: [" + fieldName + "]) exception: " + e.getMessage());
+			Logger.getLogger(this.getClass()).error("(field: [" + fieldName + "]) exception: " + e.getMessage());
 			result = false;
 			ex = e;
 		}

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.testng.IHookCallBack;
 import org.testng.ITestResult;
@@ -80,11 +81,11 @@ public class AbstractTestNGCucumberWithReporterTests extends AbstractTestNGCucum
             
             runtime = (Runtime) field.get(runner);
         } catch (NoSuchFieldException | SecurityException | IllegalAccessException e) {
-            e.printStackTrace();
+        	Logger.getLogger(this.getClass()).error(e.getMessage());
         }
 
         if (scenario.getStatus().equals("undefined")) {
-        	System.out.println(scenario.getName());
+        	Logger.getLogger(this.getClass()).info(scenario.getName());
         	String fileName = StringUtils.capitalize(scenario.getName()).replaceAll("/[^A-Za-z0-9]/", "").replace(" ", "");
         	generateMissingSteps(fileName, runtime.getSnippets());
         }
@@ -114,7 +115,7 @@ public class AbstractTestNGCucumberWithReporterTests extends AbstractTestNGCucum
 	        
 	        bufferWritter.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).error(e.getMessage());
 		}
 		
 	}

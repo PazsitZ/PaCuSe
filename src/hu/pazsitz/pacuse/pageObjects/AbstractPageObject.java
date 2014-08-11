@@ -3,6 +3,7 @@ package hu.pazsitz.pacuse.pageObjects;
 import hu.pazsitz.pacuse.pages.AbstractPage;
 import hu.pazsitz.pacuse.pages.AbstractWidget;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -37,7 +38,7 @@ public abstract class AbstractPageObject<P extends AbstractPage> {
         try {
             this.page = page.getDeclaredConstructor(WebDriver.class).newInstance(webDriver);
         } catch (Exception e) {
-            e.printStackTrace();
+        	Logger.getLogger(this.getClass()).error(e.getMessage());
         }
         PageFactory.initElements(webDriver, this.page);
     }
@@ -56,8 +57,7 @@ public abstract class AbstractPageObject<P extends AbstractPage> {
 					widget.getClass(), WebDriver.class).newInstance(
 						widget, webDriver);
 		} catch (Exception e) {
-			// TODO log4j
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).error(e.getMessage());
 		}
 
 		return widgetObject; 

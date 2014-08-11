@@ -1,5 +1,6 @@
 package hu.pazsitz.pacuse.pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
@@ -39,8 +40,7 @@ public abstract class AbstractPage {
 		try {
 			widget = clazz.getDeclaredConstructor(WebDriver.class).newInstance(webDriver);
 		} catch (Exception e) {
-			// TODO log4j
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).error(e.getMessage());
 		}
 		
     	PageFactory.initElements(webDriver, widget);

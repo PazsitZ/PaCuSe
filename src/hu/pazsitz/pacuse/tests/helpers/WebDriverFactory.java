@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -105,7 +106,7 @@ public class WebDriverFactory {
         try {
             webDriver = new RemoteWebDriver(new URL(gridHubUrl), capability);
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+        	Logger.getLogger(WebDriverFactory.class).error(e.getMessage());
         }
 
         return webDriver;

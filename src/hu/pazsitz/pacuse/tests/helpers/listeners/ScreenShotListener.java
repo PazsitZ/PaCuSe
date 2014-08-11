@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestResult;
@@ -30,17 +31,17 @@ public class ScreenShotListener extends TestListenerAdapter {
             try {
                 screenshot.createNewFile();
             } catch (IOException e) {
-                e.printStackTrace();
+            	Logger.getLogger(this.getClass()).error(e.getMessage());
             }
         }
         try {
             new FileOutputStream(screenshot).write(((TakesScreenshot) StepDefBase.getInstance().getWebDriver())
                     .getScreenshotAs(OutputType.BYTES));
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        	Logger.getLogger(this.getClass()).error(e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+        	Logger.getLogger(this.getClass()).error(e.getMessage());
         }
-        System.out.println("Written screenshot to " + screenshot.getAbsolutePath());
+        Logger.getLogger(this.getClass()).info("Written screenshot to " + screenshot.getAbsolutePath());
     }
 }
