@@ -18,9 +18,10 @@ There is an integrated report-generator with the following cucumber-jvm reporter
 	- Waiter Helper class with a collection of waiter implementations
     - Form Elements Handling Helper class
 	- built in report generator
+	- use log4j logging
 	
 
 ## Jar package available from:
-http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.81/pacuse.0.81.jar
+http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.82/pacuse.0.82.jar
 
-http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.81/pacuse.0.81.source.jar
+http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.82/pacuse.0.82.source.jar
