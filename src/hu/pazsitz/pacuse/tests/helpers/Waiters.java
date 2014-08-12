@@ -7,6 +7,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
@@ -18,6 +19,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Waiters {
     private static WebDriver webDriver;
 
+    /**
+     * Waits for a match with the given url part
+     * @param seconds
+     * @param inputUrlParts
+     */
     public static void waitForUrl(String inputUrlPart, int seconds) {
         final String ulrPart = inputUrlPart;
         new WebDriverWait(webDriver, seconds).until(new ExpectedCondition<Boolean>() {
@@ -28,6 +34,11 @@ public class Waiters {
         });
     }
 
+    /**
+     * Waits for a match with any of the given url part
+     * @param seconds
+     * @param inputUrlParts
+     */
     public static void waitForMultipleUrl(int seconds, String... inputUrlParts) {
         final String[] urlParts = inputUrlParts;
         new WebDriverWait(webDriver, seconds).until(new ExpectedCondition<Boolean>() {
@@ -37,29 +48,6 @@ public class Waiters {
                     if( d.getCurrentUrl().contains(urlPart) ) {
                         return true;
                     }
-                }
-                return false;
-            }
-        });
-    }
-
-    public static void waitForMultipleUrlOnPayments(int seconds, String... inputUrlParts) {
-        final String[] urlParts = inputUrlParts;
-        final String startUrl = webDriver.getCurrentUrl();
-        new WebDriverWait(webDriver, seconds).until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver d) {
-                for(String urlPart : urlParts) {
-                    String url = d.getCurrentUrl();
-                    try{
-                        if(
-                            url.contains(urlPart) && !startUrl.equals(url)
-                            ||
-                            startUrl.equals(url) && d.findElement(By.id("page-level-error")).isDisplayed()
-                        ) {
-                            return true;
-                        }
-                    } catch(Exception e) { return false; }
                 }
                 return false;
             }
@@ -80,6 +68,13 @@ public class Waiters {
     	waitForElementDisappears(by, seconds, 0);
     }
     
+    /**
+     * Waits for dissapearing of an element,
+     * uses an initial delay before starts checking the element appearance
+     * @param by
+     * @param seconds
+     * @param startDelay
+     */
     public static void waitForElementDisappears(By by, int seconds, int startDelay) {
     	webDriver.manage().timeouts().implicitlyWait(startDelay, TimeUnit.SECONDS);
     	final By byStatement = by;
@@ -113,6 +108,10 @@ public class Waiters {
     	waitForElementDisplayed(By.className(className), seconds);
     }
 
+    /**
+     * Uses javascript check of document.readyState
+     * @param seconds
+     */
     public static void waitForDocumentReady(int seconds) {
         new WebDriverWait(webDriver, seconds).until(new ExpectedCondition<Boolean>() {
             @Override
@@ -120,12 +119,18 @@ public class Waiters {
                 return ((JavascriptExecutor)webDriver).executeScript("return document.readyState").equals("complete");
             }
         });
+        waitForCondition(ExpectedConditions.elementToBeClickable(By.id("")), 10);
     }
 
-    public static void waitForCondition(ExpectedCondition<Boolean> condition, int seconds) {
+    /**
+     * You can use static methods from ExpectedConditions util class or any ExpectedCondition implementation
+     * @param condition
+     * @param seconds
+     */
+    public static <T> void waitForCondition(ExpectedCondition<T> condition, int seconds) {
         new WebDriverWait(webDriver, seconds).until(condition);
     }
-
+    
     public static void setWebDriver(WebDriver webDriver) {
         Waiters.webDriver = webDriver;
     }
