@@ -1,9 +1,14 @@
 package hu.pazsitz.pacuse.tests.helpers;
 
 import hu.pazsitz.pacuse.pages.AbstractPage;
+import hu.pazsitz.pacuse.pages.AbstractWidget;
+import hu.pazsitz.pacuse.tests.annotations.Widget;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -61,26 +66,68 @@ public class ElementHelper {
 	}
 	
 	/**
+	 * Simply check element existence (NoSuchElementException)
+	 * @param element
+	 * @return boolean
+	 */
+	public static boolean isExists(WebElement element) {
+		try{
+			element.isDisplayed();
+			return true;
+		} catch (NoSuchElementException e) {
+			Logger.getLogger(ElementHelper.class).info(e.getMessage());
+		}
+		
+		return false;
+	}
+	
+	/**
 	 * Gets the defined field By selector from the page model
 	 * @param element
 	 * @param page
-	 * @return By
+	 * @return By or null if not found
 	 */
 	public static By getByFromElement(AbstractPage page, WebElement element) {
+		if (page == null || !isExists(element)) {
+			return null;
+		}
+		
 		FindBy findBy = null;
+		List<AbstractWidget> widgets = new ArrayList<>();
 		for(Field field : page.getClass().getDeclaredFields()) {
 			field.setAccessible(true);
 			WebElement reflectionElement;
 			try {
+				if (field.isAnnotationPresent(Widget.class)) {
+					widgets.add((AbstractWidget)field.get(page));
+					continue;
+				}
 				reflectionElement = (WebElement) field.get(page);
 				if (reflectionElement.equals(element)) {
 					findBy = field.getAnnotation(FindBy.class);
 					break;
 				}
-			} catch (Exception e) {}
+			} catch (Exception e) {
+				Logger.getLogger(ElementHelper.class).info(e.getMessage());
+			}
 		}
-			
-		return buildByFromLongFindBy(findBy);
+		
+		if (findBy != null) {
+			return buildByFromLongFindBy(findBy);
+		}
+		
+		return getByFromWidgetElement(widgets, element);
+	}
+
+	private static By getByFromWidgetElement(List<AbstractWidget> widgets, WebElement element) {
+		for (AbstractWidget widget : widgets) {
+			By by = getByFromElement(widget, element);
+			if (by != null) {
+				return by;
+			}
+		}
+		
+		return null;
 	}
 	
 	private static By buildByFromLongFindBy(FindBy findBy) {
