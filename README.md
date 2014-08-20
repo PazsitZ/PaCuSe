@@ -28,7 +28,7 @@ Dynamic Cucumber-Selenium table mapping between Page Model and Gherkin Table fro
 	- Dynamic Cucumber-Selenium table mapping with configurable built in validation and population based on annotations (Object-DataTable Mapping)
 	- Waiter Helper class with a collection of waiter implementations
 	- WebElement Helper class
-        - Form Elements Handling Helper class
+	- Form Elements Handling Helper class
 	- built in report generator
 	- use log4j logging
 	
