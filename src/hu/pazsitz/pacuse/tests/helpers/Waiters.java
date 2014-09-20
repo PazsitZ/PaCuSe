@@ -119,7 +119,7 @@ public class Waiters {
                 return ((JavascriptExecutor)webDriver).executeScript("return document.readyState").equals("complete");
             }
         });
-        waitForCondition(ExpectedConditions.elementToBeClickable(By.tagName("body")), 10);
+        waitForCondition(ExpectedConditions.presenceOfElementLocated(By.tagName("body")), seconds);
     }
 
     /**
