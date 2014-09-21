@@ -169,7 +169,7 @@ public class WebDriverFactory {
         boolean is_supported = true;
         Platform current = Platform.getCurrent();
         if (BrowserName.INTERNET_EXPLORER.equals(browser)) {
-            is_supported = Platform.WINDOWS.is(current);
+            is_supported = Platform.WINDOWS.is(current) || Platform.XP.is(current) || Platform.VISTA.is(current) || Platform.WIN8.is(current);
         }
         assert is_supported : "Platform is not supported by " + browser.name + " browser";
     }
