@@ -31,7 +31,7 @@ public class ElementHelper {
 	 * @param element
 	 * @return boolean
 	 */
-	public static boolean isVisible(WebElement element) {
+	public static boolean isVisible(WebElement element) throws NoSuchElementException {
 		if (element == null) return false;
 		return element.isDisplayed();
 	}
@@ -47,6 +47,7 @@ public class ElementHelper {
 		try {
 			element = driver.findElement(by);
 		} catch (NoSuchElementException e) {
+			Logger.getLogger(ElementHelper.class).info("ElementHelper.isVisible: " + e.getMessage());
 			return false;
 		}
 		
@@ -75,7 +76,7 @@ public class ElementHelper {
 			element.isDisplayed();
 			return true;
 		} catch (NoSuchElementException e) {
-			Logger.getLogger(ElementHelper.class).info(e.getMessage());
+			Logger.getLogger(ElementHelper.class).info("ElementHelper.isExists: " + e.getMessage());
 		}
 		
 		return false;
