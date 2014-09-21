@@ -2,6 +2,7 @@ package hu.pazsitz.pacuse.pageObjects;
 
 import hu.pazsitz.pacuse.pages.AbstractWidget;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -27,6 +28,13 @@ public class AbstractWidgetObject<W extends AbstractWidget> {
     	this.webDriver = webDriver;
     }
     
+    public boolean exists() {
+    	return getWidget().exists();
+    }
+    
+    public boolean visible() throws NoSuchElementException {
+    	return getWidget().visible();
+    }
 
     public W getWidget() {
         return widget;
