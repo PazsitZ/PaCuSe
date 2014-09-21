@@ -14,6 +14,9 @@ public class AboutWidget extends AbstractWidget {
 		super(webDriver);
 	}
 	
+	@FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' about ')]")
+    private WebElement container;
+	
 	@DataTableAttributes(name="name")
     @FindBy(how=How.XPATH, using="//div[contains(concat(' ',@class,' '), ' about ')]/div/span/h2")
     private WebElement name;
@@ -29,6 +32,11 @@ public class AboutWidget extends AbstractWidget {
 
 	public WebElement getProfession() {
 		return profession;
+	}
+
+	@Override
+	public WebElement getContainer() {
+		return container;
 	}
 
 }
