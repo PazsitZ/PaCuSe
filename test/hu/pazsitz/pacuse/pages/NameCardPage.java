@@ -19,6 +19,7 @@ import org.openqa.selenium.support.How;
  */
 public class NameCardPage extends AbstractPage {
     private final String pageUrl = "http://pazsitz.hu";
+    
     @Widget
     protected AboutWidget aboutWidget;
 
