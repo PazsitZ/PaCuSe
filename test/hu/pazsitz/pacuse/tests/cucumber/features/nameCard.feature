@@ -6,7 +6,7 @@ Feature: Sample
 		When select the about card
 		Then validate the about page content:
 		|	name		|	profession						|
-		| Zoltán Pázsit	| Software Enginer - Web Developer	|
+		| Zoltán Pázsit	| Software Engineer - Web Developer	|
 		When select the contact card
 		Then validate the contact page content from table:
 		| email1             | email2            | webPage            | Facebook                    | LinkedIn                          | Github                      |

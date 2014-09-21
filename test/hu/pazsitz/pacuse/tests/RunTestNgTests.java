@@ -25,9 +25,6 @@ import cucumber.api.SnippetType;
 )
 // Default TestNG Runner, runs all of the features are available
 public class RunTestNgTests extends AbstractTestNGCucumberWithReporterTests {
-    /**
-     * Right now the Cucumber ReportGenerator doesn't support embed image only the HtmlReportGenerator
-     */
 
     @BeforeClass
     public void init() {
