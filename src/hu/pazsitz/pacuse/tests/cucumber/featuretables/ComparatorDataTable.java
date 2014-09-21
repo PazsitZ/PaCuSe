@@ -12,7 +12,7 @@ import java.util.Map;
  * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
-public class ComparatorDataTable extends AbstractDataTable implements IFieldMapperDataTable {
+public class ComparatorDataTable extends AbstractDataTable<ComparatorDataTable> implements IFieldMapperDataTable {
 	
 	public ComparatorDataTable(List<Map<String, String>> table) {
 		super(new ComparatorAction());

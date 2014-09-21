@@ -12,7 +12,7 @@ import java.util.Map;
  * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
-public class PopulatorDataTable extends AbstractDataTable implements IFieldMapperDataTable {
+public class PopulatorDataTable extends AbstractDataTable<PopulatorDataTable> implements IFieldMapperDataTable {
 
 	public PopulatorDataTable(List<Map<String, String>> table) {
 		super(new PopulatorAction());

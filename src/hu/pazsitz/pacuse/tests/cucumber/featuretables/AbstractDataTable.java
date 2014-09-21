@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.NoSuchElementException;
 
 /**
  * AbstractDataTable.java
@@ -18,8 +19,13 @@ import org.apache.log4j.Logger;
  * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
-public abstract class AbstractDataTable implements IFieldMapperDataTable {
+public abstract class AbstractDataTable<T extends AbstractDataTable<T>> implements IFieldMapperDataTable {
 	private IFieldAction action;
+	
+	/**
+	 * On false state the non existent elements treated as non-determined fields instead of failed ones
+	 */
+	private boolean strictMode = true;
 	private List<String> success = new ArrayList<>();
 	private Map<String, String> failed = new HashMap<>();
 	private List<String> fieldNonDetermined = new ArrayList<>();
@@ -32,6 +38,18 @@ public abstract class AbstractDataTable implements IFieldMapperDataTable {
 		this.mapper = new PageFieldTableMapper();
 	}
 	
+	/**
+	 * Constructor for implicit turn off the strict mode
+	 * Chain setter also provided
+	 * @param action
+	 * @param strictMode true by default
+	 */
+	public AbstractDataTable(IFieldAction action, boolean strictMode) {
+		this.action = action;
+		this.mapper = new PageFieldTableMapper();
+		this.strictMode = strictMode;
+	}
+	
 	protected void fillNonDetermined() {
 		for (Map<String, String> row : table) {
 			for (Entry<String, String> entry : row.entrySet()) {
@@ -39,6 +57,18 @@ public abstract class AbstractDataTable implements IFieldMapperDataTable {
 				fieldNumber++;
 			}
 		}
+	}
+	
+	/**
+	 * Implement with return to provide chained setter if second constructor is not implemented
+	 * @param strictMode true by default
+	 * @return super implementation class type
+	 */
+	@SuppressWarnings("unchecked") // the nested extend should prevents unchecked cast
+	public T setStrictMode(boolean strictMode) {
+		this.strictMode = strictMode;
+		
+		return (T) this;
 	}
 
 	public List<Map<String, String>> getTable() {
@@ -92,6 +122,9 @@ public abstract class AbstractDataTable implements IFieldMapperDataTable {
 		if (result != null && result) {
 			success.add(fieldName);
 			fieldNonDetermined.remove(fieldName);
+		} else if (!strictMode && (ex instanceof NoSuchElementException)) {
+			// no action
+			Logger.getLogger(this.getClass()).info("strict mode off, field: [" + fieldName + "])", ex);
 		} else if (result != null) {
 			failed.put(fieldName, ex.getMessage());
 			fieldNonDetermined.remove(fieldName);

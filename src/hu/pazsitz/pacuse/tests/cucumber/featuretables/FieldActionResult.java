@@ -106,7 +106,7 @@ public class FieldActionResult {
 	public Map<String, String> getNonSucceedFields() {
 		Map<String, String> map = new HashMap<String, String>();
 		map.putAll(fieldFailed);
-		for (String item : fieldNonDeterined) { map.put(item, "Non Determined"); }
+		for (String item : fieldNonDeterined) { map.put(item, "Non Determined field"); }
 		
 		return map;
 	}
