@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -64,13 +65,20 @@ public class Waiters {
     	});
     }
     
+    /**
+     * Waits for dissapearing of an element, uses isDisplayed() method
+     * (it handles non-existent element case too)
+     * @param by
+     * @param seconds
+     */
     public static void waitForElementDisappears(By by, int seconds) {
     	waitForElementDisappears(by, seconds, 0);
     }
     
     /**
-     * Waits for dissapearing of an element,
-     * uses an initial delay before starts checking the element appearance
+     * Waits for dissapearing of an element, uses isDisplayed() method, 
+     * (it handles non-existent element case too)
+     * with an initial delay before starts checking the element appearance
      * @param by
      * @param seconds
      * @param startDelay
@@ -81,9 +89,41 @@ public class Waiters {
     	new WebDriverWait(webDriver, seconds).until(new ExpectedCondition<Boolean>() {
     		@Override
     		public Boolean apply(WebDriver d) {
+    			try {
+    				return !d.findElement(byStatement).isDisplayed();
+    			} catch (NoSuchElementException e) {
+    				return true;
+    			}
+    		}
+    	});
+    }
+    
+    /**
+     * Waits for dissapearing of an element from the DOM,
+     * with an initial delay before starts checking the element appearance
+     * @param by
+     * @param seconds
+     * @param startDelay
+     */
+    public static void waitForElementNotExists(By by, int seconds, int startDelay) {
+    	webDriver.manage().timeouts().implicitlyWait(startDelay, TimeUnit.SECONDS);
+    	final By byStatement = by;
+    	new WebDriverWait(webDriver, seconds).until(new ExpectedCondition<Boolean>() {
+    		@Override
+    		public Boolean apply(WebDriver d) {
     			return d.findElements(byStatement).isEmpty();
     		}
     	});
+    }
+    
+    /**
+     * Waits until the element is clickable and invokes the click event on it
+     * @param by
+     * @param seconds
+     */
+    public static void waitForElementToClick(By by, int seconds) {
+    	waitForCondition(ExpectedConditions.elementToBeClickable(by), seconds);
+    	webDriver.findElement(by).click();
     }
     
     public static void waitForElementDisplayed(By by, int seconds) {
