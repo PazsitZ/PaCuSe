@@ -25,14 +25,17 @@ import org.openqa.selenium.support.How;
  * @copyright Copyright (c) 2014, Zoltan Pazsit
  */
 public class ElementHelper {
-	
+	private static Logger logger = Logger.getLogger(ElementHelper.class);
 	/**
-	 * Determines if element is visible
+	 * Determines if element is visible (handles null element)
 	 * @param element
 	 * @return boolean
 	 */
 	public static boolean isVisible(WebElement element) throws NoSuchElementException {
-		if (element == null) return false;
+		if (element == null) {
+			logger.debug("isVisible(WebElement) - element was null");
+			return false;
+		}
 		return element.isDisplayed();
 	}
 	
@@ -47,7 +50,7 @@ public class ElementHelper {
 		try {
 			element = driver.findElement(by);
 		} catch (NoSuchElementException e) {
-			Logger.getLogger(ElementHelper.class).info("ElementHelper.isVisible: " + e.getMessage());
+			logger.info("ElementHelper.isVisible: " + e.getMessage());
 			return false;
 		}
 		
@@ -67,16 +70,21 @@ public class ElementHelper {
 	}
 	
 	/**
-	 * Simply check element existence (NoSuchElementException)
+	 * Simply check element existence (handles null element and NoSuchElementException)
 	 * @param element
 	 * @return boolean
 	 */
 	public static boolean isExists(WebElement element) {
+		if (element == null) {
+			logger.debug("isExists(WebElement) - element was null");
+			return false;
+		}
+		
 		try{
 			element.isDisplayed();
 			return true;
 		} catch (NoSuchElementException e) {
-			Logger.getLogger(ElementHelper.class).info("ElementHelper.isExists: " + e.getMessage());
+			logger.info("ElementHelper.isExists: " + e.getMessage());
 		}
 		
 		return false;
@@ -109,7 +117,7 @@ public class ElementHelper {
 					break;
 				}
 			} catch (Exception e) {
-				Logger.getLogger(ElementHelper.class).info(e.getMessage());
+				logger.info(e.getMessage());
 			}
 		}
 		
