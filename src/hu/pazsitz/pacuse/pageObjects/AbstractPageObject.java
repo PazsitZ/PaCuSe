@@ -103,11 +103,11 @@ public abstract class AbstractPageObject<P extends AbstractPage> {
         prevPageHandle = webDriver.getWindowHandle();
         JavascriptExecutor jsExecutor = (JavascriptExecutor) webDriver;
         jsExecutor.executeScript("window.open(\"" + url + "\")");
-        String connectorPageHandle = Iterables.getLast(webDriver.getWindowHandles());
+        String pageHandle = Iterables.getLast(webDriver.getWindowHandles());
        
-        webDriver.switchTo().window(connectorPageHandle);
+        webDriver.switchTo().window(pageHandle);
        
-        return connectorPageHandle;
+        return pageHandle;
     }
     
     /**
