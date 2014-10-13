@@ -21,6 +21,12 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 import cucumber.api.testng.TestNGCucumberRunner;
 import cucumber.runtime.Runtime;
 
+/**
+ * AbstractTestNGCucumberWithReporterTests.java
+ *
+ * @author Zoltan Pazsit <pazsitz@pazsitz.hu>
+ * @copyright Copyright (c) 2014, Zoltan Pazsit
+ */
 public class AbstractTestNGCucumberWithReporterTests extends AbstractTestNGCucumberTests {
     private static TestNGCucumberRunner runner;
     private static String filePathOfStepDefinitions = "tests/cucumber/stepdefs/";
