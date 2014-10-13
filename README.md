@@ -29,11 +29,12 @@ Dynamic Cucumber-Selenium table mapping between Page Model and Gherkin Table fro
 	- Waiter Helper class with a collection of waiter implementations
 	- WebElement Helper class
 	- Form Elements Handling Helper class
+	- Cucumber Step processing Helper class
 	- built in report generator
 	- use log4j logging
 	
 
 ## Jar package available from:
-http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.83/pacuse.0.83.jar
+http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.84/pacuse.0.84.jar
 
-http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.83/pacuse.0.83.source.jar
+http://pazsitz.hu/repo/hu/pazsitz/pacuse/0.84/pacuse.0.84.source.jar
