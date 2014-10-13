@@ -11,5 +11,7 @@ Feature: Sample
 		Then validate the contact page content from table:
 		| email1             | email2            | webPage            | Facebook                    | LinkedIn                          | Github                      |
 		| contact@pazsitz.hu | pazsitz@gmail.com | http://pazsitz.hu/ | http://facebook.com/pazsitz | http://linkedin.com/in/PazsitZ    | https://github.com/PazsitZ/ |
+		Then the email is visible
+		Then the email3 shouldn't present
 		And no matching feature
 

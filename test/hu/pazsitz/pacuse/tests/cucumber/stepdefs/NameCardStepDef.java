@@ -1,11 +1,15 @@
 package hu.pazsitz.pacuse.tests.cucumber.stepdefs;
 
 import hu.pazsitz.pacuse.pageObjects.NameCardPageObject;
+import hu.pazsitz.pacuse.tests.cucumber.helpers.BoolValue;
+import hu.pazsitz.pacuse.tests.cucumber.helpers.BoolValueConverter;
+import hu.pazsitz.pacuse.tests.cucumber.helpers.BoolValueEnum;
 import hu.pazsitz.pacuse.tests.helpers.StepDefBase;
 
 import java.util.List;
 import java.util.Map;
 
+import cucumber.api.Transform;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -59,5 +63,27 @@ public class NameCardStepDef {
 	@Then("^validate the contact page content from table:$")
 	public void validate_the_contact_page_contentWithTable(List<Map<String, String>> table) throws Throwable {
     	nameCard.validateContactCard(table);
+	}
+	
+	@Then("^the email (.*) visible$")
+	public void theEmailVisible(BoolValue visible) {
+		System.out.println("[" + visible.getClass().getName() + "]" + visible.name() + " " + visible.getBoolValue());
+		if (visible.getBoolValue()) {
+			System.out.println(visible.getValue());
+		}
+		else {
+			System.out.println(visible.getValue());
+		}
+	}
+	
+	@Then("^the email3 (.*) present$")
+	public void theEmailPresent(@Transform(BoolValueConverter.class) BoolValueEnum present) {
+		System.out.println("[" + present.getClass().getName() + "]" + present.name() + " " + present.getBoolValue());
+		if (present.getBoolValue()) {
+			System.out.println(present.getValue());
+		}
+		else {
+			System.out.println(present.getValue());
+		}
 	}
 }
