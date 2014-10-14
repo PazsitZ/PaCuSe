@@ -1,7 +1,7 @@
 package hu.pazsitz.pacuse.tests.cucumber.stepdefs;
 
 import hu.pazsitz.pacuse.pageObjects.NameCardPageObject;
-import hu.pazsitz.pacuse.tests.cucumber.helpers.BoolValue;
+import hu.pazsitz.pacuse.tests.cucumber.helpers.BoolNegateValues;
 import hu.pazsitz.pacuse.tests.cucumber.helpers.BoolValueConverter;
 import hu.pazsitz.pacuse.tests.cucumber.helpers.BoolValueEnum;
 import hu.pazsitz.pacuse.tests.helpers.StepDefBase;
@@ -66,7 +66,7 @@ public class NameCardStepDef {
 	}
 	
 	@Then("^the email (.*) visible$")
-	public void theEmailVisible(BoolValue visible) {
+	public void theEmailVisible(BoolNegateValues visible) {
 		System.out.println("[" + visible.getClass().getName() + "]" + visible.name() + " " + visible.getBoolValue());
 		if (visible.getBoolValue()) {
 			System.out.println(visible.getValue());
