@@ -55,7 +55,7 @@ abstract public class BoolValue {
 	}
 	
 	public String name() {
-		return trueValue.contains(value) ? "TRUE" : "FALSE";
+		return value;
 	}
 	
 	

@@ -43,4 +43,8 @@ public class BoolNegateValues extends BoolValue {
 		super(value.toLowerCase().replace("n't", " not"));
 	}
 
+	@Override
+	public String name() {
+		return trueValue.contains(super.getValue()) ? "TRUE" : "FALSE";
+	}
 }
