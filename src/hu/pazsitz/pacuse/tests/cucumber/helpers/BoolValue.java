@@ -16,8 +16,8 @@ import org.apache.commons.collections.ListUtils;
  * <pre>
  * class NewBoolValue extends BoolValue {
  *     static {
- *         BoolValue.trueValue.addAll( new ArrayList&lt;String&gt;(Arrays.asList("true")) );
- *         BoolValue.falseValue.addAll( new ArrayList&lt;String&gt;(Arrays.asList("false")) );
+ *         BoolValue.trueValue.add("true");
+ *         BoolValue.falseValue.addAll( new ArrayList&lt;String&gt;(Arrays.asList("false", "not")) );
  *     }
  *     
  *     public NewBoolValue(String value) { super(value); }
