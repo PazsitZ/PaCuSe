@@ -28,11 +28,23 @@ public class TestBase {
     @BeforeClass
     public void init() {
         server = "";
-        webDriver = WebDriverFactory.getInstance(
-    		WebDriverFactory.BrowserName.getBrowser(
-    			System.getProperty("PaCuSe.browser")
-    		)
-		);
+        String weDriverGridUrl = System.getProperty("PaCuSe.WebDriver.gridUrl", "");
+        if (weDriverGridUrl.isEmpty()) {
+            webDriver = WebDriverFactory.getInstance(
+        		WebDriverFactory.BrowserName.getBrowser(
+        			System.getProperty("PaCuSe.browser")
+        		)
+    		);
+        } else {
+            webDriver = WebDriverFactory.getInstance(
+                weDriverGridUrl, 
+                WebDriverFactory.BrowserName.getBrowser(
+                    System.getProperty("PaCuSe.browser")
+                ), 
+                "", ""
+            );
+        }
+        
         Waiters.setWebDriver(webDriver);
     }
 
