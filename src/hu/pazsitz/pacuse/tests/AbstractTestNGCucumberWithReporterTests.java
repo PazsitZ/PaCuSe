@@ -102,7 +102,7 @@ public class AbstractTestNGCucumberWithReporterTests extends AbstractTestNGCucum
 		String fileStringStart = "package " + this.getClass().getPackage().getName() + ".cucumber.stepdefs;" + br + br
 			+ "import cucumber.api.DataTable;" + br 
 			+ "import cucumber.api.PendingException;" + br 
-			+ "import cucumber.api.java.en.Then;" + br 
+			+ "import cucumber.api.java.en.When;" + br 
 			+ "import cucumber.api.java.en.Given;" + br 
 			+ "import cucumber.api.java.en.Then;" + br 
 			+ br + br
