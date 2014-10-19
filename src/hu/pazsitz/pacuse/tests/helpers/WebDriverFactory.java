@@ -44,7 +44,7 @@ public class WebDriverFactory {
         }
 
     }
-
+    
     private WebDriverFactory() {
     }
 
@@ -75,12 +75,16 @@ public class WebDriverFactory {
         }
 
         if (BrowserName.CHROME.equals(browserName)) {
+            setChromeDriver();
             capability = DesiredCapabilities.chrome();
+            capability.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
+            capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         }
         else if (BrowserName.FIREFOX.equals(browserName)) {
             capability = DesiredCapabilities.firefox();
 
             FirefoxProfile ffProfile = new FirefoxProfile();
+            ffProfile.setAcceptUntrustedCertificates(true);
 
             // Authenication Hack for Firefox
             if (username != null && password != null) {
@@ -91,9 +95,12 @@ public class WebDriverFactory {
             capability.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
         } else if (BrowserName.INTERNET_EXPLORER.equals(browserName)) {
             capability = DesiredCapabilities.internetExplorer();
+            capability.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
+            capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+            capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
             capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
         } else {
-            capability = DesiredCapabilities.htmlUnit();
+            capability = DesiredCapabilities.htmlUnitWithJs();
             // HTMLunit Check
             webDriver = new HtmlUnitDriver(true);
 
@@ -121,7 +128,7 @@ public class WebDriverFactory {
      */
     public static WebDriver getInstance(BrowserName browser) {
 
-        WebDriver webDriver;
+        WebDriver webDriver = null;
 
         DesiredCapabilities capabilities;
         

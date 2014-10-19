@@ -40,17 +40,24 @@ import cucumber.api.java.Before;
 */
 public class SharedDriver extends EventFiringWebDriver {
     private static boolean doEmbedScreenshot = false;
-    private static final WebDriver REAL_DRIVER = WebDriverFactory.getInstance(
-		WebDriverFactory.BrowserName.getBrowser(
-			System.getProperty("PaCuSe.browser")
-		)
-	);
+    private static WebDriver REAL_DRIVER = System.getProperty("PaCuSe.WebDriver.gridUrl", "").isEmpty() ? 
+        WebDriverFactory.getInstance(WebDriverFactory.BrowserName.getBrowser(
+                System.getProperty("PaCuSe.browser")
+            ))
+                :
+            WebDriverFactory.getInstance(
+                System.getProperty("PaCuSe.WebDriver.gridUrl", ""), 
+                WebDriverFactory.BrowserName.getBrowser(
+                    System.getProperty("PaCuSe.browser")
+                ), 
+                "", "");
 
     public SharedDriver() {
         super(REAL_DRIVER);
+    
         doEmbedScreenshot = Boolean.parseBoolean(System.getProperty("cucumber.report.embed_screenshot", "false"));
     }
-
+    
     @Override
     public void close() {
         if (REAL_DRIVER != null) {
