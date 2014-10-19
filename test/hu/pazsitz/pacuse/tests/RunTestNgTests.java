@@ -32,6 +32,7 @@ public class RunTestNgTests extends AbstractTestNGCucumberWithReporterTests {
         System.setProperty("cucumber.report.embed_screenshot", Boolean.toString(true));
         System.setProperty("PaCuSe.browser", WebDriverFactory.BrowserName.CHROME.name());
         System.setProperty("PaCuSe.WebDriver.screenshot.path", "reports/");
+//        System.setProperty("PaCuSe.WebDriver.gridUrl", "http://127.0.0.1:5555/wd/hub");
         System.setProperty("PaCuSe.ReportGenerator.outputReport.path", "reports/");
         System.setProperty("PaCuSe.ReportGenerator.jsonReport.path", "reports/");
         System.setProperty("PaCuSe.log4j.config", "");
