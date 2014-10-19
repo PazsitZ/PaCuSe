@@ -33,7 +33,7 @@ public class BoolNegateValues extends BoolValue {
 				"can", "must"
 		)) );
 		BoolValue.falseValue.addAll( new ArrayList<String>(Arrays.asList(
-				"be not", "is not", "are not", "has not", 
+				"be not", "not be", "is not", "are not", "has not", 
 	    		"should not", "could not", "do not", "does not", 
 	    		"can not", "must not"
 		)) );
