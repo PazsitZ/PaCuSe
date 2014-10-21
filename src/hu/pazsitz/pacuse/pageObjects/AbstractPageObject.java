@@ -23,18 +23,18 @@ public abstract class AbstractPageObject<P extends AbstractPage> {
 
     public AbstractPageObject(Class<P> pageClass, WebDriver webDriver) {
         this.webDriver = webDriver;
-        instantiatePage(pageClass, webDriver);
+        instantiatePage(pageClass);
     }
 
     public AbstractPageObject(Class<P> pageClass, WebDriver webDriver, boolean implicitLoadPage) {
         this.webDriver = webDriver;
-        instantiatePage(pageClass, webDriver);
+        instantiatePage(pageClass);
         if (implicitLoadPage) {
             loadPage();
         }
     }
 
-    private void instantiatePage(Class<P> page, WebDriver webDriver) {
+    private void instantiatePage(Class<P> page) {
         try {
             this.page = page.getDeclaredConstructor(WebDriver.class).newInstance(webDriver);
         } catch (Exception e) {
