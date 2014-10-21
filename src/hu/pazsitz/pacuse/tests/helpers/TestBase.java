@@ -4,7 +4,7 @@ import hu.pazsitz.pacuse.pages.AbstractPage;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
@@ -28,22 +28,7 @@ public class TestBase {
     @BeforeClass
     public void init() {
         server = "";
-        String weDriverGridUrl = System.getProperty("PaCuSe.WebDriver.gridUrl", "");
-        if (weDriverGridUrl.isEmpty()) {
-            webDriver = WebDriverFactory.getInstance(
-        		WebDriverFactory.BrowserName.getBrowser(
-        			System.getProperty("PaCuSe.browser")
-        		)
-    		);
-        } else {
-            webDriver = WebDriverFactory.getInstance(
-                weDriverGridUrl, 
-                WebDriverFactory.BrowserName.getBrowser(
-                    System.getProperty("PaCuSe.browser")
-                ), 
-                "", ""
-            );
-        }
+        webDriver = new SharedDriver();
         
         Waiters.setWebDriver(webDriver);
     }
@@ -53,7 +38,7 @@ public class TestBase {
         webDriver.manage().deleteAllCookies();
     }
 
-    @AfterSuite(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void tearDown() {
         if (webDriver != null) {
             webDriver.quit();
