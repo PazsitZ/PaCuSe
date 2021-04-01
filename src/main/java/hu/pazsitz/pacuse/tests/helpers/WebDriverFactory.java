@@ -8,10 +8,12 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -20,6 +22,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
  * WebDriverFactory.java
  */
 public class WebDriverFactory {
+    private static Platform platform = Platform.WINDOWS;
 
     /* Browsers constants */
     public enum BrowserName {
@@ -33,19 +36,23 @@ public class WebDriverFactory {
         BrowserName(String name) {
             this.name = name;
         }
-        
+
         public static BrowserName getBrowser(String name) {
         	for (BrowserName browserName : BrowserName.values()){
         		if (browserName.name().equals(name))
         			return browserName;
         	}
-        	
+
         	return BrowserName.CHROME;
         }
 
     }
-    
+
     private WebDriverFactory() {
+    }
+
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
     }
 
     /*
@@ -100,9 +107,9 @@ public class WebDriverFactory {
             capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
             capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
         } else {
-            capability = DesiredCapabilities.htmlUnitWithJs();
+            capability = DesiredCapabilities.htmlUnit();
             // HTMLunit Check
-            webDriver = new HtmlUnitDriver(true);
+            webDriver = new InternetExplorerDriver();
 
             return webDriver;
         }
@@ -131,17 +138,17 @@ public class WebDriverFactory {
         WebDriver webDriver = null;
 
         DesiredCapabilities capabilities;
-        
+
         if (BrowserName.CHROME.equals(browser)) {
             setChromeDriver();
-            capabilities = DesiredCapabilities.chrome();
-            capabilities.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
-            capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-            webDriver = new ChromeDriver(capabilities);
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
+            chromeOptions.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+            webDriver = new ChromeDriver(chromeOptions);
         } else if (BrowserName.FIREFOX.equals(browser)) {
-            FirefoxProfile ffProfile = new FirefoxProfile();
-            ffProfile.setAcceptUntrustedCertificates(true);
-            webDriver = new FirefoxDriver(ffProfile);
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            firefoxOptions.setAcceptInsecureCerts(true);
+            webDriver = new FirefoxDriver(firefoxOptions);
         } else if (BrowserName.INTERNET_EXPLORER.equals(browser)) {
             isSupportedPlatform(browser);
             setIEDriver();
@@ -151,9 +158,10 @@ public class WebDriverFactory {
             capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
             webDriver = new InternetExplorerDriver(capabilities);
         } else {
-        	capabilities = DesiredCapabilities.htmlUnitWithJs();
+        	capabilities = DesiredCapabilities.internetExplorer();
+            InternetExplorerOptions options = new InternetExplorerOptions(capabilities);
             // HTMLunit Check
-            webDriver = new HtmlUnitDriver(capabilities);
+            webDriver = new InternetExplorerDriver(capabilities);
         }
 
         return webDriver;
@@ -163,7 +171,8 @@ public class WebDriverFactory {
      * Helper method to set ChromeDriver location into the right system property
      */
     private static void setChromeDriver() {
-        String chromeDriverPath = new File("").getAbsolutePath() + "/lib/chromedriver/chromedriver.exe";
+        String fileName = (platform == Platform.WINDOWS) ? "chromedriver.exe" : "chromedriver";
+        String chromeDriverPath = new File("").getAbsolutePath() + "/lib/chromedriver/" + fileName ;
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
     }
 

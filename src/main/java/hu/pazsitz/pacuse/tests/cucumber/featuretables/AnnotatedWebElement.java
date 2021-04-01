@@ -6,7 +6,10 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -18,7 +21,7 @@ import org.openqa.selenium.WebElement;
 public class AnnotatedWebElement implements WebElement {
 	private WebElement baseElement;
 	private DataTableAttributes fieldAnnotation;
-	
+
 	/**
 	 * wraps WebElement and the associated DataTableAttributes annotation
 	 * @param element
@@ -28,7 +31,7 @@ public class AnnotatedWebElement implements WebElement {
 		this.baseElement = element;
 		this.fieldAnnotation = annotation;
 	}
-	
+
 	/**
 	 * Gets the real WebElement
 	 * @return WebElement
@@ -119,5 +122,15 @@ public class AnnotatedWebElement implements WebElement {
 	public String getCssValue(String propertyName) {
 		return baseElement.getCssValue(propertyName);
 	}
+
+    @Override
+    public Rectangle getRect() {
+       return  baseElement.getRect();
+    }
+
+    @Override
+    public <X> X getScreenshotAs(OutputType<X> ot) throws WebDriverException {
+        return baseElement.getScreenshotAs(ot);
+    }
 
 }

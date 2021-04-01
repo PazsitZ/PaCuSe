@@ -30,7 +30,7 @@ import cucumber.runtime.Runtime;
 public class AbstractTestNGCucumberWithReporterTests extends AbstractTestNGCucumberTests {
     private static TestNGCucumberRunner runner;
     private static String filePathOfStepDefinitions = "tests/cucumber/stepdefs/";
-    
+
     @BeforeClass
     public void initLogging() {
     	String configPath = System.getProperty("PaCuSe.log4j.config", "");
@@ -57,34 +57,32 @@ public class AbstractTestNGCucumberWithReporterTests extends AbstractTestNGCucum
 		prop.setProperty("log4j.logger.hu.pazsitz", "DEBUG");
 		return prop;
 	}
-    
-    @Override
+
     @Test(groups = "cucumber", description = "Runs Cucumber Features")
     public void run_cukes() throws IOException {
-        runner = new TestNGCucumberRunner(getClass());
+        runner = new TestNGCucumberRunner(this.getClass());
         runner.runCukes();
     }
 
-    @Override
     public void run(IHookCallBack iHookCallBack, ITestResult iTestResult) {
         iHookCallBack.runTestMethod(iTestResult);
     }
-    
+
     public TestNGCucumberRunner getRunner() {
         return runner;
     }
-    
+
     public void setFilePathOfStepDefinitions(String filePath) {
     	AbstractTestNGCucumberWithReporterTests.filePathOfStepDefinitions = filePath;
     }
-    
+
     public void afterReporting(Scenario scenario) {
     	cucumber.runtime.Runtime runtime = null;
         Field field;
         try {
             field = runner.getClass().getDeclaredField("runtime");
             field.setAccessible(true);
-            
+
             runtime = (Runtime) field.get(runner);
         } catch (NoSuchFieldException | SecurityException | IllegalAccessException e) {
         	Logger.getLogger(this.getClass()).error(e.getMessage());
@@ -96,19 +94,19 @@ public class AbstractTestNGCucumberWithReporterTests extends AbstractTestNGCucum
         	generateMissingSteps(fileName, runtime.getSnippets());
         }
     }
-    
+
 	private void generateMissingSteps(String className, List<String> snippets) {
 		final String br = System.getProperty("line.separator");
 		String fileStringStart = "package " + this.getClass().getPackage().getName() + ".cucumber.stepdefs;" + br + br
-			+ "import cucumber.api.DataTable;" + br 
-			+ "import cucumber.api.PendingException;" + br 
-			+ "import cucumber.api.java.en.When;" + br 
-			+ "import cucumber.api.java.en.Given;" + br 
-			+ "import cucumber.api.java.en.Then;" + br 
+			+ "import cucumber.api.DataTable;" + br
+			+ "import cucumber.api.PendingException;" + br
+			+ "import cucumber.api.java.en.When;" + br
+			+ "import cucumber.api.java.en.Given;" + br
+			+ "import cucumber.api.java.en.Then;" + br
 			+ br + br
 			+ "public class " + className + " { " + br;
 		final String fileStringEnd = "} ";
-		 
+
 		try {
 			File file = new File(filePathOfStepDefinitions + className + ".java");
 	        BufferedWriter bufferWritter = new BufferedWriter(new FileWriter(file));
@@ -118,12 +116,12 @@ public class AbstractTestNGCucumberWithReporterTests extends AbstractTestNGCucum
 	        	bufferWritter.write(snippet);
 	        }
 	        bufferWritter.write(fileStringEnd);
-	        
+
 	        bufferWritter.close();
 		} catch (IOException e) {
 			Logger.getLogger(this.getClass()).error(e.getMessage());
 		}
-		
+
 	}
-    
+
 }
