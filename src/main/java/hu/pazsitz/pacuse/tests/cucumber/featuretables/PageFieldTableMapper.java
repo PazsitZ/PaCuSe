@@ -28,7 +28,6 @@ public class PageFieldTableMapper {
 	 * Gets the mapped field if exists
 	 * @param page
 	 * @param fieldName
-	 * @param value
 	 * @return boolean
 	 */
 	public AnnotatedWebElement mapField(AbstractPage page, String fieldName) {
@@ -43,11 +42,11 @@ public class PageFieldTableMapper {
 	 * @param fields
 	 * @return Map<String, WebElement>
 	 */
-	public Map<String, WebElement> mapFields(AbstractPage page, List<String> fields) {
-		Map<String, WebElement> result = new HashMap<>();
+	public Map<String, AnnotatedWebElement> mapFields(AbstractPage page, List<String> fields) {
+		Map<String, AnnotatedWebElement> result = new HashMap<>();
 		
 		for (String field : fields) {
-			WebElement element = lookUpForField(page, field);
+			AnnotatedWebElement element = lookUpForField(page, field);
 			result.put(field, element);
 		}
 		
