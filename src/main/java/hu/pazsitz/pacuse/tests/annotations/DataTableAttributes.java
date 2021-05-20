@@ -22,7 +22,7 @@ public @interface DataTableAttributes {
 	 * if multiple select allowed it considers "," as separator chars in value string
 	 * @return
 	 */
-	boolean allowMultiSelect() default true;
+	boolean allowMultiSelect() default false;
 	
 	/**
 	 * If you want to specify the Input Attribute handling
