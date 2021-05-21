@@ -14,6 +14,16 @@
         <selenium.version>3.14.0</selenium.version>
         <cuke.version>1.2.5</cuke.version>
     </properties>
+    <repositories>
+        <repository>
+            <id>pazsitz.hu</id>
+            <url>http://pazsitz.hu/repo</url>
+        </repository>
+        <repository>
+            <id>repo.bodar.com</id>
+            <url>http://repo.bodar.com</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -118,6 +128,18 @@
                     </compilerArguments>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -152,9 +174,7 @@
                     </execution>
                 </executions>
             </plugin>
-        </plugins>
-        </pluginManagement>
-        <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -165,6 +185,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        </pluginManagement>
     </build>
 
 </project>
