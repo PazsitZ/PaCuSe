@@ -20,13 +20,15 @@
             <id>pazsitz.hu</id>
             <url>https://pazsitz.hu/repo</url>
         </repository>
-        <repository>
-            <id>repo.bodar.com</id>
-            <url>https://repo.bodar.com</url>
-        </repository>
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>com.googlecode</groupId>
+            <artifactId>totallylazy</artifactId>
+            <version>1077</version>
+            <systemPath>${project.basedir}/lib/com/googlecode/totallylazy/1077/totallylazy-1077.jar</systemPath>
+        </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-api</artifactId>
@@ -174,16 +176,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
             </plugin>
         </plugins>
         </pluginManagement>
