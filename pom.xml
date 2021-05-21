@@ -14,14 +14,15 @@
         <selenium.version>3.14.0</selenium.version>
         <cuke.version>1.2.5</cuke.version>
     </properties>
+
     <repositories>
         <repository>
             <id>pazsitz.hu</id>
-            <url>http://pazsitz.hu/repo</url>
+            <url>https://pazsitz.hu/repo</url>
         </repository>
         <repository>
             <id>repo.bodar.com</id>
-            <url>http://repo.bodar.com</url>
+            <url>https://repo.bodar.com</url>
         </repository>
     </repositories>
 
